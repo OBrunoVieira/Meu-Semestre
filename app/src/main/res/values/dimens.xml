@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  Dimensions  -->
+    <dimen name="spacing_two">2dp</dimen>
+    <dimen name="spacing_four">4dp</dimen>
+    <dimen name="spacing_eight">8dp</dimen>
+    <dimen name="spacing_twelve">12dp</dimen>
+    <dimen name="spacing_sixteen">16dp</dimen>
+    <dimen name="spacing_eighteen">18dp</dimen>
+    <dimen name="spacing_twenty_four">24dp</dimen>
+    <dimen name="spacing_twenty_eight">28dp</dimen>
+    <dimen name="spacing_thirty_two">32dp</dimen>
+    <dimen name="spacing_forty">40dp</dimen>
+    <dimen name="spacing_forty_four">44dp</dimen>
+
+    <!--  Text sizes  -->
+    <dimen name="text_size_eight">8sp</dimen>
+    <dimen name="text_size_twelve">12sp</dimen>
+    <dimen name="text_size_sixteen">16sp</dimen>
+    <dimen name="text_size_twenty_eight">28sp</dimen>
+
+    <!--  Custom Dimensions  -->
+    <dimen name="max_subject_width">152dp</dimen>
+    <dimen name="max_progress_height">@dimen/spacing_four</dimen>
+
+    <dimen name="min_dashboard_cr_width">@dimen/spacing_thirty_two</dimen>
+    <dimen name="min_subject_title_height">@dimen/spacing_forty_four</dimen>
+
+    <dimen name="warning_size">@dimen/spacing_eighteen</dimen>
+</resources>

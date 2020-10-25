@@ -3,4 +3,14 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    
+    <color name="zircon">#FCFDFF</color>
+    <color name="zircon_forty">#66FCFDFF</color>
+
+    <color name="dark_pink">#ED7390</color>
+    <color name="light_purple">#8A7AED</color>
+    <color name="light_blue">#6581FF</color>
+    <color name="light_yellow">#FEC261</color>
+    <color name="blue_zodiac">#0F1F3B</color>
+    <color name="hawkes_blue">#D6E3FD</color>
 </resources>

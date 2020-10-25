@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Meu Semestre</string>
+
+    <!--  Fragment/Dashboard  -->
+    <string name="dashboard_title">Semestre ativo</string>
+    <string name="dashboard_cr">CR %s</string>
+
+    <!--  VH/Subject  -->
+    <string name="subject_average">Média &lt;b>%s&lt;/b></string>
 </resources>

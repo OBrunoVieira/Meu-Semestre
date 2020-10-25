@@ -1,10 +1,90 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/zircon</item>
+    </style>
+
+    <style name="Base.TextView" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/zircon</item>
+        <item name="android:textSize">@dimen/text_size_sixteen</item>
+    </style>
+
+    <!--  Font/Mulish  -->
+    <style name="Base.TextView.Mulish.SemiBold" parent="Base.TextView">
+        <item name="android:fontFamily">@font/mulish_semi_bold</item>
+    </style>
+
+    <style name="Base.TextView.Mulish.Bold" parent="Base.TextView">
+        <item name="android:fontFamily">@font/mulish_bold</item>
+    </style>
+
+    <!--  Font/Inter  -->
+    <style name="Base.TextView.Inter.Light" parent="Base.TextView">
+        <item name="android:fontFamily">@font/inter_light</item>
+    </style>
+
+    <style name="Base.TextView.Inter.Medium" parent="Base.TextView">
+        <item name="android:fontFamily">@font/inter_medium</item>
+    </style>
+
+    <style name="Base.TextView.Inter.Regular" parent="Base.TextView">
+        <item name="android:fontFamily">@font/inter_regular</item>
+    </style>
+
+    <style name="Base.TextView.Inter.SemiBold" parent="Base.TextView">
+        <item name="android:fontFamily">@font/inter_semi_bold</item>
+    </style>
+
+    <!--  Fragment/Dashboard  -->
+    <style name="Dashboard.TextView.Title" parent="Base.TextView.Mulish.Bold">
+        <item name="android:textSize">@dimen/text_size_twenty_eight</item>
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:text">@string/dashboard_title</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="Dashboard.TextView.CR" parent="Base.TextView.Inter.Medium">
+        <item name="android:textSize">@dimen/spacing_eight</item>
+        <item name="android:minWidth">@dimen/min_dashboard_cr_width</item>
+        <item name="android:textColor">@color/zircon</item>
+        <item name="android:background">@drawable/shape_cr</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/spacing_four</item>
+        <item name="android:text">@string/dashboard_cr</item>
+    </style>
+
+    <!--  VH/Subject  -->
+    <style name="Subject.TextView.Title" parent="Base.TextView.Mulish.SemiBold">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:layout_marginStart">@dimen/spacing_sixteen</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_sixteen</item>
+        <item name="android:layout_marginTop">@dimen/spacing_twenty_four</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_eight</item>
+    </style>
+
+    <style name="Subject.TextView.Average" parent="Base.TextView.Inter.Regular">
+        <item name="android:textSize">@dimen/text_size_twelve</item>
+        <item name="android:layout_marginStart">@dimen/spacing_sixteen</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_sixteen</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_eight</item>
+    </style>
+
+    <style name="Subject.Progress.Average" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/shape_progress</item>
+        <item name="android:layout_marginStart">@dimen/spacing_sixteen</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_sixteen</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_two</item>
+    </style>
+
+    <style name="Subject.ImageView.Wave" parent="">
+        <item name="android:importantForAccessibility">no</item>
+        <item name="android:adjustViewBounds">true</item>
     </style>
 
 </resources>
