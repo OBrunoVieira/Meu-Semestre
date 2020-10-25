@@ -16,7 +16,7 @@
         android:id="@+id/subject_card_view"
         android:layout_width="@dimen/max_subject_width"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_four"
+        android:layout_marginEnd="@dimen/spacing_eight"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"

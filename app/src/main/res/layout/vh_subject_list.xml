@@ -7,8 +7,6 @@
     android:layout_height="wrap_content"
     android:clipToPadding="false"
     android:orientation="horizontal"
-    android:paddingStart="@dimen/spacing_twelve"
-    android:paddingEnd="@dimen/spacing_twelve"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     tools:itemCount="10"
     tools:listitem="@layout/vh_subject" />
