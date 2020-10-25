@@ -58,8 +58,8 @@
         <item name="android:text">@string/dashboard_cr</item>
     </style>
 
-    <!--  VH/Subject  -->
-    <style name="Subject.TextView.Title" parent="Base.TextView.Mulish.SemiBold">
+    <!--  VH/Discipline  -->
+    <style name="Discipline.TextView.Title" parent="Base.TextView.Mulish.SemiBold">
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">2</item>
         <item name="android:layout_marginStart">@dimen/spacing_sixteen</item>
@@ -68,33 +68,33 @@
         <item name="android:layout_marginBottom">@dimen/spacing_eight</item>
     </style>
 
-    <style name="Subject.TextView.Average" parent="Base.TextView.Inter.Regular">
+    <style name="Discipline.TextView.Average" parent="Base.TextView.Inter.Regular">
         <item name="android:textSize">@dimen/text_size_twelve</item>
         <item name="android:layout_marginStart">@dimen/spacing_sixteen</item>
         <item name="android:layout_marginEnd">@dimen/spacing_sixteen</item>
         <item name="android:layout_marginBottom">@dimen/spacing_eight</item>
     </style>
 
-    <style name="Subject.Progress.Average" parent="Widget.AppCompat.ProgressBar.Horizontal">
+    <style name="Discipline.Progress.Average" parent="Widget.AppCompat.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/shape_progress</item>
         <item name="android:layout_marginStart">@dimen/spacing_sixteen</item>
         <item name="android:layout_marginEnd">@dimen/spacing_sixteen</item>
         <item name="android:layout_marginBottom">@dimen/spacing_two</item>
     </style>
 
-    <style name="Subject.ImageView.Wave" parent="">
+    <style name="Discipline.ImageView.Wave" parent="">
         <item name="android:importantForAccessibility">no</item>
         <item name="android:adjustViewBounds">true</item>
     </style>
 
-    <!--  VH/Best Subject  -->
-    <style name="BestSubject.TextView.Title" parent="Base.TextView.Inter.Light">
-        <item name="android:text">@string/best_subject_title</item>
+    <!--  VH/Best Discipline  -->
+    <style name="BestDiscipline.TextView.Title" parent="Base.TextView.Inter.Light">
+        <item name="android:text">@string/best_discipline_title</item>
         <item name="android:textSize">@dimen/text_size_twelve</item>
         <item name="android:layout_marginStart">@dimen/spacing_sixteen</item>
     </style>
 
-    <style name="BestSubject.TextView.Name" parent="Base.TextView.Mulish.SemiBold">
+    <style name="BestDiscipline.TextView.Name" parent="Base.TextView.Mulish.SemiBold">
         <item name="android:layout_marginTop">@dimen/spacing_four</item>
         <item name="android:layout_marginStart">@dimen/spacing_sixteen</item>
         <item name="android:textSize">@dimen/text_size_eighteen</item>

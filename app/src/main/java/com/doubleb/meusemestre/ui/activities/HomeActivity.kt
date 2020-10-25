@@ -4,33 +4,33 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ConcatAdapter
 import com.doubleb.meusemestre.R
-import com.doubleb.meusemestre.models.Subject
-import com.doubleb.meusemestre.ui.adapters.BestSubjectAdapter
-import com.doubleb.meusemestre.ui.adapters.SubjectListAdapter
+import com.doubleb.meusemestre.models.Discipline
+import com.doubleb.meusemestre.ui.adapters.BestDisciplineAdapter
+import com.doubleb.meusemestre.ui.adapters.DisciplineListAdapter
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity(R.layout.activity_home) {
 
-    private val subjectsListAdapter by lazy { SubjectListAdapter() }
-    private val bestSubjectAdapter by lazy { BestSubjectAdapter() }
-    private val concatAdapter by lazy { ConcatAdapter(subjectsListAdapter, bestSubjectAdapter) }
+    private val disciplineListAdapter by lazy { DisciplineListAdapter() }
+    private val bestDisciplineAdapter by lazy { BestDisciplineAdapter() }
+    private val concatAdapter by lazy { ConcatAdapter(disciplineListAdapter, bestDisciplineAdapter) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dashboard_recycler_view.adapter = concatAdapter
-        bestSubjectAdapter.subject = Subject("", "Fotografia", 10f)
+        bestDisciplineAdapter.discipline = Discipline("", "Fotografia", 10f)
 
 
-        subjectsListAdapter.list = listOf(
-            Subject("", "Fotografia", 10f),
-            Subject("", "Sociologia", 2f),
-            Subject("", "Desenvolvimento de Banco de Dados II", 2f),
-            Subject("", "Química", 5f),
-            Subject("", "Álgebra Linear", 3.4f),
-            Subject("", "Cálculo I", 7f),
-            Subject("", "Ilustração", 9f),
-            Subject("", "Literatura Moderna", 9.5f),
-            Subject("", "Literatura Clássica", 8f)
+        disciplineListAdapter.list = listOf(
+            Discipline("", "Fotografia", 10f),
+            Discipline("", "Sociologia", 2f),
+            Discipline("", "Desenvolvimento de Banco de Dados II", 2f),
+            Discipline("", "Química", 5f),
+            Discipline("", "Álgebra Linear", 3.4f),
+            Discipline("", "Cálculo I", 7f),
+            Discipline("", "Ilustração", 9f),
+            Discipline("", "Literatura Moderna", 9.5f),
+            Discipline("", "Literatura Clássica", 8f)
         )
     }
 

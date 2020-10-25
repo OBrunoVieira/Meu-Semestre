@@ -5,11 +5,11 @@
     <string name="dashboard_title">Semestre ativo</string>
     <string name="dashboard_cr">CR %s</string>
 
-    <!--  VH/Subject  -->
-    <string name="subject_average">Média &lt;b>%s&lt;/b></string>
+    <!--  VH/Discipline  -->
+    <string name="discipline_average">Média &lt;b>%s&lt;/b></string>
 
-    <!--  VH/Best Subject  -->
-    <string name="best_subject_title">Sua melhor disciplina é</string>
+    <!--  VH/Best Discipline  -->
+    <string name="best_discipline_title">Sua melhor disciplina é</string>
 
     <!--  View/CircleChart  -->
     <string name="circle_chart_title">Média</string>

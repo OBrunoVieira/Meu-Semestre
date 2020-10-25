@@ -28,12 +28,12 @@
     <!--  Custom Dimensions/Chart  -->
     <dimen name="chart_min_size">40dp</dimen>
 
-    <!--  Custom Dimension/Subject  -->
-    <dimen name="max_subject_width">152dp</dimen>
-    <dimen name="min_subject_title_height">44dp</dimen>
+    <!--  Custom Dimension/Discipline  -->
+    <dimen name="max_discipline_width">152dp</dimen>
+    <dimen name="min_discipline_title_height">44dp</dimen>
 
-    <!--  Custom Dimension/Best Subject  -->
-    <dimen name="best_subject_chart_size">96dp</dimen>
+    <!--  Custom Dimension/Best Discipline  -->
+    <dimen name="best_discipline_chart_size">96dp</dimen>
 
     <!--  Custom Dimension/Dashboard  -->
     <dimen name="min_dashboard_cr_width">32dp</dimen>

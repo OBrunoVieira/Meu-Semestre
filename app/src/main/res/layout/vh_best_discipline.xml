@@ -26,36 +26,36 @@
             app:layout_constraintVertical_bias="1" />
 
         <com.doubleb.meusemestre.ui.views.CircleChartView
-            android:id="@+id/best_subject_circle_chart"
+            android:id="@+id/best_discipline_circle_chart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_sixteen"
-            android:minWidth="@dimen/best_subject_chart_size"
-            android:minHeight="@dimen/best_subject_chart_size"
+            android:minWidth="@dimen/best_discipline_chart_size"
+            android:minHeight="@dimen/best_discipline_chart_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/best_subject_text_view_title"
-            style="@style/BestSubject.TextView.Title"
+            android:id="@+id/best_discipline_text_view_title"
+            style="@style/BestDiscipline.TextView.Title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/best_subject_text_view_name"
+            app:layout_constraintBottom_toTopOf="@id/best_discipline_text_view_name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/best_subject_circle_chart"
+            app:layout_constraintStart_toEndOf="@id/best_discipline_circle_chart"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
-            android:id="@+id/best_subject_text_view_name"
-            style="@style/BestSubject.TextView.Name"
+            android:id="@+id/best_discipline_text_view_name"
+            style="@style/BestDiscipline.TextView.Name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/best_subject_circle_chart"
-            app:layout_constraintTop_toBottomOf="@id/best_subject_text_view_title"
+            app:layout_constraintStart_toEndOf="@id/best_discipline_circle_chart"
+            app:layout_constraintTop_toBottomOf="@id/best_discipline_text_view_title"
             tools:text="Álgebra Linear" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

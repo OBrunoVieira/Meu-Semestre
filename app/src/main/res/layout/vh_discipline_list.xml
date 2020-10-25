@@ -2,11 +2,11 @@
 <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/subject_list_recycler_view"
+    android:id="@+id/discipline_list_recycler_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clipToPadding="false"
     android:orientation="horizontal"
+    android:overScrollMode="never"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     tools:itemCount="10"
-    tools:listitem="@layout/vh_subject" />
+    tools:listitem="@layout/vh_discipline" />
