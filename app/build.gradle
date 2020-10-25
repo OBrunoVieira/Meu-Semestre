@@ -61,6 +61,7 @@ dependencies {
 
     implementation androidDependencies.kotlin
     implementation androidDependencies.androidx
+    implementation androidDependencies.mpchart
 //    implementation androidDependencies.compose
     implementation androidDependencies.firebase
 

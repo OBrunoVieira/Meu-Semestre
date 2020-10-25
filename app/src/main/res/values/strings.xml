@@ -7,4 +7,10 @@
 
     <!--  VH/Subject  -->
     <string name="subject_average">Média &lt;b>%s&lt;/b></string>
+
+    <!--  VH/Best Subject  -->
+    <string name="best_subject_title">Sua melhor disciplina é</string>
+
+    <!--  View/CircleChart  -->
+    <string name="circle_chart_title">Média</string>
 </resources>

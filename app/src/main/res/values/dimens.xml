@@ -12,19 +12,30 @@
     <dimen name="spacing_thirty_two">32dp</dimen>
     <dimen name="spacing_forty">40dp</dimen>
     <dimen name="spacing_forty_four">44dp</dimen>
+    <dimen name="spacing_seventy_six">76dp</dimen>
 
     <!--  Text sizes  -->
     <dimen name="text_size_eight">8sp</dimen>
     <dimen name="text_size_twelve">12sp</dimen>
     <dimen name="text_size_sixteen">16sp</dimen>
+    <dimen name="text_size_eighteen">18sp</dimen>
     <dimen name="text_size_twenty_eight">28sp</dimen>
 
     <!--  Custom Dimensions  -->
+    <dimen name="warning_size">18dp</dimen>
+    <dimen name="max_progress_height">4dp</dimen>
+
+    <!--  Custom Dimensions/Chart  -->
+    <dimen name="chart_min_size">40dp</dimen>
+
+    <!--  Custom Dimension/Subject  -->
     <dimen name="max_subject_width">152dp</dimen>
-    <dimen name="max_progress_height">@dimen/spacing_four</dimen>
+    <dimen name="min_subject_title_height">44dp</dimen>
 
-    <dimen name="min_dashboard_cr_width">@dimen/spacing_thirty_two</dimen>
-    <dimen name="min_subject_title_height">@dimen/spacing_forty_four</dimen>
+    <!--  Custom Dimension/Best Subject  -->
+    <dimen name="best_subject_chart_size">96dp</dimen>
 
-    <dimen name="warning_size">@dimen/spacing_eighteen</dimen>
+    <!--  Custom Dimension/Dashboard  -->
+    <dimen name="min_dashboard_cr_width">32dp</dimen>
+
 </resources>
