@@ -5,17 +5,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ConcatAdapter
 import com.doubleb.meusemestre.R
 import com.doubleb.meusemestre.models.Subject
+import com.doubleb.meusemestre.ui.adapters.BestSubjectAdapter
 import com.doubleb.meusemestre.ui.adapters.SubjectListAdapter
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity(R.layout.activity_home) {
 
     private val subjectsListAdapter by lazy { SubjectListAdapter() }
-    private val concatAdapter by lazy { ConcatAdapter(subjectsListAdapter) }
+    private val bestSubjectAdapter by lazy { BestSubjectAdapter() }
+    private val concatAdapter by lazy { ConcatAdapter(subjectsListAdapter, bestSubjectAdapter) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dashboard_recycler_view.adapter = concatAdapter
+        bestSubjectAdapter.subject = Subject("", "Fotografia", 10f)
+
 
         subjectsListAdapter.list = listOf(
             Subject("", "Fotografia", 10f),

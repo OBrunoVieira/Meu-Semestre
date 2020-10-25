@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.doubleb.meusemestre.R
+import com.doubleb.meusemestre.extensions.roundWhenBase10
 import com.doubleb.meusemestre.models.Subject
 import kotlinx.android.synthetic.main.vh_subject.view.*
 import java.text.DecimalFormat
@@ -38,10 +39,9 @@ class SubjectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
     }
 
-    fun transformGradeToText(grade: Float) = run {
-        val gradeString = DecimalFormat(if (grade % 1 == 0f) "#" else "#.#").format(grade)
+    private fun transformGradeToText(grade: Float) = run {
         HtmlCompat.fromHtml(
-            itemView.context.getString(R.string.subject_average, gradeString),
+            itemView.context.getString(R.string.subject_average, grade.roundWhenBase10()),
             HtmlCompat.FROM_HTML_MODE_LEGACY
         )
     }
