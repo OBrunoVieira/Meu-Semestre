@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|top"
+        android:elevation="3dp"
+        android:src="@drawable/vector_warning" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/subject_card_view"
+        android:layout_width="@dimen/max_subject_width"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_four"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/light_blue"
+        app:cardCornerRadius="@dimen/spacing_eight">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/subject_text_view_title"
+                style="@style/Subject.TextView.Title"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/min_subject_title_height"
+                app:layout_constraintBottom_toTopOf="@id/subject_text_view_average_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Desenvolvimento Linear" />
+
+            <TextView
+                android:id="@+id/subject_text_view_average_title"
+                style="@style/Subject.TextView.Average"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/subject_progress_average"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="Média 7,8" />
+
+            <ProgressBar
+                android:id="@+id/subject_progress_average"
+                style="@style/Subject.Progress.Average"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/max_progress_height"
+                android:progressDrawable="@drawable/shape_progress"
+                app:layout_constraintBottom_toTopOf="@id/subject_image_view_wave"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:progress="20" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/subject_image_view_wave"
+                style="@style/Subject.ImageView.Wave"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:src="@drawable/vector_wave_left" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>
