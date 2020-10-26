@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--  Dimensions  -->
+    <dimen name="spacing_one">1dp</dimen>
     <dimen name="spacing_two">2dp</dimen>
     <dimen name="spacing_four">4dp</dimen>
     <dimen name="spacing_eight">8dp</dimen>
@@ -12,21 +13,25 @@
     <dimen name="spacing_thirty_two">32dp</dimen>
     <dimen name="spacing_forty">40dp</dimen>
     <dimen name="spacing_forty_four">44dp</dimen>
+    <dimen name="spacing_fifty_six">56dp</dimen>
     <dimen name="spacing_seventy_six">76dp</dimen>
 
     <!--  Text sizes  -->
     <dimen name="text_size_eight">8sp</dimen>
     <dimen name="text_size_twelve">12sp</dimen>
+    <dimen name="text_size_fourteen">14sp</dimen>
     <dimen name="text_size_sixteen">16sp</dimen>
     <dimen name="text_size_eighteen">18sp</dimen>
     <dimen name="text_size_twenty_eight">28sp</dimen>
+    <dimen name="text_size_forty">40sp</dimen>
 
     <!--  Custom Dimensions  -->
     <dimen name="warning_size">18dp</dimen>
     <dimen name="max_progress_height">4dp</dimen>
+    <dimen name="min_button_height">56dp</dimen>
 
     <!--  Custom Dimensions/Chart  -->
-    <dimen name="chart_min_size">40dp</dimen>
+    <dimen name="chart_min_size">48dp</dimen>
 
     <!--  Custom Dimension/Discipline  -->
     <dimen name="max_discipline_width">152dp</dimen>
@@ -37,5 +42,8 @@
 
     <!--  Custom Dimension/Dashboard  -->
     <dimen name="min_dashboard_cr_width">32dp</dimen>
+
+    <!-- Custom Dimension/Grade Variation-->
+    <dimen name="min_grade_variation_title_height">44dp</dimen>
 
 </resources>
