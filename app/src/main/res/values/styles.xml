@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -11,6 +11,14 @@
     <style name="Base.TextView" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/zircon</item>
         <item name="android:textSize">@dimen/text_size_sixteen</item>
+    </style>
+
+    <style name="Base.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:minHeight">0dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">@dimen/spacing_eight</item>
+        <item name="android:padding">@dimen/spacing_sixteen</item>
     </style>
 
     <!--  Font/Mulish  -->
@@ -36,6 +44,10 @@
     </style>
 
     <style name="Base.TextView.Inter.SemiBold" parent="Base.TextView">
+        <item name="android:fontFamily">@font/inter_semi_bold</item>
+    </style>
+
+    <style name="Base.Button.Inter.SemiBold" parent="Base.Button">
         <item name="android:fontFamily">@font/inter_semi_bold</item>
     </style>
 
@@ -100,4 +112,106 @@
         <item name="android:textSize">@dimen/text_size_eighteen</item>
     </style>
 
+    <!--  VH/Restricted Discipline List  -->
+    <style name="RestrictedDisciplineList.TextView.Title" parent="Base.TextView.Mulish.SemiBold">
+        <item name="android:text">@string/restricted_discipline_title</item>
+        <item name="android:textSize">@dimen/text_size_eighteen</item>
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:layout_marginStart">@dimen/spacing_sixteen</item>
+    </style>
+
+    <!--  VH/Restricted Discipline  -->
+    <style name="RestrictedDiscipline.TextView.Title" parent="Base.TextView.Inter.Medium">
+        <item name="android:textSize">@dimen/text_size_eighteen</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_sixteen</item>
+    </style>
+
+    <style name="RestrictedDiscipline.TextView.Info" parent="Base.TextView.Inter.Light">
+        <item name="android:textSize">@dimen/text_size_fourteen</item>
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:layout_marginTop">@dimen/spacing_eight</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_sixteen</item>
+    </style>
+
+    <!--  VH/Register Grades  -->
+    <style name="RegisterGrades.TextView.Title" parent="Base.TextView.Mulish.SemiBold">
+        <item name="android:textSize">@dimen/text_size_eighteen</item>
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:text">@string/register_grades_title</item>
+        <item name="android:layout_marginStart">@dimen/spacing_sixteen</item>
+    </style>
+
+    <style name="RegisterGrades.TextView.Description" parent="Base.TextView.Inter.Light">
+        <item name="android:textSize">@dimen/text_size_fourteen</item>
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">@string/register_grades_description</item>
+        <item name="android:layout_marginTop">@dimen/spacing_twenty_four</item>
+    </style>
+
+    <style name="RegisterGrades.Button" parent="Base.Button.Inter.SemiBold">
+        <item name="android:textSize">@dimen/text_size_fourteen</item>
+        <item name="android:textColor">@color/zircon</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">@string/register_grades_action</item>
+        <item name="android:layout_marginTop">@dimen/spacing_twenty_four</item>
+        <item name="backgroundTint">@color/light_purple</item>
+    </style>
+
+    <!--  VH/Finish Semester  -->
+    <style name="FinishSemester.Button" parent="Base.Button.Inter.SemiBold">
+        <item name="android:textSize">@dimen/text_size_fourteen</item>
+        <item name="android:textColor">@color/light_purple</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:theme">@style/Theme.MaterialComponents</item>
+        <item name="android:text">@string/finish_semester_action</item>
+        <item name="android:layout_marginTop">@dimen/spacing_thirty_two</item>
+        <item name="android:layout_marginStart">@dimen/spacing_sixteen</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_sixteen</item>
+        <item name="android:backgroundTint">@color/zircon</item>
+        <item name="strokeColor">@color/light_purple</item>
+        <item name="strokeWidth">@dimen/spacing_one</item>
+    </style>
+
+    <!--  VH/Grade Highlight  -->
+    <style name="GradeHighlight.TextView.Title" parent="Base.TextView.Mulish.SemiBold">
+        <item name="android:textSize">@dimen/text_size_eighteen</item>
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:text">@string/grade_highlight_title</item>
+        <item name="android:layout_marginStart">@dimen/spacing_sixteen</item>
+    </style>
+
+    <!--  View/Grade Variation  -->
+    <style name="GradeVariation.TextView.Title" parent="Base.TextView.Mulish.SemiBold">
+        <item name="android:textColor">@color/zircon</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+    </style>
+
+    <style name="GradeVariation.TextView.Grade" parent="Base.TextView.Inter.SemiBold">
+        <item name="android:textColor">@color/zircon</item>
+        <item name="android:textSize">@dimen/text_size_forty</item>
+        <item name="android:layout_marginTop">@dimen/spacing_twenty_four</item>
+    </style>
+
+    <style name="GradeVariation.TextView.Variation" parent="Base.TextView.Inter.SemiBold">
+        <item name="android:textColor">@color/zircon</item>
+        <item name="android:textSize">@dimen/spacing_twelve</item>
+        <item name="android:padding">@dimen/spacing_four</item>
+        <item name="android:drawablePadding">@dimen/spacing_four</item>
+        <item name="android:background">@drawable/shape_variation</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:layout_marginStart">@dimen/spacing_eight</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_twelve</item>
+    </style>
+
+    <!--  View/Button Selection  -->
+    <style name="ButtonSelection.TextView.Action" parent="Base.TextView.Inter.Regular">
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:textSize">@dimen/spacing_twelve</item>
+        <item name="android:layout_marginStart">@dimen/spacing_four</item>
+    </style>
 </resources>
