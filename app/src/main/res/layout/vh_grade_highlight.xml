@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/spacing_sixteen"
+    android:layout_marginTop="@dimen/spacing_thirty_two"
+    android:layout_marginEnd="@dimen/spacing_sixteen"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/vh_grade_highlight_title"
+        style="@style/GradeHighlight.TextView.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.doubleb.meusemestre.ui.views.GradeHighlightView
+        android:id="@+id/vh_grade_highlight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_eight" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
