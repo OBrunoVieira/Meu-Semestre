@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/spacing_thirty_two"
+    android:layout_marginStart="@dimen/spacing_sixteen"
+    android:layout_marginEnd="@dimen/spacing_sixteen"
     app:cardCornerRadius="@dimen/spacing_eight"
+    app:cardUseCompatPadding="true"
     app:cardBackgroundColor="@color/light_blue">
 
     <androidx.constraintlayout.widget.ConstraintLayout

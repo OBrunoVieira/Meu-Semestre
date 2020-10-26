@@ -9,19 +9,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|top"
-        android:elevation="3dp"
+        android:elevation="@dimen/spacing_four"
+        android:importantForAccessibility="no"
         android:src="@drawable/vector_warning" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/discipline_card_view"
         android:layout_width="@dimen/max_discipline_width"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/spacing_eight"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardBackgroundColor="@color/light_blue"
-        app:cardCornerRadius="@dimen/spacing_eight">
+        app:cardCornerRadius="@dimen/spacing_eight"
+        app:cardUseCompatPadding="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
