@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shadow_card"
+    android:padding="@dimen/spacing_twenty_four">
+
+    <TextView
+        android:id="@+id/restricted_discipline_text_view_title"
+        style="@style/RestrictedDiscipline.TextView.Title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/restricted_discipline_text_view_info"
+        app:layout_constraintEnd_toStartOf="@id/restricted_discipline_circle_chart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Química Inorgânica" />
+
+    <TextView
+        android:id="@+id/restricted_discipline_text_view_info"
+        style="@style/RestrictedDiscipline.TextView.Info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/restricted_discipline_circle_chart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/restricted_discipline_text_view_title"
+        tools:text="2 notas registradas" />
+
+    <com.doubleb.meusemestre.ui.views.CircleChartView
+        android:id="@+id/restricted_discipline_circle_chart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
