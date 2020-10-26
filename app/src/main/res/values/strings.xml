@@ -11,6 +11,27 @@
     <!--  VH/Best Discipline  -->
     <string name="best_discipline_title">Sua melhor disciplina é</string>
 
-    <!--  View/CircleChart  -->
+    <!--  VH/Restricted Discipline  -->
+    <string name="restricted_discipline_title">Disciplinas que precisam de atenção</string>
+
+    <!--  VH/Register Grades  -->
+    <string name="register_grades_title">Cadastre suas notas!</string>
+    <string name="register_grades_action">Cadastrar notas</string>
+    <string name="register_grades_description">Você tem disciplinas sem notas. Mantendo suas notas
+        atualizadas, fica mais fácil saber onde você precisa melhorar, e onde está mandando bem!
+    </string>
+
+    <!--  VH/Finish Semester  -->
+    <string name="finish_semester_action">Encerrar semestre</string>
+
+    <!--  VH/Grade Highlight  -->
+    <string name="grade_highlight_title">Onde melhorou, onde piorou</string>
+
+    <!--  View/Circle Chart  -->
     <string name="circle_chart_title">Média</string>
+
+    <!--  View/Bottom Navigation  -->
+    <string name="bottom_navigation_dashboard">Semestre</string>
+    <string name="bottom_navigation_disciplines">Disciplinas</string>
+    <string name="bottom_navigation_tips">Dicas</string>
 </resources>
