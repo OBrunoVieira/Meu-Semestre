@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/spacing_sixteen"
+    android:layout_marginTop="@dimen/spacing_thirty_two"
+    android:layout_marginEnd="@dimen/spacing_sixteen"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/register_grades_text_view_title"
+        style="@style/RegisterGrades.TextView.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_eight"
+        android:background="@drawable/shadow_card"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_twenty_four">
+
+        <ImageView
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/shape_profile" />
+
+        <TextView
+            style="@style/RegisterGrades.TextView.Description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/RegisterGrades.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
