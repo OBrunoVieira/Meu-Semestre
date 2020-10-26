@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    tools:parentTag="androidx.appcompat.widget.LinearLayoutCompat">
+
+    <com.doubleb.meusemestre.ui.views.GradeHighlightVerticalView
+        android:id="@+id/grade_highlight_grade_vertical_positive"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_four"
+        android:layout_weight=".5" />
+
+    <com.doubleb.meusemestre.ui.views.GradeHighlightVerticalView
+        android:id="@+id/grade_highlight_grade_vertical_negative"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_four"
+        android:layout_weight="0.5" />
+
+    <com.doubleb.meusemestre.ui.views.GradeHighlightHorizontalView
+        android:id="@+id/grade_highlight_grade_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+</merge>
