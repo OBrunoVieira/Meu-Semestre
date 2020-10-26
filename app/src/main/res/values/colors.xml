@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorPrimary">@color/light_purple</color>
+    <color name="colorPrimaryDark">@color/dark_purple</color>
+    <color name="colorAccent">@color/dark_pink</color>
     
     <color name="zircon">#FCFDFF</color>
     <color name="zircon_forty">#66FCFDFF</color>
 
+    <color name="dark_gray">#6B7FA1</color>
+    <color name="light_gray">#EEF4FF</color>
+
     <color name="dark_pink">#ED7390</color>
+    <color name="light_pink">#F390A8</color>
+
+    <color name="dark_purple">#7362DF</color>
     <color name="light_purple">#8A7AED</color>
+
+    <color name="dark_blue">#4D6DFB</color>
     <color name="light_blue">#6581FF</color>
+
+    <color name="dark_yellow">#F4AF3F</color>
     <color name="light_yellow">#FEC261</color>
+
+    <color name="light_green">#0BCC7B</color>
     <color name="blue_zodiac">#0F1F3B</color>
     <color name="hawkes_blue">#D6E3FD</color>
 </resources>
