@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/welcome_content_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="@color/light_blue">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/welcome_view_pager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/welcome_content_buttons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/welcome_image_view_triangle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/vector_triangle"
+        android:importantForAccessibility="no"
+        app:layout_constraintBottom_toTopOf="@id/welcome_content_buttons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/welcome_content_buttons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/zircon"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/spacing_thirty_two"
+        android:paddingEnd="@dimen/spacing_thirty_two"
+        android:paddingBottom="@dimen/spacing_thirty_two"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.rd.PageIndicatorView
+            android:id="@+id/welcome_page_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:piv_animationType="worm"
+            app:piv_padding="@dimen/spacing_eight"
+            app:piv_radius="@dimen/spacing_four"
+            app:piv_selectedColor="@color/light_purple"
+            app:piv_unselectedColor="@color/blue_zodiac_thirty" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/welcome_button_explore"
+            style="@style/Welcome.Button.Explore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/welcome_button_login"
+            style="@style/Welcome.Button.Login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
