@@ -22,7 +22,9 @@
     <color name="dark_yellow">#F4AF3F</color>
     <color name="light_yellow">#FEC261</color>
 
-    <color name="light_green">#0BCC7B</color>
     <color name="blue_zodiac">#0F1F3B</color>
+    <color name="blue_zodiac_thirty">#3D0F1F3B</color>
+
+    <color name="light_green">#0BCC7B</color>
     <color name="hawkes_blue">#D6E3FD</color>
 </resources>

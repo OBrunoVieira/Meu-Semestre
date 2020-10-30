@@ -1,9 +1,30 @@
 <resources>
     <string name="app_name">Meu Semestre</string>
 
+    <!--  Activity/Welcome  -->
+    <string name="welcome_button_explore">Começar a explorar</string>
+    <string name="welcome_button_login">Já tenho uma conta</string>
+
     <!--  Fragment/Dashboard  -->
     <string name="dashboard_title">Semestre ativo</string>
     <string name="dashboard_cr">CR %s</string>
+
+    <!--  Fragment/Welcome Info  -->
+    <string name="welcome_info_first_title">Olá!</string>
+    <string name="welcome_info_first_description">O Meu Semestre te ajuda a manter a organização e
+        saber no que precisa focar para garantir sua aprovação.</string>
+
+    <string name="welcome_info_second_title">Notas em dia</string>
+    <string name="welcome_info_second_description">Registre as notas que você tira ao longo do
+        semestre para acompanhar seu desempenho.</string>
+
+    <string name="welcome_info_third_title">De olho no desempenho</string>
+    <string name="welcome_info_third_description">Fique sabendo em quais disiciplinas você precisa
+        focar mais e em quais você está mandando bem.</string>
+
+    <string name="welcome_info_fourth_title">Guarde o histórico</string>
+    <string name="welcome_info_fourth_description">Todos os semestres registrados no aplicativo
+        ficam disponíveis para consulta e download.</string>
 
     <!--  VH/Discipline  -->
     <string name="discipline_average">Média &lt;b>%s&lt;/b></string>

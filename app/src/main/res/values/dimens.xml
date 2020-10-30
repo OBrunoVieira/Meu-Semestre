@@ -8,6 +8,7 @@
     <dimen name="spacing_twelve">12dp</dimen>
     <dimen name="spacing_sixteen">16dp</dimen>
     <dimen name="spacing_eighteen">18dp</dimen>
+    <dimen name="spacing_twenty">20dp</dimen>
     <dimen name="spacing_twenty_four">24dp</dimen>
     <dimen name="spacing_twenty_eight">28dp</dimen>
     <dimen name="spacing_thirty_two">32dp</dimen>
@@ -22,6 +23,7 @@
     <dimen name="text_size_fourteen">14sp</dimen>
     <dimen name="text_size_sixteen">16sp</dimen>
     <dimen name="text_size_eighteen">18sp</dimen>
+    <dimen name="text_size_twenty">20sp</dimen>
     <dimen name="text_size_twenty_eight">28sp</dimen>
     <dimen name="text_size_forty">40sp</dimen>
 

@@ -51,6 +51,28 @@
         <item name="android:fontFamily">@font/inter_semi_bold</item>
     </style>
 
+    <!--  Activity/Welcome  -->
+    <style name="Welcome.Button.Explore" parent="Base.Button.Inter.SemiBold">
+        <item name="android:textSize">@dimen/text_size_fourteen</item>
+        <item name="android:textColor">@color/zircon</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">@string/welcome_button_explore</item>
+        <item name="backgroundTint">@color/light_purple</item>
+        <item name="android:layout_marginTop">@dimen/spacing_twenty</item>
+    </style>
+
+    <style name="Welcome.Button.Login" parent="Base.Button.Inter.SemiBold">
+        <item name="android:textSize">@dimen/text_size_fourteen</item>
+        <item name="android:textColor">@color/light_purple</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:theme">@style/Theme.MaterialComponents</item>
+        <item name="android:text">@string/welcome_button_login</item>
+        <item name="android:backgroundTint">@color/zircon</item>
+        <item name="strokeColor">@color/light_purple</item>
+        <item name="strokeWidth">@dimen/spacing_one</item>
+        <item name="android:layout_marginTop">@dimen/spacing_sixteen</item>
+    </style>
+
     <!--  Fragment/Dashboard  -->
     <style name="Dashboard.TextView.Title" parent="Base.TextView.Mulish.Bold">
         <item name="android:textSize">@dimen/text_size_twenty_eight</item>
@@ -68,6 +90,18 @@
         <item name="android:gravity">center</item>
         <item name="android:padding">@dimen/spacing_four</item>
         <item name="android:text">@string/dashboard_cr</item>
+    </style>
+
+    <!--  Fragment/Welcome Info  -->
+    <style name="WelcomeInfo.TextView.Title" parent="Base.TextView.Mulish.Bold">
+        <item name="android:textSize">@dimen/text_size_twenty</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">@dimen/spacing_thirty_two</item>
+    </style>
+
+    <style name="WelcomeInfo.TextView.Description" parent="Base.TextView.Inter.Light">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">@dimen/spacing_eight</item>
     </style>
 
     <!--  VH/Discipline  -->
