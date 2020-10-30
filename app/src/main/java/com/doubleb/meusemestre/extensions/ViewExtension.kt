@@ -1,5 +1,7 @@
 package com.doubleb.meusemestre.extensions
 
+import android.animation.ArgbEvaluator
+import android.animation.ObjectAnimator
 import android.content.res.ColorStateList
 import android.view.View
 import androidx.annotation.ColorInt
@@ -24,4 +26,19 @@ fun View.gone() = apply {
 
 fun View.invisible() = apply {
     this.visibility = View.INVISIBLE
+}
+
+fun View.blendColorAnimation(
+    @ColorRes fromColor: Int,
+    @ColorRes toColor: Int,
+    propertyName: String
+) {
+    ObjectAnimator.ofObject(
+        this, propertyName, ArgbEvaluator(),
+        ContextCompat.getColor(context, fromColor),
+        ContextCompat.getColor(context, toColor)
+    ).apply {
+        duration = 300
+        start()
+    }
 }
