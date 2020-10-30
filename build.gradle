@@ -48,6 +48,8 @@ ext {
     final constraintLayoutVersion = '2.0.2'
     final fragmentVersion = '1.2.5'
     final mpchartVersion = 'v3.1.0'
+    final pageIndicatorVersion = '1.0.3'
+    final viewPagerVersion = '1.0.0'
 
     final espressoVersion = '3.2.0'
     final androidJunitVersion = '1.1.1'
@@ -82,6 +84,11 @@ ext {
             ],
 
             mpchart    : "com.github.PhilJay:MPAndroidChart:$mpchartVersion",
+
+            viewPager: [
+                    "com.romandanylyk:pageindicatorview:$pageIndicatorVersion",
+                    "androidx.viewpager2:viewpager2:$viewPagerVersion"
+            ],
 
             unitTest   : [
                     "junit:junit:$junitVersion"
