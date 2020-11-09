@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ConcatAdapter
 import com.doubleb.meusemestre.R
 import com.doubleb.meusemestre.models.Discipline
-import com.doubleb.meusemestre.ui.adapters.*
+import com.doubleb.meusemestre.ui.adapters.recyclerview.*
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard) {

@@ -3,7 +3,7 @@ package com.doubleb.meusemestre.ui.viewholders
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.doubleb.meusemestre.models.Discipline
-import com.doubleb.meusemestre.ui.adapters.DisciplineAdapter
+import com.doubleb.meusemestre.ui.adapters.recyclerview.DisciplineAdapter
 import kotlinx.android.synthetic.main.vh_discipline_list.view.*
 
 class DisciplineListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
