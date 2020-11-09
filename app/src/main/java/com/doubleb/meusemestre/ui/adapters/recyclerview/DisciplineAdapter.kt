@@ -1,11 +1,11 @@
-package com.doubleb.meusemestre.ui.adapters
+package com.doubleb.meusemestre.ui.adapters.recyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.doubleb.meusemestre.R
 import com.doubleb.meusemestre.models.Discipline
-import com.doubleb.meusemestre.ui.adapters.diff.DisciplineDiffUtils
+import com.doubleb.meusemestre.ui.adapters.recyclerview.diff.DisciplineDiffUtils
 import com.doubleb.meusemestre.ui.viewholders.DisciplineViewHolder
 
 class DisciplineAdapter : ListAdapter<Discipline, DisciplineViewHolder>(DisciplineDiffUtils()) {

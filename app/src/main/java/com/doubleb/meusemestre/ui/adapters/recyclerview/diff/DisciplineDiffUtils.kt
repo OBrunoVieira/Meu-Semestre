@@ -1,4 +1,4 @@
-package com.doubleb.meusemestre.ui.adapters.diff
+package com.doubleb.meusemestre.ui.adapters.recyclerview.diff
 
 import androidx.recyclerview.widget.DiffUtil
 import com.doubleb.meusemestre.models.Discipline

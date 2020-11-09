@@ -1,4 +1,4 @@
-package com.doubleb.meusemestre.ui.adapters
+package com.doubleb.meusemestre.ui.adapters.viewpager
 
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter

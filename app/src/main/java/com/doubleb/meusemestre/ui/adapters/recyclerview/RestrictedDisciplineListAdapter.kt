@@ -1,4 +1,4 @@
-package com.doubleb.meusemestre.ui.adapters
+package com.doubleb.meusemestre.ui.adapters.recyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
