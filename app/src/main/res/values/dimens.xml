@@ -24,6 +24,7 @@
     <dimen name="text_size_sixteen">16sp</dimen>
     <dimen name="text_size_eighteen">18sp</dimen>
     <dimen name="text_size_twenty">20sp</dimen>
+    <dimen name="text_size_twenty_four">24sp</dimen>
     <dimen name="text_size_twenty_eight">28sp</dimen>
     <dimen name="text_size_forty">40sp</dimen>
 
