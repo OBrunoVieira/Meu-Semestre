@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.doubleb.meusemestre.R
 import com.doubleb.meusemestre.extensions.blendColorAnimation
-import com.doubleb.meusemestre.ui.adapters.WelcomeAdapter
+import com.doubleb.meusemestre.ui.adapters.viewpager.WelcomeAdapter
 import kotlinx.android.synthetic.main.activity_welcome.*
 
 class WelcomeActivity : BaseActivity(R.layout.activity_welcome) {
@@ -30,6 +30,10 @@ class WelcomeActivity : BaseActivity(R.layout.activity_welcome) {
         }
 
         welcome_button_explore.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
+        }
+
+        welcome_button_login.setOnClickListener {
             startActivity(Intent(this, HomeActivity::class.java))
             finish()
         }
