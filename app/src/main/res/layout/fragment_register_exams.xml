@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:background="@color/light_purple">
+
+        <TextView
+            android:id="@+id/register_exams_text_view_title"
+            style="@style/Register.TextView.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/register_exams_title" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/register_exams_button_1"
+            style="@style/Register.Button.Option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/register_exams_1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/register_exams_button_2"
+            style="@style/Register.Button.Option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/register_exams_2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/register_exams_button_3"
+            style="@style/Register.Button.Option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/register_exams_3" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/register_exams_button_4"
+            style="@style/Register.Button.Option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/register_exams_4" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/register_exams_button_5"
+            style="@style/Register.Button.Option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/register_exams_5" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/register_exams_button_other"
+            style="@style/Register.Button.Option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/register_exams_other" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.core.widget.NestedScrollView>

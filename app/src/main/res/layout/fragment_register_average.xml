@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:background="@color/light_purple">
+
+        <TextView
+            android:id="@+id/register_average_text_view_title"
+            style="@style/Register.TextView.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/register_average_title" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/register_average_button_5"
+            style="@style/Register.Button.Option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/register_average_5" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/register_average_button_6"
+            style="@style/Register.Button.Option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/register_average_6" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/register_average_button_7"
+            style="@style/Register.Button.Option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/register_average_7" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/register_average_button_8"
+            style="@style/Register.Button.Option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/register_average_8" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/register_average_button_9"
+            style="@style/Register.Button.Option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/register_average_9" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.core.widget.NestedScrollView>
