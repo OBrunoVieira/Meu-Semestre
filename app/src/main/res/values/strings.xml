@@ -1,9 +1,37 @@
 <resources>
     <string name="app_name">Meu Semestre</string>
+    <!-- Default-->
+    <string name="back">Voltar</string>
+
 
     <!--  Activity/Welcome  -->
     <string name="welcome_button_explore">Começar a explorar</string>
     <string name="welcome_button_login">Já tenho uma conta</string>
+
+    <!--  Activity/Register  -->
+    <string name="register_button_proceed">Prosseguir</string>
+
+    <!--  Fragment/Register Institution  -->
+    <string name="register_institution_title">Em qual tipo de instituição você estuda?</string>
+    <string name="register_institution_public">Pública</string>
+    <string name="register_institution_private">Privada</string>
+
+    <!--  Fragment/Register Exams  -->
+    <string name="register_exams_title">Quantas avaliações você tem por semestre (em cada disciplina)?</string>
+    <string name="register_exams_1">1</string>
+    <string name="register_exams_2">2</string>
+    <string name="register_exams_3">3</string>
+    <string name="register_exams_4">4</string>
+    <string name="register_exams_5">5</string>
+    <string name="register_exams_other">Variável</string>
+
+    <!--  Fragment/Register Average  -->
+    <string name="register_average_title">Qual é a média para aprovação na instituição que você estuda?</string>
+    <string name="register_average_5">5</string>
+    <string name="register_average_6">6</string>
+    <string name="register_average_7">7</string>
+    <string name="register_average_8">8</string>
+    <string name="register_average_9">9</string>
 
     <!--  Fragment/Dashboard  -->
     <string name="dashboard_title">Semestre ativo</string>
