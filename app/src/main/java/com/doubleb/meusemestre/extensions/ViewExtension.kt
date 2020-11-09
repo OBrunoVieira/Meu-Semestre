@@ -8,6 +8,16 @@ import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 
+fun View.disable() = apply{
+    alpha = .5f
+    isEnabled = false
+}
+
+fun View.enable() = apply{
+    alpha = 1f
+    isEnabled = true
+}
+
 fun View.tintBackgroundColorRes(@ColorRes color: Int) = apply {
     backgroundTintList = ContextCompat.getColorStateList(context, color)
 }
