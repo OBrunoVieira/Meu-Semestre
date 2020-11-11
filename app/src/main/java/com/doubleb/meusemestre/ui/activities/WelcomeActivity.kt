@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.doubleb.meusemestre.R
 import com.doubleb.meusemestre.extensions.blendColorAnimation
-import com.doubleb.meusemestre.ui.adapters.viewpager.WelcomeAdapter
+import com.doubleb.meusemestre.ui.adapters.viewpager.WelcomePageAdapter
 import kotlinx.android.synthetic.main.activity_welcome.*
 
 class WelcomeActivity : BaseActivity(R.layout.activity_welcome) {
@@ -24,8 +24,8 @@ class WelcomeActivity : BaseActivity(R.layout.activity_welcome) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         welcome_view_pager.apply {
-            adapter = WelcomeAdapter(this@WelcomeActivity)
-            welcome_page_indicator.count = (adapter as WelcomeAdapter).itemCount
+            adapter = WelcomePageAdapter(this@WelcomeActivity)
+            welcome_page_indicator.count = (adapter as WelcomePageAdapter).itemCount
             registerOnPageChangeCallback(pageChangeCallback)
         }
 

@@ -7,7 +7,7 @@ import com.doubleb.meusemestre.ui.fragments.RegisterExamsFragment
 import com.doubleb.meusemestre.ui.fragments.RegisterFragment
 import com.doubleb.meusemestre.ui.fragments.RegisterInstitutionFragment
 
-class RegisterAdapter(
+class RegisterPageAdapter(
     fragmentActivity: FragmentActivity,
     private val listener: RegisterFragment.Listener
 ) : FragmentStateAdapter(fragmentActivity) {

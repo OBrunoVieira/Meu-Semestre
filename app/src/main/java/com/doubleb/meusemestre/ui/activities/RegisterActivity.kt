@@ -9,7 +9,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.doubleb.meusemestre.R
 import com.doubleb.meusemestre.extensions.disable
 import com.doubleb.meusemestre.extensions.enable
-import com.doubleb.meusemestre.ui.adapters.viewpager.RegisterAdapter
+import com.doubleb.meusemestre.ui.adapters.viewpager.RegisterPageAdapter
 import com.doubleb.meusemestre.ui.fragments.RegisterFragment
 import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.activity_register.*
@@ -18,7 +18,7 @@ class RegisterActivity : BaseActivity(R.layout.activity_register), RegisterFragm
 
     private val pageChangeCallback by lazy { onPageChangeCallback() }
     private val registerAdapter by lazy {
-        RegisterAdapter(
+        RegisterPageAdapter(
             this@RegisterActivity,
             this@RegisterActivity
         )

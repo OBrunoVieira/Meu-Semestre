@@ -5,7 +5,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.doubleb.meusemestre.R
 import com.doubleb.meusemestre.ui.fragments.WelcomeInfoFragment
 
-class WelcomeAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+class WelcomePageAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
     override fun getItemCount() = 4
     override fun createFragment(position: Int) =
         when (position) {
