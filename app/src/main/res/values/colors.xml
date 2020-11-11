@@ -15,6 +15,7 @@
 
     <color name="dark_purple">#7362DF</color>
     <color name="light_purple">#8A7AED</color>
+    <color name="light_purple_fifty">#808A7AED</color>
 
     <color name="dark_blue">#4D6DFB</color>
     <color name="light_blue">#6581FF</color>
