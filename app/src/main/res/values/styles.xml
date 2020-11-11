@@ -81,6 +81,25 @@
         <item name="android:backgroundTint">@color/light_yellow</item>
     </style>
 
+    <!--  Activity/Home  -->
+    <style name="Home.TextView.Title" parent="Base.TextView.Mulish.Bold">
+        <item name="android:textSize">@dimen/text_size_twenty_eight</item>
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:text">@string/dashboard_title</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="Home.TextView.CR" parent="Base.TextView.Inter.Medium">
+        <item name="android:textSize">@dimen/spacing_eight</item>
+        <item name="android:minWidth">@dimen/min_dashboard_cr_width</item>
+        <item name="android:textColor">@color/zircon</item>
+        <item name="android:background">@drawable/shape_cr</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/spacing_four</item>
+        <item name="android:text">@string/dashboard_cr</item>
+    </style>
+
     <!--  Activity/Welcome  -->
     <style name="Welcome.Button.Explore" parent="Base.Button.Inter.SemiBold">
         <item name="android:textSize">@dimen/text_size_fourteen</item>
@@ -127,25 +146,6 @@
         <item name="android:layout_marginTop">@dimen/spacing_sixteen</item>
         <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
         <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
-    </style>
-
-    <!--  Fragment/Dashboard  -->
-    <style name="Dashboard.TextView.Title" parent="Base.TextView.Mulish.Bold">
-        <item name="android:textSize">@dimen/text_size_twenty_eight</item>
-        <item name="android:textColor">@color/blue_zodiac</item>
-        <item name="android:text">@string/dashboard_title</item>
-        <item name="android:includeFontPadding">false</item>
-    </style>
-
-    <style name="Dashboard.TextView.CR" parent="Base.TextView.Inter.Medium">
-        <item name="android:textSize">@dimen/spacing_eight</item>
-        <item name="android:minWidth">@dimen/min_dashboard_cr_width</item>
-        <item name="android:textColor">@color/zircon</item>
-        <item name="android:background">@drawable/shape_cr</item>
-        <item name="android:includeFontPadding">false</item>
-        <item name="android:gravity">center</item>
-        <item name="android:padding">@dimen/spacing_four</item>
-        <item name="android:text">@string/dashboard_cr</item>
     </style>
 
     <!--  Fragment/Welcome Info  -->
