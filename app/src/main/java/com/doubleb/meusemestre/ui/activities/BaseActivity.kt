@@ -4,6 +4,7 @@ import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.doubleb.meusemestre.R
 
 open class BaseActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity(contentLayoutId) {
 
@@ -13,6 +14,7 @@ open class BaseActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity(con
         if (supportFragmentManager.findFragmentByTag(tag) == null) {
             supportFragmentManager
                 .beginTransaction()
+                .setCustomAnimations(R.anim.anim_fade_in, R.anim.anim_fade_out)
                 .replace(containerViewId, fragment, tag)
                 .commit()
         }
