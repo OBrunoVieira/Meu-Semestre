@@ -15,6 +15,7 @@ class GradeHighlightHorizontalView @JvmOverloads constructor(
     init {
         View.inflate(context, R.layout.view_grade_highlight_horizontal, this)
         radius = resources.getDimension(R.dimen.spacing_eight)
+        useCompatPadding = true
     }
 
     fun name(name: String) = apply {
