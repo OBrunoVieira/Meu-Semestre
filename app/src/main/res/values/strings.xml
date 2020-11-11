@@ -3,6 +3,10 @@
     <!-- Default-->
     <string name="back">Voltar</string>
 
+    <!--  Activity/Home  -->
+    <string name="home_dashboard">Semestre ativo</string>
+    <string name="home_disciplines">Disciplinas</string>
+    <string name="home_tips">Dicas</string>
 
     <!--  Activity/Welcome  -->
     <string name="welcome_button_explore">Começar a explorar</string>
@@ -10,6 +14,12 @@
 
     <!--  Activity/Register  -->
     <string name="register_button_proceed">Prosseguir</string>
+
+    <!--  Fragment/Disciplines  -->
+    <string-array name="disciplines_tab_item">
+        <item>Semestre ativo</item>
+        <item>Histórico</item>
+    </string-array>
 
     <!--  Fragment/Register Institution  -->
     <string name="register_institution_title">Em qual tipo de instituição você estuda?</string>
@@ -34,7 +44,6 @@
     <string name="register_average_9">9</string>
 
     <!--  Fragment/Dashboard  -->
-    <string name="dashboard_title">Semestre ativo</string>
     <string name="dashboard_cr">CR %s</string>
 
     <!--  Fragment/Welcome Info  -->
