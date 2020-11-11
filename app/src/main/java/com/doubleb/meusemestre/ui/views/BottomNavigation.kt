@@ -15,6 +15,8 @@ class BottomNavigation @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
+    private var listener: Listener? = null
+
     init {
         View.inflate(context, R.layout.view_bottom_navigation, this)
 
@@ -28,27 +30,43 @@ class BottomNavigation @JvmOverloads constructor(
             .backgroundColorRes(R.color.light_purple)
             .title(R.string.bottom_navigation_dashboard)
             .open()
-            .setOnClickListener(buttonClickListener())
+            .setOnClickListener(buttonClickListener(Type.DASHBOARD))
 
         bottom_navigation_button_disciplines
             .icon(R.drawable.vector_disciplines, R.color.dark_blue)
             .backgroundColorRes(R.color.light_blue)
             .title(R.string.bottom_navigation_disciplines)
-            .setOnClickListener(buttonClickListener())
+            .setOnClickListener(buttonClickListener(Type.DISCIPLINES))
 
         bottom_navigation_button_tips
             .icon(R.drawable.vector_tips, R.color.dark_yellow)
             .backgroundColorRes(R.color.light_yellow)
             .title(R.string.bottom_navigation_tips)
-            .setOnClickListener(buttonClickListener())
+            .setOnClickListener(buttonClickListener(Type.TIPS))
     }
 
-    private fun buttonClickListener() = OnClickListener {
+    fun setListener(listener: Listener) {
+        this.listener = listener
+    }
+
+    private fun buttonClickListener(type: Type) = OnClickListener {
         this.children.toList().forEach { child ->
             (child as? ButtonSelectionView)?.close()
         }
 
         val button = it as ButtonSelectionView
         button.open()
+
+        listener?.onNavigationItemSelected(button, type)
+    }
+
+    fun interface Listener {
+        fun onNavigationItemSelected(view: View, type: Type)
+    }
+
+    enum class Type {
+        DASHBOARD,
+        DISCIPLINES,
+        TIPS
     }
 }
