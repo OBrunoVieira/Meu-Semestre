@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/active_semester_recycler_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/spacing_sixteen"
+    android:paddingTop="@dimen/spacing_twenty_four"
+    android:paddingEnd="@dimen/spacing_sixteen"
+    android:paddingBottom="@dimen/spacing_twenty_four"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
