@@ -16,6 +16,7 @@
     <string name="register_button_proceed">Prosseguir</string>
 
     <!--  Fragment/Disciplines  -->
+    <string name="disciplines_fab">Disciplina</string>
     <string-array name="disciplines_tab_item">
         <item>Semestre ativo</item>
         <item>Histórico</item>
@@ -63,8 +64,8 @@
     <string name="welcome_info_fourth_description">Todos os semestres registrados no aplicativo
         ficam disponíveis para consulta e download.</string>
 
-    <!--  VH/Discipline  -->
-    <string name="discipline_average">Média &lt;b>%s&lt;/b></string>
+    <!--  VH/Active Semester  -->
+    <string name="active_semester_delete">Deletar Disciplina</string>
 
     <!--  VH/Best Discipline  -->
     <string name="best_discipline_title">Sua melhor disciplina é</string>
@@ -87,6 +88,10 @@
 
     <!--  View/Circle Chart  -->
     <string name="circle_chart_title">Média</string>
+
+    <!--  View/Average Indicator  -->
+    <string name="average_indicator_title">Média &lt;b>%s&lt;/b></string>
+    <string name="average_indicator_empty_average">Sem notas</string>
 
     <!--  View/Bottom Navigation  -->
     <string name="bottom_navigation_dashboard">Semestre</string>
