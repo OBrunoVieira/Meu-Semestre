@@ -33,32 +33,21 @@
                 style="@style/Discipline.TextView.Title"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/min_discipline_title_height"
-                app:layout_constraintBottom_toTopOf="@id/discipline_text_view_average_title"
+                app:layout_constraintBottom_toTopOf="@id/discipline_average_indicator"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Desenvolvimento Linear" />
 
-            <TextView
-                android:id="@+id/discipline_text_view_average_title"
-                style="@style/Discipline.TextView.Average"
+            <com.doubleb.meusemestre.ui.views.AverageIndicatorView
+                android:id="@+id/discipline_average_indicator"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@id/discipline_progress_average"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="Média 7,8" />
-
-            <ProgressBar
-                android:id="@+id/discipline_progress_average"
-                style="@style/Discipline.Progress.Average"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/max_progress_height"
-                android:progressDrawable="@drawable/shape_progress"
+                android:layout_marginStart="@dimen/spacing_sixteen"
+                android:layout_marginEnd="@dimen/spacing_sixteen"
                 app:layout_constraintBottom_toTopOf="@id/discipline_image_view_wave"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:progress="20" />
+                android:layout_height="wrap_content"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/discipline_image_view_wave"
