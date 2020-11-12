@@ -100,6 +100,16 @@
         <item name="android:text">@string/dashboard_cr</item>
     </style>
 
+    <style name="Home.Fab" parent="Base.TextView.Inter.SemiBold">
+        <item name="android:textSize">@dimen/text_size_fourteen</item>
+        <item name="android:textColor">@color/zircon</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:text">@string/disciplines_fab</item>
+        <item name="iconTint">@color/zircon</item>
+        <item name="android:backgroundTint">@color/colorAccent</item>
+        <item name="icon">@drawable/vector_add</item>
+    </style>
+
     <!--  Activity/Welcome  -->
     <style name="Welcome.Button.Explore" parent="Base.Button.Inter.SemiBold">
         <item name="android:textSize">@dimen/text_size_fourteen</item>
@@ -166,6 +176,16 @@
         <item name="android:layout_marginTop">@dimen/spacing_eight</item>
     </style>
 
+    <!--  VH/Active Semester  -->
+    <style name="ActiveSemester.TextView.Title" parent="Base.TextView.Mulish.SemiBold">
+        <item name="android:textSize">@dimen/text_size_sixteen</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_twenty_eight</item>
+        <item name="android:layout_marginStart">@dimen/spacing_sixteen</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_sixteen</item>
+    </style>
+
     <!--  VH/Discipline  -->
     <style name="Discipline.TextView.Title" parent="Base.TextView.Mulish.SemiBold">
         <item name="android:ellipsize">end</item>
@@ -174,20 +194,6 @@
         <item name="android:layout_marginEnd">@dimen/spacing_sixteen</item>
         <item name="android:layout_marginTop">@dimen/spacing_twenty_four</item>
         <item name="android:layout_marginBottom">@dimen/spacing_eight</item>
-    </style>
-
-    <style name="Discipline.TextView.Average" parent="Base.TextView.Inter.Regular">
-        <item name="android:textSize">@dimen/text_size_twelve</item>
-        <item name="android:layout_marginStart">@dimen/spacing_sixteen</item>
-        <item name="android:layout_marginEnd">@dimen/spacing_sixteen</item>
-        <item name="android:layout_marginBottom">@dimen/spacing_eight</item>
-    </style>
-
-    <style name="Discipline.Progress.Average" parent="Widget.AppCompat.ProgressBar.Horizontal">
-        <item name="android:progressDrawable">@drawable/shape_progress</item>
-        <item name="android:layout_marginStart">@dimen/spacing_sixteen</item>
-        <item name="android:layout_marginEnd">@dimen/spacing_sixteen</item>
-        <item name="android:layout_marginBottom">@dimen/spacing_two</item>
     </style>
 
     <style name="Discipline.ImageView.Wave" parent="">
@@ -278,6 +284,17 @@
         <item name="android:textColor">@color/blue_zodiac</item>
         <item name="android:text">@string/grade_highlight_title</item>
         <item name="android:layout_marginStart">@dimen/spacing_sixteen</item>
+    </style>
+
+    <!--  View/Average Indicator  -->
+    <style name="AverageIndicator.TextView.Average" parent="Base.TextView.Inter.Regular">
+        <item name="android:textSize">@dimen/text_size_twelve</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_eight</item>
+    </style>
+
+    <style name="AverageIndicator.Progress.Average" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/shape_progress</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_two</item>
     </style>
 
     <!--  View/Grade Variation  -->
