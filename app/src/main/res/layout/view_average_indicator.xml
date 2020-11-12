@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:minWidth="@dimen/max_discipline_width"
+    tools:background="@color/colorPrimary"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <TextView
+        android:id="@+id/average_indicator_text_view_average_title"
+        style="@style/AverageIndicator.TextView.Average"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/average_indicator_progress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Média 7,8" />
+
+    <ProgressBar
+        android:id="@+id/average_indicator_progress"
+        style="@style/AverageIndicator.Progress.Average"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/max_progress_height"
+        android:progressDrawable="@drawable/shape_progress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/average_indicator_text_view_average_title"
+        app:layout_constraintWidth_max="@dimen/max_discipline_width"
+        tools:progress="20" />
+
+</merge>
