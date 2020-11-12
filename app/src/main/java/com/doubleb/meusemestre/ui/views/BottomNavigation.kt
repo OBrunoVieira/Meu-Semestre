@@ -29,7 +29,6 @@ class BottomNavigation @JvmOverloads constructor(
             .icon(R.drawable.vector_dashboard, R.color.dark_purple)
             .backgroundColorRes(R.color.light_purple)
             .title(R.string.bottom_navigation_dashboard)
-            .open()
             .setOnClickListener(buttonClickListener(Type.DASHBOARD))
 
         bottom_navigation_button_disciplines
@@ -45,19 +44,33 @@ class BottomNavigation @JvmOverloads constructor(
             .setOnClickListener(buttonClickListener(Type.TIPS))
     }
 
+    fun selectItem(type: Type) = apply {
+        val button = when (type) {
+            Type.DASHBOARD -> bottom_navigation_button_dashboard
+            Type.DISCIPLINES -> bottom_navigation_button_disciplines
+            else -> bottom_navigation_button_tips
+        }
+
+        openButton(button)
+        listener?.onNavigationItemSelected(button, type)
+    }
+
     fun setListener(listener: Listener) {
         this.listener = listener
     }
 
     private fun buttonClickListener(type: Type) = OnClickListener {
+        val button = it as ButtonSelectionView
+        openButton(button)
+        listener?.onNavigationItemSelected(button, type)
+    }
+
+    private fun openButton(button: ButtonSelectionView) {
         this.children.toList().forEach { child ->
             (child as? ButtonSelectionView)?.close()
         }
 
-        val button = it as ButtonSelectionView
         button.open()
-
-        listener?.onNavigationItemSelected(button, type)
     }
 
     fun interface Listener {
