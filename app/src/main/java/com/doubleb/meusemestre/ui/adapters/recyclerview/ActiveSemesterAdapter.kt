@@ -8,7 +8,7 @@ import com.doubleb.meusemestre.models.Discipline
 import com.doubleb.meusemestre.ui.adapters.recyclerview.diff.DisciplineDiffUtils
 import com.doubleb.meusemestre.ui.viewholders.ActiveSemesterViewHolder
 
-class ActiveSemesterAdapter() :
+class ActiveSemesterAdapter :
     ListAdapter<Discipline, ActiveSemesterViewHolder>(DisciplineDiffUtils()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ActiveSemesterViewHolder(
@@ -16,5 +16,6 @@ class ActiveSemesterAdapter() :
         )
 
     override fun onBindViewHolder(holder: ActiveSemesterViewHolder, position: Int) {
+        holder.bind(getItem(position))
     }
 }

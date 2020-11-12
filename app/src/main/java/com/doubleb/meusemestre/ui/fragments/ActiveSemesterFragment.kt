@@ -16,6 +16,14 @@ class ActiveSemesterFragment : Fragment(R.layout.fragment_active_semester) {
         super.onViewCreated(view, savedInstanceState)
         active_semester_recycler_view.adapter = adapter
 
-        adapter.submitList(List(10) { Discipline("", "", 0f) })
+        adapter.submitList(arrayListOf<Discipline>().apply {
+            add(Discipline("", "Fotografia", null))
+            add(Discipline("", "Desenvolvimento de Banco de Dados", 3.2f))
+            add(Discipline("", "Programação Orientada à Objetos", 7f))
+            add(Discipline("", "Cálculo III", 10f))
+            add(Discipline("", "Física I", 9.3f))
+            add(Discipline("", "Química Orgânica", null))
+            add(Discipline("", "Filosofia", null))
+        })
     }
 }
