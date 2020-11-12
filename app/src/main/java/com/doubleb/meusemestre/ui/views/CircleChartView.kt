@@ -2,13 +2,9 @@ package com.doubleb.meusemestre.ui.views
 
 import android.content.Context
 import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Typeface
 import android.text.Spannable
 import android.text.SpannableString
-import android.text.TextPaint
 import android.text.style.ForegroundColorSpan
-import android.text.style.MetricAffectingSpan
 import android.text.style.RelativeSizeSpan
 import android.util.AttributeSet
 import androidx.annotation.ColorInt
@@ -86,17 +82,19 @@ class CircleChartView @JvmOverloads constructor(
         this.enableTitle = enableTitle
     }
 
-    fun valueProportion(proportion:Float) = apply {
+    fun valueProportion(proportion: Float) = apply {
         this.valueProportion = proportion
     }
 
-    fun holeRadius(radius:Float) = apply {
+    fun holeRadius(radius: Float) = apply {
         holeRadius = radius
     }
 
-    fun grade(@FloatRange(from = 0.0, to = 10.0) grade: Float) = apply {
-        this.thereWasChanging = this.grade != grade
-        this.grade = grade
+    fun grade(@FloatRange(from = 0.0, to = 10.0) value: Float?) = apply {
+        value?.let {
+            thereWasChanging = grade != value
+            grade = value
+        }
     }
 
     fun build() {
@@ -180,21 +178,4 @@ class CircleChartView @JvmOverloads constructor(
                 setDrawValues(false)
             }
         }
-
-
-    private inner class TypeFaceSpannable(private val typeFace: Typeface?) : MetricAffectingSpan() {
-
-        override fun updateMeasureState(textPaint: TextPaint) {
-            applyTypeFace(textPaint, typeFace)
-        }
-
-        override fun updateDrawState(textPaint: TextPaint?) {
-            textPaint?.let { applyTypeFace(textPaint, typeFace) }
-        }
-
-        private fun applyTypeFace(paint: Paint, typeFace: Typeface?) {
-            paint.typeface = typeFace
-        }
-
-    }
 }
