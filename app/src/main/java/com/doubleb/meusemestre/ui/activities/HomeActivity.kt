@@ -13,14 +13,14 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        inflateDashboard()
 
         home_bottom_navigation.setListener { _, type ->
             home_fab.isVisible = type == BottomNavigation.Type.DISCIPLINES
 
             when (type) {
                 BottomNavigation.Type.DASHBOARD -> {
-                    inflateDashboard()
+                    home_text_view_title.setText(R.string.home_dashboard)
+                    inflateFragment(DashboardFragment())
                 }
 
                 BottomNavigation.Type.DISCIPLINES -> {
@@ -34,15 +34,11 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
                 }
             }
         }
+
+        home_bottom_navigation.selectItem(BottomNavigation.Type.DASHBOARD)
     }
 
     private fun inflateFragment(fragment: Fragment) {
         inflateFragment(R.id.home_fragment_container, fragment)
     }
-
-    private fun inflateDashboard() {
-        home_text_view_title.setText(R.string.home_dashboard)
-        inflateFragment(DashboardFragment())
-    }
-
 }
