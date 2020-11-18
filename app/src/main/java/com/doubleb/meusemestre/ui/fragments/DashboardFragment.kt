@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ConcatAdapter
 import com.doubleb.meusemestre.R
 import com.doubleb.meusemestre.models.Discipline
+import com.doubleb.meusemestre.ui.activities.HomeActivity
 import com.doubleb.meusemestre.ui.adapters.recyclerview.*
+import com.doubleb.meusemestre.ui.listeners.DisciplineListener
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 
-class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
+class DashboardFragment : Fragment(R.layout.fragment_dashboard), DisciplineListener {
     private val disciplineListAdapter by lazy { DisciplineListAdapter() }
     private val bestDisciplineAdapter by lazy { BestDisciplineAdapter() }
     private val restrictedDisciplineListAdapter by lazy { RestrictedDisciplineListAdapter() }
@@ -34,6 +36,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         dashboard_recycler_view.adapter = concatAdapter
         bestDisciplineAdapter.discipline = Discipline("", "Fotografia", 10f)
 
+        disciplineListAdapter.listener = this
         disciplineListAdapter.list = listOf(
             Discipline("", "Fotografia", 10f),
             Discipline("", "Sociologia", 2f),
@@ -50,6 +53,15 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
             Discipline("", "Álgebra Linear", 3.4f),
             Discipline("", "Sociologia", 2f),
             Discipline("", "Desenvolvimento de Banco de Dados II", 2f)
+        )
+    }
+
+    override fun onDisciplineClick(position: Int) {
+        (activity as? HomeActivity)?.inflateStackFragment(
+            DisciplineDetailsFragment.instance(
+                disciplineListAdapter.list?.get(position)?.name,
+                disciplineListAdapter.list?.get(position)?.grade
+            )
         )
     }
 }

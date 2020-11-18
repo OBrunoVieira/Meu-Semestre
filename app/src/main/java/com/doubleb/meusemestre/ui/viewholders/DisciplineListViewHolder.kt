@@ -4,6 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.doubleb.meusemestre.models.Discipline
 import com.doubleb.meusemestre.ui.adapters.recyclerview.DisciplineAdapter
+import com.doubleb.meusemestre.ui.listeners.DisciplineListener
 import kotlinx.android.synthetic.main.vh_discipline_list.view.*
 
 class DisciplineListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -14,7 +15,8 @@ class DisciplineListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemVie
         itemView.discipline_list_recycler_view.adapter = disciplineAdapter
     }
 
-    fun bind(list: List<Discipline>) {
+    fun bind(list: List<Discipline>, listener:DisciplineListener?) {
+        disciplineAdapter.listener = listener
         disciplineAdapter.submitList(list)
     }
 
