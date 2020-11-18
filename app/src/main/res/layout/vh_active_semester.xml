@@ -5,19 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
+        style="@style/Image.Warning"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|top"
-        android:elevation="@dimen/spacing_four"
-        android:importantForAccessibility="no"
-        android:src="@drawable/vector_warning" />
+        android:layout_height="wrap_content" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/active_semester_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:elevation="0dp"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         app:cardBackgroundColor="@color/light_blue"
         app:cardCornerRadius="@dimen/spacing_eight"
         app:cardUseCompatPadding="true">
@@ -38,18 +38,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:background="@drawable/vector_wave_right" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/active_semester_text_view_title"
-                style="@style/ActiveSemester.TextView.Title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@id/active_semester_average_indicator"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed"
-                tools:text="Desenvolvimento Linear" />
-
             <com.doubleb.meusemestre.ui.views.AverageIndicatorView
                 android:id="@+id/active_semester_average_indicator"
                 android:layout_width="0dp"
@@ -57,18 +45,19 @@
                 android:layout_marginStart="@dimen/spacing_sixteen"
                 android:layout_marginEnd="@dimen/spacing_sixteen"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/active_semester_image_delete"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/active_semester_text_view_title" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/active_semester_image_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/spacing_sixteen"
-                android:clickable="true"
-                android:focusable="true"
                 android:background="?selectableItemBackgroundBorderless"
+                android:clickable="true"
                 android:contentDescription="@string/active_semester_delete"
+                android:focusable="true"
                 android:src="@drawable/vector_delete"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
