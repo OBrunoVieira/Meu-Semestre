@@ -24,9 +24,17 @@ class CircleChartView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : PieChart(context, attrs, defStyleAttr) {
 
+    private val colors by lazy {
+        arrayOf(
+            R.color.light_purple,
+            R.color.light_yellow,
+            R.color.light_blue
+        )
+    }
+
+
     private var grade = 0f
     private var valueProportion = 1.8f
-
     private var thereWasChanging = false
     private var enableTitle = true
     private var progressColor = ContextCompat.getColor(context, R.color.zircon)
@@ -62,12 +70,16 @@ class CircleChartView @JvmOverloads constructor(
         grade(0f).build()
     }
 
-    fun progressColorRes(@ColorRes color: Int) = apply {
-        this.progressColor = ContextCompat.getColor(context, color)
+    fun colorIndex(index: Int) = apply {
+        progressColorRes(colors[index % colors.size])
     }
 
     fun progressColorInt(@ColorInt color: Int) = apply {
         this.progressColor = color
+    }
+
+    fun progressColorRes(@ColorRes color: Int) = apply {
+        this.progressColor = ContextCompat.getColor(context, color)
     }
 
     fun backgroundProgressColorRes(@ColorRes color: Int) = apply {
