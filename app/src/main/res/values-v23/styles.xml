@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Discipline.TextView.Title" parent="Base.TextView.Mulish.SemiBold">
+    <!--  View/Average Indicator  -->
+    <style name="AverageIndicator.TextView.Title" parent="Base.TextView.Mulish.SemiBold">
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">2</item>
-        <item name="android:layout_marginStart">@dimen/spacing_sixteen</item>
-        <item name="android:layout_marginEnd">@dimen/spacing_sixteen</item>
-        <item name="android:layout_marginTop">@dimen/spacing_twenty_four</item>
+        <item name="android:minLines">2</item>
         <item name="android:layout_marginBottom">@dimen/spacing_eight</item>
         <item name="android:hyphenationFrequency">full</item>
     </style>
 
+    <!--  View/Grade Variation  -->
     <style name="GradeVariation.TextView.Title" parent="Base.TextView.Mulish.SemiBold">
         <item name="android:textColor">@color/zircon</item>
         <item name="android:ellipsize">end</item>

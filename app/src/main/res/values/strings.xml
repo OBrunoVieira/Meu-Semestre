@@ -67,6 +67,9 @@
     <!--  VH/Active Semester  -->
     <string name="active_semester_delete">Deletar Disciplina</string>
 
+    <!--  VH/Exam  -->
+    <string name="exam_edit">Editar Avaliação</string>
+
     <!--  VH/Best Discipline  -->
     <string name="best_discipline_title">Sua melhor disciplina é</string>
 

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AverageIndicatorView">
+        <attr name="aiv_title_height" format="dimension" />
+        <attr name="aiv_title_spacing" format="dimension" />
+        <attr name="aiv_title_min_lines" format="integer" />
+    </declare-styleable>
+</resources>
