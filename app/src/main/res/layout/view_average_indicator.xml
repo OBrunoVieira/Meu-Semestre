@@ -8,6 +8,18 @@
     tools:background="@color/colorPrimary"
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/discipline_text_view_title"
+        style="@style/AverageIndicator.TextView.Title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/average_indicator_text_view_average_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Desenvolvimento Linear" />
+
     <TextView
         android:id="@+id/average_indicator_text_view_average_title"
         style="@style/AverageIndicator.TextView.Average"
@@ -16,8 +28,7 @@
         app:layout_constraintBottom_toTopOf="@id/average_indicator_progress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toBottomOf="@id/discipline_text_view_title"
         tools:text="Média 7,8" />
 
     <ProgressBar
