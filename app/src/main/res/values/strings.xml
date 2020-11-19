@@ -22,6 +22,9 @@
         <item>Histórico</item>
     </string-array>
 
+    <!--  Fragment/Discipline Detail  -->
+    <string name="discipline_detail_menu_delete">Deletar Disciplina</string>
+
     <!--  Fragment/Register Institution  -->
     <string name="register_institution_title">Em qual tipo de instituição você estuda?</string>
     <string name="register_institution_public">Pública</string>
