@@ -22,27 +22,27 @@ class AverageIndicatorView @JvmOverloads constructor(
 
     init {
         View.inflate(context, R.layout.view_average_indicator, this)
-
-        val typedArray =
-            context.obtainStyledAttributes(attrs, R.styleable.AverageIndicatorView, defStyleAttr, 0)
-        titleTextSize = typedArray.getDimensionPixelSize(
-            R.styleable.AverageIndicatorView_aiv_title_height,
-            resources.getDimensionPixelSize(R.dimen.text_size_sixteen)
-        )
-
-        titleMinLines = typedArray.getInteger(
-            R.styleable.AverageIndicatorView_aiv_title_min_lines,
-            2
-        )
-
-        titleSpacing = typedArray.getDimensionPixelSize(
-            R.styleable.AverageIndicatorView_aiv_title_spacing,
-            resources.getDimensionPixelSize(R.dimen.spacing_eight)
-        )
-
-        typedArray.recycle()
-
         minWidth = resources.getDimensionPixelSize(R.dimen.max_discipline_width)
+
+        context.obtainStyledAttributes(attrs, R.styleable.AverageIndicatorView, defStyleAttr, 0)
+            .run {
+                titleTextSize = getDimensionPixelSize(
+                    R.styleable.AverageIndicatorView_aiv_title_height,
+                    resources.getDimensionPixelSize(R.dimen.text_size_sixteen)
+                )
+
+                titleMinLines = getInteger(
+                    R.styleable.AverageIndicatorView_aiv_title_min_lines,
+                    2
+                )
+
+                titleSpacing = getDimensionPixelSize(
+                    R.styleable.AverageIndicatorView_aiv_title_spacing,
+                    resources.getDimensionPixelSize(R.dimen.spacing_eight)
+                )
+
+                recycle()
+            }
     }
 
     override fun onFinishInflate() {

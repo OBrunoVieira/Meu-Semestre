@@ -32,6 +32,8 @@ class CircleChartView @JvmOverloads constructor(
         )
     }
 
+    private val disableLightColor by lazy { ContextCompat.getColor(context, R.color.light_gray) }
+    private val disableDarkColor by lazy { ContextCompat.getColor(context, R.color.dark_gray_forty) }
 
     private var grade = 0f
     private var valueProportion = 1.8f
@@ -141,7 +143,7 @@ class CircleChartView @JvmOverloads constructor(
     private fun buildTitleSpan(spannableString: SpannableString, startLength: Int = 0) {
         val interLight = ResourcesCompat.getFont(context, R.font.inter_light)
         spannableString.setSpan(
-            ForegroundColorSpan(progressColor),
+            ForegroundColorSpan(if (grade <= 0) disableDarkColor else progressColor),
             0,
             spannableString.length,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -181,8 +183,8 @@ class CircleChartView @JvmOverloads constructor(
             }
 
             val colors = ArrayList<Int>().apply {
-                add(progressColor)
-                add(backgroundProgressColor)
+                add(if (grade <= 0) disableLightColor else progressColor)
+                add(if (grade <= 0) disableLightColor else backgroundProgressColor)
             }
 
             PieDataSet(entries, null).apply {
