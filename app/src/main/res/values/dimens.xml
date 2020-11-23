@@ -12,6 +12,7 @@
     <dimen name="spacing_twenty_four">24dp</dimen>
     <dimen name="spacing_twenty_eight">28dp</dimen>
     <dimen name="spacing_thirty_two">32dp</dimen>
+    <dimen name="spacing_thirty_four">34dp</dimen>
     <dimen name="spacing_forty">40dp</dimen>
     <dimen name="spacing_forty_four">44dp</dimen>
     <dimen name="spacing_fifty_six">56dp</dimen>

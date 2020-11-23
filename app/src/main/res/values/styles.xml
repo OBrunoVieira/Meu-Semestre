@@ -9,6 +9,10 @@
         <item name="android:textColorSecondary">@color/zircon</item>
     </style>
 
+    <style name="LightPurpleTheme" parent="AppTheme">
+        <item name="colorControlNormal">@color/light_purple</item>
+    </style>
+
     <style name="Base.TextView" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/zircon</item>
         <item name="android:textSize">@dimen/text_size_sixteen</item>
@@ -97,6 +101,15 @@
         <item name="android:src">@drawable/vector_warning</item>
     </style>
 
+    <!--  DropDown  -->
+    <style name="DropDown.Zodiac" parent="Base.TextView.Inter.Regular">
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textAppearance">?attr/textAppearanceSubtitle1</item>
+        <item name="android:padding">@dimen/spacing_sixteen</item>
+    </style>
+
     <!--  Activity/Home  -->
     <style name="Home.TextView.Title" parent="Base.TextView.Mulish.Bold">
         <item name="android:textSize">@dimen/text_size_twenty_eight</item>
@@ -120,7 +133,6 @@
         <item name="android:textSize">@dimen/text_size_fourteen</item>
         <item name="android:textColor">@color/zircon</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:text">@string/disciplines_fab</item>
         <item name="iconTint">@color/zircon</item>
         <item name="android:backgroundTint">@color/colorAccent</item>
         <item name="icon">@drawable/vector_add</item>
@@ -156,10 +168,139 @@
         <item name="android:text">@string/register_button_proceed</item>
     </style>
 
+    <!--  Activity/Discipline Registration  -->
+    <style name="DisciplineRegistration.TextView.Name" parent="Base.TextView.Mulish.Bold">
+        <item name="android:textSize">@dimen/text_size_eighteen</item>
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:text">@string/discipline_registration_name</item>
+        <item name="android:layout_marginTop">@dimen/spacing_thirty_four</item>
+        <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
+    </style>
+
+    <style name="DisciplineRegistration.TextInput.Name" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:layout_marginTop">@dimen/spacing_sixteen</item>
+        <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
+        <item name="android:hint">@string/discipline_registration_name_hint</item>
+    </style>
+
+    <style name="DisciplineRegistration.TextView.Exams" parent="Base.TextView.Mulish.Bold">
+        <item name="android:textSize">@dimen/text_size_eighteen</item>
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:text">@string/discipline_registration_exams_quantity</item>
+        <item name="android:layout_marginTop">@dimen/spacing_thirty_four</item>
+        <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
+    </style>
+
+    <style name="DisciplineRegistration.TextView.KnowledgeArea" parent="Base.TextView.Mulish.Bold">
+        <item name="android:textSize">@dimen/text_size_eighteen</item>
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:text">@string/discipline_registration_knowledge_area</item>
+        <item name="android:layout_marginTop">@dimen/spacing_thirty_four</item>
+        <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
+    </style>
+
+    <style name="DisciplineRegistration.TextInput.KnowledgeArea" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:layout_marginTop">@dimen/spacing_sixteen</item>
+        <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
+        <item name="android:hint">@string/discipline_registration_knowledge_area_hint</item>
+    </style>
+
+    <style name="DisciplineRegistration.TextInput.Exams" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:layout_marginTop">@dimen/spacing_sixteen</item>
+        <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
+        <item name="android:hint">@string/discipline_registration_exams_quantity_hint</item>
+    </style>
+
+    <style name="DisciplineRegistration.Button" parent="Button.Primary.Default">
+        <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_sixteen</item>
+        <item name="android:text">@string/discipline_registration_button</item>
+    </style>
+
+    <!--  Activity/Exam Registration  -->
+    <style name="ExamRegistration.TextView.Name" parent="Base.TextView.Mulish.Bold">
+        <item name="android:textSize">@dimen/text_size_eighteen</item>
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:text">@string/exam_registration_name</item>
+        <item name="android:layout_marginTop">@dimen/spacing_thirty_four</item>
+        <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
+    </style>
+
+    <style name="ExamRegistration.TextView.Value" parent="Base.TextView.Mulish.Bold">
+        <item name="android:textSize">@dimen/text_size_eighteen</item>
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:text">@string/exam_registration_value</item>
+        <item name="android:layout_marginTop">@dimen/spacing_thirty_four</item>
+        <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
+    </style>
+
+    <style name="ExamRegistration.TextView.Grade" parent="Base.TextView.Mulish.Bold">
+        <item name="android:textSize">@dimen/text_size_eighteen</item>
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:text">@string/exam_registration_grade</item>
+        <item name="android:layout_marginTop">@dimen/spacing_thirty_four</item>
+        <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
+    </style>
+
+    <style name="ExamRegistration.TextInput.Name" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:layout_marginTop">@dimen/spacing_sixteen</item>
+        <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
+        <item name="android:hint">@string/exam_registration_name_hint</item>
+    </style>
+
+    <style name="ExamRegistration.TextInput.Value" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:layout_marginTop">@dimen/spacing_sixteen</item>
+        <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
+        <item name="android:hint">@string/exam_registration_value_hint</item>
+    </style>
+
+    <style name="ExamRegistration.TextInput.Grade" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:layout_marginTop">@dimen/spacing_sixteen</item>
+        <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
+        <item name="android:hint">@string/exam_registration_grade_hint</item>
+    </style>
+
+    <style name="ExamRegistration.Button" parent="Button.Primary.Default">
+        <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_sixteen</item>
+        <item name="android:text">@string/exam_registration_button</item>
+    </style>
+
     <!--  Fragment/Disciplines  -->
     <style name="Disciplines.Tab" parent="Base.TextView.Mulish.SemiBold">
         <item name="android:textSize">@dimen/text_size_sixteen</item>
         <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!--  Fragment/Discipline Details  -->
+    <style name="DisciplineDetails.CollapsingLayout" parent="Base.TextView.Mulish.Bold">
+        <item name="android:textSize">@dimen/text_size_eighteen</item>
     </style>
 
     <!--  Fragment/Register  -->
@@ -238,6 +379,20 @@
         <item name="android:layout_marginEnd">@dimen/spacing_sixteen</item>
     </style>
 
+    <!--  VH/Discipline History  -->
+    <style name="DisciplineHistory.TextView.Name" parent="Base.TextView.Inter.Medium">
+        <item name="android:textSize">@dimen/spacing_sixteen</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/zircon</item>
+    </style>
+
+    <style name="DisciplineHistory.TextView.Status" parent="Base.TextView.Inter.Light">
+        <item name="android:textSize">@dimen/text_size_twelve</item>
+        <item name="android:textColor">@color/zircon</item>
+        <item name="android:layout_marginTop">@dimen/spacing_eight</item>
+    </style>
+
     <!--  VH/Restricted Discipline  -->
     <style name="RestrictedDiscipline.TextView.Title" parent="Base.TextView.Inter.Medium">
         <item name="android:textSize">@dimen/text_size_eighteen</item>
@@ -302,6 +457,30 @@
         <item name="android:layout_marginStart">@dimen/spacing_sixteen</item>
     </style>
 
+    <!--  VH/Tips  -->
+    <style name="Tips.TextView.Title" parent="Base.TextView.Mulish.SemiBold">
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:textSize">@dimen/spacing_sixteen</item>
+        <item name="android:layout_marginStart">@dimen/spacing_sixteen</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_eight</item>
+        <item name="android:layout_marginTop">@dimen/spacing_twenty_four</item>
+    </style>
+
+    <style name="Tips.TextView.Description" parent="Base.TextView.Inter.Light">
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:textSize">@dimen/text_size_fourteen</item>
+        <item name="android:layout_marginTop">@dimen/spacing_eight</item>
+        <item name="android:layout_marginStart">@dimen/spacing_sixteen</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_eight</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_twenty_four</item>
+    </style>
+
+    <!--  VH/Semester History  -->
+    <style name="SemesterHistory.TextView.Name" parent="Base.TextView.Mulish.SemiBold">
+        <item name="android:textColor">@color/zircon</item>
+        <item name="android:textSize">@dimen/text_size_twenty</item>
+    </style>
+
     <!--  View/Average Indicator  -->
     <style name="AverageIndicator.TextView.Title" parent="Base.TextView.Mulish.SemiBold">
         <item name="android:ellipsize">end</item>
@@ -342,6 +521,25 @@
         <item name="android:includeFontPadding">false</item>
         <item name="android:layout_marginStart">@dimen/spacing_eight</item>
         <item name="android:layout_marginBottom">@dimen/spacing_twelve</item>
+    </style>
+
+    <!--  View/Empty State  -->
+    <style name="EmptyState.TextView.Title" parent="Base.TextView.Mulish.SemiBold">
+        <item name="android:textSize">@dimen/text_size_twenty</item>
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">@dimen/spacing_thirty_two</item>
+    </style>
+
+    <style name="EmptyState.TextView.Description" parent="Base.TextView.Inter.Light">
+        <item name="android:textSize">@dimen/text_size_fourteen</item>
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">@dimen/spacing_eight</item>
+    </style>
+
+    <style name="EmptyState.Button" parent="Button.Primary.Default">
+        <item name="android:layout_marginTop">@dimen/spacing_forty</item>
     </style>
 
     <!--  View/Button Selection  -->

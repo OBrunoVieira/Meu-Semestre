@@ -15,15 +15,45 @@
     <!--  Activity/Register  -->
     <string name="register_button_proceed">Prosseguir</string>
 
+    <!--  Activity/Discipline Registration  -->
+    <string name="discipline_registration_name">Dê um nome para a disciplina</string>
+    <string name="discipline_registration_name_hint">Nome da disiciplina</string>
+    <string name="discipline_registration_knowledge_area">Selecione a área de conhecimento em que a disciplina melhor se encaixa</string>
+    <string name="discipline_registration_knowledge_area_hint">Área de conhecimento</string>
+    <string name="discipline_registration_exams_quantity">Quantas avaliações você vai ter nesta disciplina?</string>
+    <string name="discipline_registration_exams_quantity_hint">Quantidade de avaliações</string>
+    <string name="discipline_registration_button">Concluir</string>
+    <string-array name="discipline_registration_knowledge_areas">
+        <item>Ciências Exatas e da Terra</item>
+        <item>Ciências Biológicas</item>
+        <item>Engenharias</item>
+        <item>Ciências da Saúde</item>
+        <item>Ciências Agrárias</item>
+        <item>Ciências Sociais</item>
+        <item>Ciências Humanas</item>
+        <item>Linguística, Letras</item>
+        <item>Artes</item>
+    </string-array>
+
+    <!--  Activity/Exam Registration  -->
+    <string name="exam_registration_name">Dê um nome para a atividade</string>
+    <string name="exam_registration_name_hint">Nome da atividade</string>
+    <string name="exam_registration_value">Quanto esta atividade vale?</string>
+    <string name="exam_registration_value_hint">Valor</string>
+    <string name="exam_registration_grade">Quanto você tirou?</string>
+    <string name="exam_registration_grade_hint">Nota</string>
+    <string name="exam_registration_button">Concluir</string>
+    <string name="exam_registration_menu_delete">Deletar atividade</string>
+
     <!--  Fragment/Disciplines  -->
-    <string name="disciplines_fab">Disciplina</string>
     <string-array name="disciplines_tab_item">
         <item>Semestre ativo</item>
         <item>Histórico</item>
     </string-array>
 
     <!--  Fragment/Discipline Detail  -->
-    <string name="discipline_detail_menu_delete">Deletar Disciplina</string>
+    <string name="discipline_detail_menu_delete">Deletar Atividade</string>
+    <string name="discipline_detail_fab">Atividade</string>
 
     <!--  Fragment/Register Institution  -->
     <string name="register_institution_title">Em qual tipo de instituição você estuda?</string>
@@ -69,6 +99,7 @@
 
     <!--  VH/Active Semester  -->
     <string name="active_semester_delete">Deletar Disciplina</string>
+    <string name="active_semester_fab">Disciplinas</string>
 
     <!--  VH/Exam  -->
     <string name="exam_edit">Editar Avaliação</string>
