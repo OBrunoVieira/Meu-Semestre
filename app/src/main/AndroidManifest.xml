@@ -22,6 +22,10 @@
         <activity android:name=".ui.activities.HomeActivity" />
 
         <activity android:name=".ui.activities.RegisterActivity" />
+
+        <activity android:name=".ui.activities.ExamRegistrationActivity" />
+
+        <activity android:name=".ui.activities.DisciplineRegistrationActivity" />
     </application>
 
 </manifest>
