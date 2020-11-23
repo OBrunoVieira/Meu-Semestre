@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_exam_registration_delete"
+        android:icon="@drawable/vector_delete"
+        app:iconTint="@color/light_purple"
+        android:title="@string/exam_registration_menu_delete"
+        app:showAsAction="ifRoom" />
+</menu>

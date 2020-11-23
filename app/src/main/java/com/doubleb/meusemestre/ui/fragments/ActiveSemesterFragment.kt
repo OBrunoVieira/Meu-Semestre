@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_active_semester.*
 
 class ActiveSemesterFragment : Fragment(R.layout.fragment_active_semester), DisciplineListener {
 
-    val adapter by lazy { ActiveSemesterAdapter(this) }
+    private val adapter by lazy { ActiveSemesterAdapter(this) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
