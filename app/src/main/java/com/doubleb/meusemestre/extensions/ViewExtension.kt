@@ -2,18 +2,25 @@ package com.doubleb.meusemestre.extensions
 
 import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.content.res.ColorStateList
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 
-fun View.disable() = apply{
+fun View.hideKeyboard() = apply {
+    val inputManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputManager.hideSoftInputFromWindow(applicationWindowToken, 0)
+}
+
+fun View.disable() = apply {
     alpha = .5f
     isEnabled = false
 }
 
-fun View.enable() = apply{
+fun View.enable() = apply {
     alpha = 1f
     isEnabled = true
 }
