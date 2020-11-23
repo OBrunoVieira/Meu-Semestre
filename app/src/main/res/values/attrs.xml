@@ -5,4 +5,11 @@
         <attr name="aiv_title_spacing" format="dimension" />
         <attr name="aiv_title_min_lines" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="EmptyStateView">
+        <attr name="esv_src" format="reference" />
+        <attr name="esv_title" format="string" />
+        <attr name="esv_description" format="string" />
+        <attr name="esv_button_text" format="string" />
+    </declare-styleable>
 </resources>

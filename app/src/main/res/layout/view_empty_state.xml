@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:parentTag="androidx.appcompat.widget.LinearLayoutCompat">
+
+    <ImageView
+        android:id="@+id/empty_state_image_view"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/shape_profile" />
+
+    <TextView
+        android:id="@+id/empty_state_text_view_title"
+        style="@style/EmptyState.TextView.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Nenhuma disciplina cadastrada" />
+
+    <TextView
+        android:id="@+id/empty_state_text_view_description"
+        style="@style/EmptyState.TextView.Description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Cadastre suas disciplinas e fique de olho no seu desempenho." />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/empty_state_button"
+        style="@style/EmptyState.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Cadastrar disciplinas" />
+</merge>
