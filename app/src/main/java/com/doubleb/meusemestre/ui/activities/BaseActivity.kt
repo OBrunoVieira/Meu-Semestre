@@ -1,5 +1,6 @@
 package com.doubleb.meusemestre.ui.activities
 
+import android.view.MenuItem
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +19,12 @@ open class BaseActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity(con
         if (supportFragmentManager.findFragmentByTag(tag) == null) {
             supportFragmentManager
                 .beginTransaction()
-                .setCustomAnimations(R.anim.anim_fade_in, R.anim.anim_fade_out)
+                .setCustomAnimations(
+                    R.anim.anim_fade_in,
+                    R.anim.anim_fade_out,
+                    R.anim.anim_fade_in,
+                    R.anim.anim_fade_out
+                )
                 .replace(containerViewId, fragment, tag)
                 .commit()
         }
@@ -29,9 +35,21 @@ open class BaseActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity(con
 
         supportFragmentManager
             .beginTransaction()
-            .setCustomAnimations(R.anim.anim_fade_in, R.anim.anim_fade_out)
+            .setCustomAnimations(
+                R.anim.anim_fade_in,
+                R.anim.anim_fade_out,
+                R.anim.anim_fade_in,
+                R.anim.anim_fade_out
+            )
             .replace(containerViewId, fragment, tag)
             .addToBackStack(BACK_STACK_ROOT_TAG)
             .commit()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
