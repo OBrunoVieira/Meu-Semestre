@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/login_content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@null"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/spacing_thirty_two"
+    android:paddingEnd="@dimen/spacing_thirty_two"
+    android:paddingBottom="@dimen/spacing_thirty_two">
+
+    <ImageView
+        android:id="@+id/login_sheet_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_eight"
+        android:importantForAccessibility="no"
+        android:src="@drawable/shape_bottom_sheet_indicator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/login_textview_title"
+        style="@style/Login.TextView.Title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_sheet_indicator" />
+
+    <TextView
+        android:id="@+id/login_textview_description"
+        style="@style/Login.TextView.Description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_textview_title" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/login_button_google"
+        style="@style/Login.Button.Google"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/login_button_facebook"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_textview_description" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/login_button_facebook"
+        style="@style/Login.Button.Facebook"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/login_button_google"
+        app:layout_constraintTop_toBottomOf="@id/login_textview_description" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

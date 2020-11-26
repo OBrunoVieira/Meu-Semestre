@@ -3,49 +3,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/welcome_content_main"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_width="match_parent"
     tools:background="@color/light_blue">
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/welcome_view_pager"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
         android:clipChildren="false"
         android:clipToPadding="false"
+        android:id="@+id/welcome_view_pager"
+        android:layout_height="0dp"
+        android:layout_width="0dp"
         app:layout_constraintBottom_toTopOf="@+id/welcome_content_buttons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/welcome_image_view_triangle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:background="@drawable/vector_triangle"
+        android:id="@+id/welcome_image_view_triangle"
         android:importantForAccessibility="no"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
         app:layout_constraintBottom_toTopOf="@id/welcome_content_buttons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/welcome_content_buttons"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:background="@color/zircon"
         android:gravity="center"
+        android:id="@+id/welcome_content_buttons"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
         android:orientation="vertical"
-        android:paddingStart="@dimen/spacing_thirty_two"
-        android:paddingEnd="@dimen/spacing_thirty_two"
         android:paddingBottom="@dimen/spacing_thirty_two"
+        android:paddingEnd="@dimen/spacing_thirty_two"
+        android:paddingStart="@dimen/spacing_thirty_two"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <com.rd.PageIndicatorView
             android:id="@+id/welcome_page_indicator"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             app:piv_animationType="worm"
             app:piv_padding="@dimen/spacing_eight"
             app:piv_radius="@dimen/spacing_four"
@@ -53,16 +53,16 @@
             app:piv_unselectedColor="@color/blue_zodiac_thirty" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/welcome_button_explore"
             style="@style/Welcome.Button.Explore"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:id="@+id/welcome_button_explore"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/welcome_button_login"
             style="@style/Welcome.Button.Login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:id="@+id/welcome_button_login"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
