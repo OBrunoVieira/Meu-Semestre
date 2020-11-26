@@ -50,6 +50,8 @@ ext {
     final mpchartVersion = 'v3.1.0'
     final pageIndicatorVersion = '1.0.3'
     final viewPagerVersion = '1.0.0'
+    final koinVersion = '2.2.1'
+    final facebookVersion = '8.1.0'
 
     final espressoVersion = '3.2.0'
     final androidJunitVersion = '1.1.1'
@@ -60,11 +62,23 @@ ext {
 
             firebaseBoM: "com.google.firebase:firebase-bom:$firebaseBomVersion",
 
+            login      : [
+                    "com.facebook.android:facebook-login:$facebookVersion"
+            ],
+
+            koin       : [
+                    "org.koin:koin-android:$koinVersion",
+                    "org.koin:koin-android-viewmodel:$koinVersion",
+                    "org.koin:koin-androidx-fragment:$koinVersion"
+            ],
+
             firebase   : [
                     "com.google.firebase:firebase-analytics-ktx",
                     "com.google.firebase:firebase-crashlytics-ktx",
                     "com.google.firebase:firebase-perf",
-                    "com.google.firebase:firebase-firestore-ktx"
+                    "com.google.firebase:firebase-firestore-ktx",
+                    "com.google.firebase:firebase-auth",
+                    "com.google.firebase:firebase-database-ktx"
             ],
 
             androidx   : [
@@ -85,7 +99,7 @@ ext {
 
             mpchart    : "com.github.PhilJay:MPAndroidChart:$mpchartVersion",
 
-            viewPager: [
+            viewPager  : [
                     "com.romandanylyk:pageindicatorview:$pageIndicatorVersion",
                     "androidx.viewpager2:viewpager2:$viewPagerVersion"
             ],

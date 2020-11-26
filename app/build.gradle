@@ -14,7 +14,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0-alpha01"
 
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -63,6 +63,8 @@ dependencies {
     implementation androidDependencies.androidx
     implementation androidDependencies.mpchart
     implementation androidDependencies.viewPager
+    implementation androidDependencies.koin
+    implementation androidDependencies.login
 //    implementation androidDependencies.compose
     implementation androidDependencies.firebase
 
