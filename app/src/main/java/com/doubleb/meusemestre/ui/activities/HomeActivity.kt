@@ -1,6 +1,7 @@
 package com.doubleb.meusemestre.ui.activities
 
 import android.animation.LayoutTransition.CHANGING
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -19,6 +20,10 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
         super.onCreate(savedInstanceState)
 
         home_coordinator.layoutTransition?.enableTransitionType(CHANGING)
+
+        home_content_profile.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
+        }
 
         home_bottom_navigation.setListener { _, type ->
             home_app_bar.setExpanded(true)
