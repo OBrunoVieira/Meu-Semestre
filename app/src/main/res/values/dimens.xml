@@ -35,6 +35,7 @@
     <dimen name="warning_size">18dp</dimen>
     <dimen name="max_progress_height">4dp</dimen>
     <dimen name="min_button_height">56dp</dimen>
+    <dimen name="min_expanded_header_height">194dp</dimen>
 
     <!--  Custom Dimensions/Chart  -->
     <dimen name="chart_min_size">48dp</dimen>
@@ -51,5 +52,12 @@
 
     <!-- Custom Dimension/Grade Variation-->
     <dimen name="min_grade_variation_title_height">44dp</dimen>
+
+    <!--  Custom Dimension/Login  -->
+    <dimen name="min_login_button_width">144dp</dimen>
+
+    <!--  Custom Dimension/Bottom Sheet  -->
+    <dimen name="min_bottom_sheet_indicator_width">56dp</dimen>
+    <dimen name="min_bottom_sheet_indicator_height">4dp</dimen>
 
 </resources>
