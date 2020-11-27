@@ -12,12 +12,22 @@
     <string name="welcome_button_explore">Começar a explorar</string>
     <string name="welcome_button_login">Já tenho uma conta</string>
 
+    <!--  Activity/Profile  -->
+    <string name="profile_guest_name">Convidado</string>
+    <string name="profile_empty_value">-</string>
+    <string name="profile_cr_title">CR geral</string>
+    <string name="profile_semester_title">Semestre</string>
+    <string name="profile_disciplines_title">Disciplinas</string>
+    <string name="profile_notification_title">Receber notificações</string>
+    <string name="profile_logout_title">Sair da minha conta</string>
+    <string name="profile_version_title">Versão %s</string>
+
     <!--  Activity/Register  -->
     <string name="register_button_proceed">Prosseguir</string>
 
     <!--  Activity/Discipline Registration  -->
     <string name="discipline_registration_name">Dê um nome para a disciplina</string>
-    <string name="discipline_registration_name_hint">Nome da disiciplina</string>
+    <string name="discipline_registration_name_hint">Nome da disciplina</string>
     <string name="discipline_registration_knowledge_area">Selecione a área de conhecimento em que a disciplina melhor se encaixa</string>
     <string name="discipline_registration_knowledge_area_hint">Área de conhecimento</string>
     <string name="discipline_registration_exams_quantity">Quantas avaliações você vai ter nesta disciplina?</string>
@@ -90,7 +100,7 @@
         semestre para acompanhar seu desempenho.</string>
 
     <string name="welcome_info_third_title">De olho no desempenho</string>
-    <string name="welcome_info_third_description">Fique sabendo em quais disiciplinas você precisa
+    <string name="welcome_info_third_description">Fique sabendo em quais disciplinas você precisa
         focar mais e em quais você está mandando bem.</string>
 
     <string name="welcome_info_fourth_title">Guarde o histórico</string>
@@ -134,4 +144,10 @@
     <string name="bottom_navigation_dashboard">Semestre</string>
     <string name="bottom_navigation_disciplines">Disciplinas</string>
     <string name="bottom_navigation_tips">Dicas</string>
+
+    <!--  BottomSheet/Login  -->
+    <string name="login_title">Login</string>
+    <string name="login_description">Faça login para ter acesso às informações da sua conta.</string>
+    <string name="login_button_google">Google</string>
+    <string name="login_button_facebook">Facebook</string>
 </resources>
