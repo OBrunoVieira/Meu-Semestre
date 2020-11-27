@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import com.doubleb.meusemestre.R
+import com.doubleb.meusemestre.extensions.gone
 import com.doubleb.meusemestre.models.Exam
 import com.doubleb.meusemestre.ui.activities.ExamRegistrationActivity
 import com.doubleb.meusemestre.ui.activities.HomeActivity
@@ -99,7 +100,7 @@ class DisciplineDetailsFragment : Fragment(R.layout.fragment_discipline_details)
     override fun onStop() {
         super.onStop()
         (activity as? HomeActivity)?.fab()?.let {
-            it.hide()
+            it.gone()
             it.setOnClickListener(null)
         }
     }
