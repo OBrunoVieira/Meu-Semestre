@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.doubleb.meusemestre.R
+import com.doubleb.meusemestre.extensions.gone
 import com.doubleb.meusemestre.ui.activities.DisciplineRegistrationActivity
 import com.doubleb.meusemestre.ui.activities.HomeActivity
 import com.doubleb.meusemestre.ui.adapters.viewpager.DisciplinePageAdapter
@@ -49,7 +50,7 @@ class DisciplinesFragment : Fragment(R.layout.fragment_disciplines),
     override fun onStop() {
         super.onStop()
         (activity as? HomeActivity)?.fab()?.let {
-            it.hide()
+            it.gone()
             it.setOnClickListener(null)
         }
     }
@@ -59,7 +60,7 @@ class DisciplinesFragment : Fragment(R.layout.fragment_disciplines),
             if (tab?.position == 0) {
                 it.show()
             } else {
-                it.hide()
+                it.gone()
             }
         }
     }
