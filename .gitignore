@@ -69,6 +69,7 @@ keystore/*
 # google-services.json
 app/src/debug/google-services.json
 app/google-services.json
+app/src/main/res/values/string_authentication.xml
 
 # Freeline
 freeline.py
