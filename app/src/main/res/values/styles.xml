@@ -7,6 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/zircon</item>
         <item name="android:textColorSecondary">@color/zircon</item>
+        <item name="bottomSheetDialogTheme">@style/BottomSheet.Theme</item>
     </style>
 
     <style name="LightPurpleTheme" parent="AppTheme">
@@ -54,6 +55,21 @@
 
     <style name="Base.Button.Inter.SemiBold" parent="Base.Button">
         <item name="android:fontFamily">@font/inter_semi_bold</item>
+    </style>
+
+    <!--  BottomSheet  -->
+    <style name="BottomSheet.ShapeAppearance" parent="">
+        <item name="cornerSizeTopLeft">@dimen/spacing_sixteen</item>
+        <item name="cornerSizeTopRight">@dimen/spacing_sixteen</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="BottomSheet.Style" parent="Widget.MaterialComponents.BottomSheet">
+        <item name="shapeAppearanceOverlay">@style/BottomSheet.ShapeAppearance</item>
+    </style>
+
+    <style name="BottomSheet.Theme" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheet.Style</item>
     </style>
 
     <!--  Buttons  -->
@@ -110,6 +126,13 @@
         <item name="android:padding">@dimen/spacing_sixteen</item>
     </style>
 
+    <!--  Divider  -->
+    <style name="Divider" parent="">
+        <item name="android:minHeight">@dimen/spacing_one</item>
+        <item name="android:background">@color/light_gray</item>
+        <item name="android:importantForAccessibility">no</item>
+    </style>
+
     <!--  Activity/Home  -->
     <style name="Home.TextView.Title" parent="Base.TextView.Mulish.Bold">
         <item name="android:textSize">@dimen/text_size_twenty_eight</item>
@@ -158,6 +181,76 @@
         <item name="strokeColor">@color/light_purple</item>
         <item name="strokeWidth">@dimen/spacing_one</item>
         <item name="android:layout_marginTop">@dimen/spacing_sixteen</item>
+    </style>
+
+    <!--  Activity/Profile  -->
+    <style name="Profile.TextView.Name" parent="Base.TextView.Mulish.SemiBold">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginStart">@dimen/spacing_sixteen</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_sixteen</item>
+        <item name="android:layout_marginTop">@dimen/spacing_eight</item>
+        <item name="android:textColor">@color/zircon</item>
+        <item name="android:text">@string/profile_guest_name</item>
+        <item name="android:textSize">@dimen/text_size_eighteen</item>
+    </style>
+
+    <style name="Profile.TextView.Value" parent="Base.TextView.Mulish.SemiBold">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/zircon</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:layout_marginTop">@dimen/spacing_thirty_two</item>
+        <item name="android:text">@string/profile_empty_value</item>
+        <item name="android:textSize">@dimen/text_size_twenty_four</item>
+    </style>
+
+    <style name="Profile.TextView.Header" parent="Base.TextView.Inter.Light">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/light_gray</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:layout_marginTop">@dimen/spacing_four</item>
+        <item name="android:text">@string/profile_empty_value</item>
+        <item name="android:textSize">@dimen/text_size_twelve</item>
+    </style>
+
+    <style name="Profile.TextView.Title.CR" parent="Profile.TextView.Header">
+        <item name="android:text">@string/profile_cr_title</item>
+    </style>
+
+    <style name="Profile.TextView.Title.Semester" parent="Profile.TextView.Header">
+        <item name="android:text">@string/profile_semester_title</item>
+    </style>
+
+    <style name="Profile.TextView.Title.Disciplines" parent="Profile.TextView.Header">
+        <item name="android:text">@string/profile_disciplines_title</item>
+    </style>
+
+    <style name="Profile.TextView.Options" parent="Base.TextView.Inter.Light">
+        <item name="android:importantForAccessibility">no</item>
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:textSize">@dimen/text_size_fourteen</item>
+    </style>
+
+    <style name="Profile.TextView.Notification" parent="Profile.TextView.Options">
+        <item name="android:text">@string/profile_notification_title</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_twenty_four</item>
+        <item name="android:layout_marginTop">@dimen/spacing_twenty_four</item>
+    </style>
+
+    <style name="Profile.TextView.Logout" parent="Profile.TextView.Options">
+        <item name="android:text">@string/profile_logout_title</item>
+        <item name="android:layout_marginTop">@dimen/spacing_twenty_four</item>
+    </style>
+
+    <style name="Profile.TextView.Version" parent="Profile.TextView.Options">
+        <item name="android:text">@string/profile_version_title</item>
+        <item name="android:layout_marginTop">@dimen/spacing_twenty_four</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_twenty_four</item>
+    </style>
+
+    <style name="Profile.Switch.Notification" parent="Widget.MaterialComponents.CompoundButton.Switch">
+        <item name="colorControlActivated">@color/dark_purple</item>
     </style>
 
     <!--  Activity/Register  -->
@@ -548,4 +641,34 @@
         <item name="android:textSize">@dimen/spacing_twelve</item>
         <item name="android:layout_marginStart">@dimen/spacing_four</item>
     </style>
+
+    <!--  BottomSheet/Login  -->
+    <style name="Login.TextView.Title" parent="Base.TextView.Mulish.Bold">
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:textSize">@dimen/text_size_twenty_eight</item>
+        <item name="android:text">@string/login_title</item>
+        <item name="android:layout_marginTop">@dimen/spacing_thirty_two</item>
+    </style>
+
+    <style name="Login.TextView.Description" parent="Base.TextView.Inter.Light">
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:textSize">@dimen/spacing_sixteen</item>
+        <item name="android:text">@string/login_description</item>
+        <item name="android:layout_marginTop">@dimen/spacing_twelve</item>
+    </style>
+
+    <style name="Login.Button.Google" parent="Button.Primary.Default">
+        <item name="android:text">@string/login_button_google</item>
+        <item name="icon">@drawable/vector_google</item>
+        <item name="android:layout_marginTop">@dimen/spacing_forty</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_four</item>
+    </style>
+
+    <style name="Login.Button.Facebook" parent="Button.Primary.Default">
+        <item name="android:text">@string/login_button_facebook</item>
+        <item name="icon">@drawable/vector_facebook</item>
+        <item name="android:layout_marginTop">@dimen/spacing_forty</item>
+        <item name="android:layout_marginStart">@dimen/spacing_four</item>
+    </style>
+
 </resources>
