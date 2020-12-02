@@ -1,6 +1,6 @@
 # Meu-Semestre
 
-<img src="https://i.imgur.com/EyPiwTX.png" width=300/>
+<img src="https://i.imgur.com/4Jdr5ej.png"/>
 
 ## Descrição
 Aplicação Android responsável por ajudar alunos a organizarem sua grade semestral de matérias de uma forma simples, intuitiva e acessível.
