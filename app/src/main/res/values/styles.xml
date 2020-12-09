@@ -671,4 +671,24 @@
         <item name="android:layout_marginStart">@dimen/spacing_four</item>
     </style>
 
+    <!--  BottomSheet/Semester Registration  -->
+    <style name="SemesterRegistration.TextView.Title" parent="Base.TextView.Mulish.Bold">
+        <item name="android:textSize">@dimen/text_size_eighteen</item>
+        <item name="android:text">@string/semester_registration_title</item>
+        <item name="android:layout_marginTop">@dimen/spacing_twenty_four</item>
+        <item name="android:textColor">@color/blue_zodiac</item>
+    </style>
+
+    <style name="SemesterRegistration.Button" parent="Button.Primary.Default">
+        <item name="android:text">@string/semester_registration_action</item>
+        <item name="android:layout_marginTop">@dimen/spacing_forty</item>
+    </style>
+
+    <style name="SemesterRegistration.TextInput.Value" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:layout_marginTop">@dimen/spacing_twenty_four</item>
+        <item name="android:hint">@string/semester_registration_hint</item>
+    </style>
+
 </resources>

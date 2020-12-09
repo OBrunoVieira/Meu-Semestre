@@ -133,12 +133,24 @@
     <!--  VH/Grade Highlight  -->
     <string name="grade_highlight_title">Onde melhorou, onde piorou</string>
 
+    <!--  VH/Empty Semester  -->
+    <string name="empty_semester_title">Nenhum semestre ativo</string>
+    <string name="empty_semester_description">Inicie um semestre e inclua as disciplinas que você está cursando.</string>
+    <string name="empty_semester_action">Iniciar um semestre</string>
+
+    <!--  VH/Empty Disciplines  -->
+    <string name="empty_disciplines_title">Nenhuma disciplina cadastrada</string>
+    <string name="empty_disciplines_description">Cadastre suas disciplinas e fique de olho no seu desempenho.</string>
+    <string name="empty_disciplines_action">Cadastrar disciplinas</string>
+
     <!--  View/Circle Chart  -->
     <string name="circle_chart_title">Média</string>
 
     <!--  View/Average Indicator  -->
     <string name="average_indicator_title">Média &lt;b>%s&lt;/b></string>
     <string name="average_indicator_empty_average">Sem notas</string>
+    <string name="average_content_description_valid">A disciplina %1$s está com média %2$s.</string>
+    <string name="average_content_description_invalid">A disciplina %1$s está sem nota</string>
 
     <!--  View/Bottom Navigation  -->
     <string name="bottom_navigation_dashboard">Semestre</string>
@@ -150,4 +162,9 @@
     <string name="login_description">Faça login para ter acesso às informações da sua conta.</string>
     <string name="login_button_google">Google</string>
     <string name="login_button_facebook">Facebook</string>
+
+    <!--  BottomSheet/Semester Registration  -->
+    <string name="semester_registration_title">Dê um nome para o semestre</string>
+    <string name="semester_registration_hint">Nome do semestre</string>
+    <string name="semester_registration_action">Criar</string>
 </resources>
