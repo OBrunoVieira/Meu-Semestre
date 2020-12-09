@@ -15,19 +15,19 @@ class SemesterHistoryFragment : Fragment(R.layout.fragment_semester_history) {
         semester_history_recyclerview.adapter = SemesterHistoryAdapter(
             listOf(
                 listOf(
-                    Discipline("", "Química Orgânica", 5.1f),
-                    Discipline("", "Álgebra Linear", 5.1f),
-                    Discipline("", "Expressão Gráfica", 5.1f)
+                    Discipline("", "Química Orgânica", "", 5.1f),
+                    Discipline("", "Álgebra Linear", "", 5.1f),
+                    Discipline("", "Expressão Gráfica", "", 5.1f)
                 ),
                 listOf(
-                    Discipline("", "Química Orgânica", 5.1f),
-                    Discipline("", "Álgebra Linear", 5.1f),
-                    Discipline("", "Expressão Gráfica", 5.1f)
+                    Discipline("", "Química Orgânica", "", 5.1f),
+                    Discipline("", "Álgebra Linear", "", 5.1f),
+                    Discipline("", "Expressão Gráfica", "", 5.1f)
                 ),
                 listOf(
-                    Discipline("", "Química Orgânica", 5.1f),
-                    Discipline("", "Álgebra Linear", 5.1f),
-                    Discipline("", "Expressão Gráfica", 5.1f)
+                    Discipline("", "Química Orgânica", "", 5.1f),
+                    Discipline("", "Álgebra Linear", "", 5.1f),
+                    Discipline("", "Expressão Gráfica", "", 5.1f)
                 )
             )
         )

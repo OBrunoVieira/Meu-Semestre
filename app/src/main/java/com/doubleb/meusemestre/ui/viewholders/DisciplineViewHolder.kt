@@ -19,6 +19,9 @@ class DisciplineViewHolder(itemView: View, listener: DisciplineListener?) :
 
     fun bind(item: Discipline) {
         itemView.run {
+            discipline_card_view.contentDescription =
+                discipline_average_indicator.recoverContentDescription(item.name, item.grade)
+
             discipline_average_indicator.title(item.name)
             discipline_average_indicator.average(item.grade)
 

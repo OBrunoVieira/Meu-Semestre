@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.doubleb.meusemestre.ui.views.EmptyStateView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/empty_semester_state_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="?attr/actionBarSize"
+    android:paddingStart="@dimen/spacing_thirty_two"
+    android:paddingEnd="@dimen/spacing_thirty_two"
+    app:esv_button_text="@string/empty_semester_action"
+    app:esv_description="@string/empty_semester_description"
+    app:esv_title="@string/empty_semester_title" />
