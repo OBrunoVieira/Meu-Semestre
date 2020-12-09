@@ -23,12 +23,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            android:importantForAccessibility="no"
             android:layout_height="wrap_content">
 
             <com.doubleb.meusemestre.ui.views.AverageIndicatorView
                 android:id="@+id/discipline_average_indicator"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:layout_marginStart="@dimen/spacing_sixteen"
                 android:layout_marginTop="@dimen/spacing_twenty_four"
                 android:layout_marginEnd="@dimen/spacing_sixteen"

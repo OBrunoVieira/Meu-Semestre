@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/login_content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@null"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/spacing_thirty_two"
+    android:paddingEnd="@dimen/spacing_thirty_two"
+    android:paddingBottom="@dimen/spacing_sixteen">
+
+    <ImageView
+        android:id="@+id/semester_registration_sheet_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/spacing_eight"
+        android:importantForAccessibility="no"
+        android:src="@drawable/shape_bottom_sheet_indicator" />
+
+    <TextView
+        android:id="@+id/semester_registration_textview_title"
+        style="@style/SemesterRegistration.TextView.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/semester_registration_text_input"
+        style="@style/SemesterRegistration.TextInput.Value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/semester_registration_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/semester_registration_button"
+        style="@style/SemesterRegistration.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
