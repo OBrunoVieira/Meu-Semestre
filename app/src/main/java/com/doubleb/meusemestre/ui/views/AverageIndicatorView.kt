@@ -70,6 +70,17 @@ class AverageIndicatorView @JvmOverloads constructor(
         }
     }
 
+    fun recoverContentDescription(name: String, average: Float?) =
+        average?.takeIf { it >= 0 }?.let {
+            context.getString(
+                R.string.average_content_description_valid,
+                name,
+                average.roundWhenBase10()
+            )
+        } ?: run {
+            context.getString(R.string.average_content_description_invalid, name)
+        }
+
     private fun transformGradeToText(grade: Float) =
         HtmlCompat.fromHtml(
             context.getString(R.string.average_indicator_title, grade.roundWhenBase10()),
