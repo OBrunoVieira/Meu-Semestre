@@ -60,6 +60,7 @@ dependencies {
     implementation platform(androidDependencies.firebaseBoM)
 
     implementation androidDependencies.kotlin
+    implementation androidDependencies.archComponents
     implementation androidDependencies.androidx
     implementation androidDependencies.mpchart
     implementation androidDependencies.viewPager
