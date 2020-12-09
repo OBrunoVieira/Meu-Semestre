@@ -35,11 +35,18 @@ class EmptyStateView @JvmOverloads constructor(
             }
     }
 
+    fun listener(listener: ClickListener) =
+        empty_state_button.setOnClickListener { listener.onEmptyViewActionClick(it) }
+
     override fun onFinishInflate() {
         super.onFinishInflate()
         empty_state_image_view.showIfValidDrawable(image)
         empty_state_text_view_title.showIfValidText(titleText)
         empty_state_text_view_description.showIfValidText(descriptionText)
         empty_state_button.showIfValidText(buttonText)
+    }
+
+    fun interface ClickListener {
+        fun onEmptyViewActionClick(view:View)
     }
 }
