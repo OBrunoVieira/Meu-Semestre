@@ -41,6 +41,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
+                   android:id="@+id/discipline_registration_edit_text_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionNext"
@@ -57,8 +58,8 @@
                 android:id="@+id/discipline_registration_text_input"
                 style="@style/DisciplineRegistration.TextInput.KnowledgeArea"
                 android:layout_width="match_parent"
-                android:background="@null"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@null">
 
                 <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                     android:id="@+id/discipline_registration_auto_complete_text_view"
@@ -70,12 +71,14 @@
                 android:id="@+id/discipline_registration_text_view_exams"
                 style="@style/DisciplineRegistration.TextView.Exams"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/DisciplineRegistration.TextInput.Exams"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
