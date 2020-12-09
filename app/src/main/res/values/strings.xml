@@ -138,6 +138,10 @@
     <string name="empty_semester_description">Inicie um semestre e inclua as disciplinas que você está cursando.</string>
     <string name="empty_semester_action">Iniciar um semestre</string>
 
+    <!--  VH/Empty History  -->
+    <string name="empty_history_title">Nenhum histórico de semestres</string>
+    <string name="empty_history_description">Você ainda não teve semestres anteriores</string>
+
     <!--  VH/Empty Disciplines  -->
     <string name="empty_disciplines_title">Nenhuma disciplina cadastrada</string>
     <string name="empty_disciplines_description">Cadastre suas disciplinas e fique de olho no seu desempenho.</string>
