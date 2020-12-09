@@ -5,7 +5,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ConcatAdapter
 import com.doubleb.meusemestre.R
-import com.doubleb.meusemestre.models.Discipline
 import com.doubleb.meusemestre.ui.activities.HomeActivity
 import com.doubleb.meusemestre.ui.adapters.recyclerview.*
 import com.doubleb.meusemestre.ui.dialogs.BottomSheetSemesterRegistration
@@ -20,6 +19,8 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     EmptyStateView.ClickListener,
     BottomSheetSemesterRegistration.SemesterRegistrationClickListener {
 
+    //region immutable vars
+
     //region adapters
     private val disciplineListAdapter by lazy { DisciplineListAdapter() }
     private val bestDisciplineAdapter by lazy { BestDisciplineAdapter() }
@@ -28,30 +29,28 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     private val finishSemesterAdapter by lazy { FinishSemesterAdapter() }
     private val gradeHighlightAdapter by lazy { GradeHighlightAdapter() }
     private val emptySemesterAdapter by lazy { EmptySemesterAdapter(this) }
-    private val concatAdapter by lazy { ConcatAdapter(disciplineListAdapter) }
+    private val concatAdapter by lazy { ConcatAdapter(emptySemesterAdapter) }
     //endregion
 
+    //region components
     private val bottomSheet by lazy { BottomSheetSemesterRegistration(this) }
-    private val semesterViewModel: SemesterViewModel by inject()
+    //endregion
 
+    //region viewmodels
+    private val semesterViewModel: SemesterViewModel by inject()
+    //endregion
+
+    //endregion
+
+    //region lifecycle
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        disciplineListAdapter.list = listOf(
-            Discipline("", "Fotografia", "" ,10f),
-            Discipline("", "Sociologia", "" ,2f),
-            Discipline("", "Desenvolvimento de Banco de Dados II", "" ,2f),
-            Discipline("", "Química", "" ,5f),
-            Discipline("", "Álgebra Linear", "" ,3.4f),
-            Discipline("", "Cálculo I", "" ,7f),
-            Discipline("", "Ilustração", "" ,9f),
-            Discipline("", "Literatura Moderna", "" ,9.5f),
-            Discipline("", "Literatura Clássica", "" ,8f)
-        )
-
         dashboard_recycler_view.adapter = concatAdapter
         disciplineListAdapter.listener = this
     }
+    //endregion
 
+    //region listeners
     override fun onDisciplineClick(position: Int) {
         (activity as? HomeActivity)?.inflateStackFragment(
             DisciplineDetailsFragment.instance(
@@ -61,7 +60,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         )
     }
 
-    //region Semester Creation
+    //region semester creation
     override fun onCreateSemester(name: String) {
         semesterViewModel.createSemester(name)
     }
@@ -69,5 +68,6 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     override fun onEmptyViewActionClick(view:View) {
         bottomSheet.show(childFragmentManager, BottomSheetSemesterRegistration.TAG)
     }
+    //endregion
     //endregion
 }
