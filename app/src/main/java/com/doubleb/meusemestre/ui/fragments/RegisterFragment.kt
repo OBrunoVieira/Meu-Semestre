@@ -1,11 +1,9 @@
 package com.doubleb.meusemestre.ui.fragments
 
-import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AlphaAnimation
 import androidx.annotation.LayoutRes
-import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.doubleb.meusemestre.R
@@ -46,6 +44,9 @@ abstract class RegisterFragment(@LayoutRes contentLayout: Int) : Fragment(conten
 
     interface Listener {
         fun onOptionClick(button: MaterialButton, type: Type)
+        fun onInstitutionSelected(value: String) {}
+        fun onExamsNumberSelected(value: Int?) {}
+        fun onApprovalAverageSelected(value: Double?) {}
     }
 
     enum class Type {
