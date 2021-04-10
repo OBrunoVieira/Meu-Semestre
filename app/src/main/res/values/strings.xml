@@ -69,6 +69,8 @@
     <string name="register_institution_title">Em qual tipo de instituição você estuda?</string>
     <string name="register_institution_public">Pública</string>
     <string name="register_institution_private">Privada</string>
+    <string name="register_institution_public_tag">public</string>
+    <string name="register_institution_private_tag">private</string>
 
     <!--  Fragment/Register Exams  -->
     <string name="register_exams_title">Quantas avaliações você tem por semestre (em cada disciplina)?</string>

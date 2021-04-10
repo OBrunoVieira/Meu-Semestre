@@ -56,6 +56,10 @@
     <!--  Custom Dimension/Login  -->
     <dimen name="min_login_button_width">144dp</dimen>
 
+    <!--  Custom Dimension/Tips  -->
+    <dimen name="tips_min_width">113dp</dimen>
+    <dimen name="tips_min_height">80dp</dimen>
+
     <!--  Custom Dimension/Bottom Sheet  -->
     <dimen name="min_bottom_sheet_indicator_width">56dp</dimen>
     <dimen name="min_bottom_sheet_indicator_height">4dp</dimen>

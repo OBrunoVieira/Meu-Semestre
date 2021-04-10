@@ -554,18 +554,18 @@
     <style name="Tips.TextView.Title" parent="Base.TextView.Mulish.SemiBold">
         <item name="android:textColor">@color/blue_zodiac</item>
         <item name="android:textSize">@dimen/spacing_sixteen</item>
-        <item name="android:layout_marginStart">@dimen/spacing_sixteen</item>
+        <item name="android:layout_marginStart">@dimen/spacing_twenty_four</item>
         <item name="android:layout_marginEnd">@dimen/spacing_eight</item>
-        <item name="android:layout_marginTop">@dimen/spacing_twenty_four</item>
+        <item name="android:layout_marginTop">@dimen/spacing_thirty_two</item>
     </style>
 
     <style name="Tips.TextView.Description" parent="Base.TextView.Inter.Light">
         <item name="android:textColor">@color/dark_gray</item>
         <item name="android:textSize">@dimen/text_size_fourteen</item>
         <item name="android:layout_marginTop">@dimen/spacing_eight</item>
-        <item name="android:layout_marginStart">@dimen/spacing_sixteen</item>
+        <item name="android:layout_marginStart">@dimen/spacing_twenty_four</item>
         <item name="android:layout_marginEnd">@dimen/spacing_eight</item>
-        <item name="android:layout_marginBottom">@dimen/spacing_twenty_four</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_thirty_two</item>
     </style>
 
     <!--  VH/Semester History  -->
