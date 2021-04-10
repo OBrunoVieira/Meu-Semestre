@@ -1,49 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:elevation="0dp"
-    app:cardBackgroundColor="@color/zircon"
-    app:cardCornerRadius="@dimen/spacing_eight"
-    app:cardUseCompatPadding="true">
+    android:background="@drawable/shadow_card">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tips_text_view_title"
+        style="@style/Tips.TextView.Title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/tips_text_view_description"
+        app:layout_constraintEnd_toStartOf="@id/tips_image_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Dica 1" />
 
-        <TextView
-            android:id="@+id/tips_text_view_title"
-            style="@style/Tips.TextView.Title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/tips_text_view_description"
-            app:layout_constraintEnd_toStartOf="@id/tips_image_view"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
-            tools:text="Dica 1" />
+    <TextView
+        android:id="@+id/tips_text_view_description"
+        style="@style/Tips.TextView.Description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tips_image_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tips_text_view_title"
+        tools:text="Lorem Ipsum dolor sit amet, consectur adipiscing elit. Mauris luctus, enm et onare" />
 
-        <TextView
-            android:id="@+id/tips_text_view_description"
-            style="@style/Tips.TextView.Description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/tips_image_view"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tips_text_view_title"
-            tools:text="Lorem Ipsum dolor sit amet, consectur adipiscing elit. Mauris luctus, enm et onare" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/tips_image_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/vector_social_science"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/tips_image_view"
+        android:layout_width="@dimen/tips_min_width"
+        android:layout_height="@dimen/tips_min_height"
+        android:layout_marginBottom="@dimen/spacing_twenty_four"
+        android:layout_marginEnd="@dimen/spacing_twenty_four"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:src="@drawable/vector_social_science" />
+</androidx.constraintlayout.widget.ConstraintLayout>

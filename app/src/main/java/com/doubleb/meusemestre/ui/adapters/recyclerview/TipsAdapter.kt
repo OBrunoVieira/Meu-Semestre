@@ -7,7 +7,9 @@ import com.doubleb.meusemestre.R
 import com.doubleb.meusemestre.models.Tip
 import com.doubleb.meusemestre.ui.viewholders.TipsViewHolder
 
-class TipsAdapter(private val tips: List<Tip>) : RecyclerView.Adapter<TipsViewHolder>() {
+class TipsAdapter : RecyclerView.Adapter<TipsViewHolder>() {
+    var tips: List<Tip> = emptyList()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         TipsViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.vh_tips, parent, false))
 
