@@ -57,6 +57,8 @@ android {
 }
 
 dependencies {
+    annotationProcessor androidDependencies.glideCompiler
+    
     implementation platform(androidDependencies.firebaseBoM)
 
     implementation androidDependencies.kotlin
@@ -68,6 +70,7 @@ dependencies {
     implementation androidDependencies.login
 //    implementation androidDependencies.compose
     implementation androidDependencies.firebase
+    implementation androidDependencies.glide
 
     testImplementation androidDependencies.unitTest
     androidTestImplementation androidDependencies.androidTest
