@@ -53,6 +53,7 @@ ext {
     final koinVersion = '2.2.1'
     final facebookVersion = '8.1.0'
     final archComponentsVersion = '2.2.0'
+    final glideVersion = '4.11.0'
 
     final espressoVersion = '3.2.0'
     final androidJunitVersion = '1.1.1'
@@ -67,6 +68,9 @@ ext {
                     "com.facebook.android:facebook-login:$facebookVersion"
             ],
 
+            glide         : "com.github.bumptech.glide:glide:$glideVersion",
+            glideCompiler : "com.github.bumptech.glide:compiler:$glideVersion",
+
             koin          : [
                     "org.koin:koin-android:$koinVersion",
                     "org.koin:koin-android-viewmodel:$koinVersion",
@@ -79,7 +83,8 @@ ext {
                     "com.google.firebase:firebase-perf",
                     "com.google.firebase:firebase-firestore-ktx",
                     "com.google.firebase:firebase-auth",
-                    "com.google.firebase:firebase-database-ktx"
+                    "com.google.firebase:firebase-database-ktx",
+                    "com.google.firebase:firebase-storage-ktx"
             ],
 
             androidx      : [
