@@ -26,11 +26,20 @@ class LoginViewModel(private val userRepository: UserRepository, private val aut
             "id,name,email,gender,birthday,picture.type(large)"
     }
 
+    //region immutable vars
     val facebookCallbackManager: CallbackManager by lazy { CallbackManager.Factory.create() }
     val liveData = MutableLiveData<DataSource<User>>()
+    //endregion
 
     init {
         LoginManager.getInstance().registerCallback(facebookCallbackManager, this)
+    }
+
+    fun validateCurrentSession() {
+        if (isAlreadyLogged()) {
+//            userRepository.getUser()
+            liveData.postValue(DataSource(DataState.SUCCESS))
+        }
     }
 
     //region Facebook Login's callback
@@ -49,8 +58,6 @@ class LoginViewModel(private val userRepository: UserRepository, private val aut
         liveData.postValue(DataSource(DataState.ERROR, throwable = error?.cause))
     }
     //endregion
-
-    fun isAlreadyLogged() = auth.currentUser != null
 
     fun logout(block: () -> Unit = {}) {
         GraphRequest(
@@ -89,10 +96,7 @@ class LoginViewModel(private val userRepository: UserRepository, private val aut
                 json.getString(FACEBOOK_MAIL),
                 json.getJSONObject(FACEBOOK_PICTURE)
                     .getJSONObject(FACEBOOK_PICTURE_DATA)
-                    .getString(FACEBOOK_PICTURE_URL),
-                "private",
-                7.0,
-                3
+                    .getString(FACEBOOK_PICTURE_URL)
             )
 
             userRepository.createUser(user)
@@ -102,4 +106,5 @@ class LoginViewModel(private val userRepository: UserRepository, private val aut
                 Bundle().apply { putString(FACEBOOK_FIELDS, FACEBOOK_FIELDS_VALUE) }
         }.executeAsync()
 
+    private fun isAlreadyLogged() = auth.currentUser != null
 }
