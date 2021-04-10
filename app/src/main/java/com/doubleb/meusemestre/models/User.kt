@@ -8,7 +8,5 @@ data class User(
     val name: String,
     val email: String,
     val picture: String?,
-    val institution_type : String,
-    val approval_average: Double,
-    val exams_per_semester: Int
+    val graduation_info: GraduationInfo? = null
 )
