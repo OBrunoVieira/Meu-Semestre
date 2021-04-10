@@ -2,6 +2,7 @@ package com.doubleb.meusemestre.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
 import com.doubleb.meusemestre.R
@@ -19,6 +20,19 @@ import org.koin.android.ext.android.inject
 
 class WelcomeActivity : BaseActivity(R.layout.activity_welcome),
     BottomSheetLogin.LoginClickListener {
+
+    //region immutable vars
+
+    private val pageChangeCallback by lazy { onPageChangeCallback() }
+    private val bottomSheet by lazy { BottomSheetLogin(this) }
+
+    //region viewModels
+    private val loginViewModel: LoginViewModel by inject()
+    //endregion
+
+    //endregion
+
+    //region mutable vars
     private var previousPosition = 0
 
     private val colors by lazy {
@@ -28,20 +42,12 @@ class WelcomeActivity : BaseActivity(R.layout.activity_welcome),
             R.color.dark_yellow
         )
     }
+    //endregion
 
-    private val pageChangeCallback by lazy { onPageChangeCallback() }
-    private val bottomSheet by lazy { BottomSheetLogin(this) }
-
-    private val loginViewModel: LoginViewModel by inject()
-
+    //region lifecycle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loginViewModel.liveData.observe(this, observeLogin())
-
-        if(loginViewModel.isAlreadyLogged()){
-            startActivity(Intent(this, HomeActivity::class.java))
-            finish()
-        }
 
         welcome_view_pager.apply {
             adapter = WelcomePageAdapter(this@WelcomeActivity)
@@ -49,13 +55,10 @@ class WelcomeActivity : BaseActivity(R.layout.activity_welcome),
             registerOnPageChangeCallback(pageChangeCallback)
         }
 
-        welcome_button_explore.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
-        }
+        welcome_button_explore.setOnClickListener(onExploreClick())
+        welcome_button_login.setOnClickListener(onLoginClick())
 
-        welcome_button_login.setOnClickListener {
-            bottomSheet.show(supportFragmentManager, BottomSheetLogin.TAG)
-        }
+        loginViewModel.validateCurrentSession()
     }
 
     override fun onDestroy() {
@@ -63,6 +66,13 @@ class WelcomeActivity : BaseActivity(R.layout.activity_welcome),
         welcome_view_pager.unregisterOnPageChangeCallback(pageChangeCallback)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        loginViewModel.facebookCallbackManager.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+    //endregion
+
+    //region observers
     private fun observeLogin() = Observer<DataSource<User>> {
         when (it.dataState) {
             DataState.LOADING -> {
@@ -76,6 +86,15 @@ class WelcomeActivity : BaseActivity(R.layout.activity_welcome),
             DataState.ERROR -> {
             }
         }
+    }
+    //endregion
+
+    //region callbacks
+    override fun onFacebookLogin() {
+        LoginManager.getInstance().logInWithReadPermissions(this, listOf("public_profile", "email"))
+    }
+
+    override fun onGoogleLogin() {
     }
 
     private fun onPageChangeCallback() = object : ViewPager2.OnPageChangeCallback() {
@@ -93,17 +112,12 @@ class WelcomeActivity : BaseActivity(R.layout.activity_welcome),
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        loginViewModel.facebookCallbackManager.onActivityResult(requestCode, resultCode, data)
-        super.onActivityResult(requestCode, resultCode, data)
+    private fun onExploreClick() = View.OnClickListener {
+        startActivity(Intent(this, RegisterActivity::class.java))
     }
 
-    //region Login Button's callback
-    override fun onFacebookLogin() {
-        LoginManager.getInstance().logInWithReadPermissions(this, listOf("public_profile", "email"))
+    private fun onLoginClick() = View.OnClickListener {
+        bottomSheet.show(supportFragmentManager, BottomSheetLogin.TAG)
     }
-
-    override fun onGoogleLogin() {
-    }
-
+    //endregion
 }
