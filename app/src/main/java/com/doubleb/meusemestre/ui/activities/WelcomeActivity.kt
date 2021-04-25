@@ -13,6 +13,7 @@ import com.doubleb.meusemestre.ui.dialogs.BottomSheetLogin
 import com.doubleb.meusemestre.viewmodel.DataSource
 import com.doubleb.meusemestre.viewmodel.DataState
 import com.doubleb.meusemestre.viewmodel.LoginViewModel
+import com.doubleb.meusemestre.viewmodel.UserViewModel
 import com.facebook.login.LoginManager
 import kotlinx.android.synthetic.main.activity_welcome.*
 import org.koin.android.ext.android.inject
@@ -28,6 +29,7 @@ class WelcomeActivity : BaseActivity(R.layout.activity_welcome),
 
     //region viewModels
     private val loginViewModel: LoginViewModel by inject()
+    private val userViewModel: UserViewModel by inject()
     //endregion
 
     //endregion
@@ -48,6 +50,8 @@ class WelcomeActivity : BaseActivity(R.layout.activity_welcome),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loginViewModel.liveData.observe(this, observeLogin())
+        userViewModel.liveDataUser.observe(this, observeUser())
+        userViewModel.liveDataUserCreation.observe(this, observeUserCreation())
 
         welcome_view_pager.apply {
             adapter = WelcomePageAdapter(this@WelcomeActivity)
@@ -79,7 +83,40 @@ class WelcomeActivity : BaseActivity(R.layout.activity_welcome),
             }
 
             DataState.SUCCESS -> {
-                startActivity(Intent(this, HomeActivity::class.java))
+                it.data?.let { user -> userViewModel.getUserOrCreate(user) }
+            }
+
+            DataState.ERROR -> {
+            }
+        }
+    }
+
+    private fun observeUser() = Observer<DataSource<User>> {
+        when (it.dataState) {
+            DataState.LOADING -> {
+            }
+
+            DataState.SUCCESS -> {
+                if (it.data?.graduation_info?.isValid() == true) {
+                    HomeActivity.newClearedInstance(this)
+                } else {
+                    startActivity(Intent(this, RegisterActivity::class.java))
+                    finish()
+                }
+            }
+
+            DataState.ERROR -> {
+            }
+        }
+    }
+
+    private fun observeUserCreation() = Observer<DataSource<User>> {
+        when (it.dataState) {
+            DataState.LOADING -> {
+            }
+
+            DataState.SUCCESS -> {
+                startActivity(Intent(this, RegisterActivity::class.java))
                 finish()
             }
 

@@ -1,20 +1,25 @@
 package com.doubleb.meusemestre.ui.activities
 
 import android.animation.ValueAnimator
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.animation.OvershootInterpolator
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
 import com.doubleb.meusemestre.R
 import com.doubleb.meusemestre.extensions.disable
 import com.doubleb.meusemestre.extensions.enable
 import com.doubleb.meusemestre.models.GraduationInfo
+import com.doubleb.meusemestre.models.User
 import com.doubleb.meusemestre.ui.adapters.viewpager.RegisterPageAdapter
 import com.doubleb.meusemestre.ui.fragments.RegisterFragment
+import com.doubleb.meusemestre.viewmodel.DataSource
+import com.doubleb.meusemestre.viewmodel.DataState
+import com.doubleb.meusemestre.viewmodel.UserViewModel
 import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.activity_register.*
+import org.koin.android.ext.android.inject
 
 class RegisterActivity : BaseActivity(R.layout.activity_register), RegisterFragment.Listener {
 
@@ -31,6 +36,10 @@ class RegisterActivity : BaseActivity(R.layout.activity_register), RegisterFragm
     }
     //endregion
 
+    //region viewModels
+    private val userViewModel: UserViewModel by inject()
+    //endregion
+
     //endregion
 
     //region mutable vars
@@ -40,7 +49,9 @@ class RegisterActivity : BaseActivity(R.layout.activity_register), RegisterFragm
     //region lifecycle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        register_view_pager.apply {
+        userViewModel.liveDataGraduationInfo.observe(this, observeGraduationInfoCreation())
+
+        register_view_pager.run {
             isUserInputEnabled = false
             adapter = registerAdapter
             registerOnPageChangeCallback(pageChangeCallback)
@@ -54,6 +65,22 @@ class RegisterActivity : BaseActivity(R.layout.activity_register), RegisterFragm
     override fun onDestroy() {
         super.onDestroy()
         register_view_pager.unregisterOnPageChangeCallback(pageChangeCallback)
+    }
+    //endregion
+
+    //region observers
+    private fun observeGraduationInfoCreation() = Observer<DataSource<User>> {
+        when (it.dataState) {
+            DataState.LOADING -> {
+            }
+
+            DataState.SUCCESS -> {
+                HomeActivity.newClearedInstance(this)
+            }
+
+            DataState.ERROR -> {
+            }
+        }
     }
     //endregion
 
@@ -110,10 +137,7 @@ class RegisterActivity : BaseActivity(R.layout.activity_register), RegisterFragm
         if (register_view_pager.currentItem < registerAdapter.itemCount - 1) {
             register_view_pager.currentItem += 1
         } else {
-            startActivity(
-                Intent(this, HomeActivity::class.java)
-                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            )
+            userViewModel.createGraduationInfo(graduationInfo)
         }
     }
 
