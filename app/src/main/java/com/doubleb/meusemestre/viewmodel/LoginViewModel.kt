@@ -4,14 +4,13 @@ import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.doubleb.meusemestre.models.User
-import com.doubleb.meusemestre.repository.UserRepository
 import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 
-class LoginViewModel(private val userRepository: UserRepository, private val auth: FirebaseAuth) :
+class LoginViewModel(private val auth: FirebaseAuth) :
     ViewModel(),
     FacebookCallback<LoginResult> {
 
@@ -37,7 +36,6 @@ class LoginViewModel(private val userRepository: UserRepository, private val aut
 
     fun validateCurrentSession() {
         if (isAlreadyLogged()) {
-//            userRepository.getUser()
             liveData.postValue(DataSource(DataState.SUCCESS))
         }
     }
@@ -99,7 +97,6 @@ class LoginViewModel(private val userRepository: UserRepository, private val aut
                     .getString(FACEBOOK_PICTURE_URL)
             )
 
-            userRepository.createUser(user)
             liveData.postValue(DataSource(DataState.SUCCESS, user))
         }.also {
             it.parameters =
