@@ -59,6 +59,7 @@
                         android:layout_width="59dp"
                         android:layout_height="59dp"
                         android:padding="@dimen/spacing_four"
+                        android:importantForAccessibility="no"
                         android:src="@drawable/shape_profile" />
 
                     <TextView
