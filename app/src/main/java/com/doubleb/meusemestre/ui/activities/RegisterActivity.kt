@@ -1,6 +1,8 @@
 package com.doubleb.meusemestre.ui.activities
 
 import android.animation.ValueAnimator
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.animation.OvershootInterpolator
@@ -23,6 +25,16 @@ import org.koin.android.ext.android.inject
 
 class RegisterActivity : BaseActivity(R.layout.activity_register), RegisterFragment.Listener {
 
+    companion object {
+        private const val USER_INFO_EXTRA = "USER_INFO_EXTRA"
+
+        fun newInstance(activity: Activity, user: User?) = activity.startActivity(
+            Intent(activity, RegisterActivity::class.java)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                .putExtra(USER_INFO_EXTRA, user)
+        )
+    }
+
     //region immutable vars
     private val graduationInfo by lazy { GraduationInfo() }
 
@@ -44,11 +56,13 @@ class RegisterActivity : BaseActivity(R.layout.activity_register), RegisterFragm
 
     //region mutable vars
     private var buttonMap: HashMap<String, Boolean> = hashMapOf()
+    private var user: User? = null
     //endregion
 
     //region lifecycle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        user = intent.getParcelableExtra(USER_INFO_EXTRA)
         userViewModel.liveDataGraduationInfo.observe(this, observeGraduationInfoCreation())
 
         register_view_pager.run {
@@ -75,7 +89,7 @@ class RegisterActivity : BaseActivity(R.layout.activity_register), RegisterFragm
             }
 
             DataState.SUCCESS -> {
-                HomeActivity.newClearedInstance(this)
+                HomeActivity.newClearedInstance(this, user)
             }
 
             DataState.ERROR -> {

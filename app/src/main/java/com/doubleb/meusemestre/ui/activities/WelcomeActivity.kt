@@ -83,7 +83,7 @@ class WelcomeActivity : BaseActivity(R.layout.activity_welcome),
             }
 
             DataState.SUCCESS -> {
-                it.data?.let { user -> userViewModel.getUserOrCreate(user) }
+                userViewModel.getUserOrCreate(it.data)
             }
 
             DataState.ERROR -> {
@@ -98,9 +98,9 @@ class WelcomeActivity : BaseActivity(R.layout.activity_welcome),
 
             DataState.SUCCESS -> {
                 if (it.data?.graduation_info?.isValid() == true) {
-                    HomeActivity.newClearedInstance(this)
+                    HomeActivity.newClearedInstance(this, it.data)
                 } else {
-                    startActivity(Intent(this, RegisterActivity::class.java))
+                    RegisterActivity.newInstance(this, it.data)
                     finish()
                 }
             }
@@ -116,7 +116,7 @@ class WelcomeActivity : BaseActivity(R.layout.activity_welcome),
             }
 
             DataState.SUCCESS -> {
-                startActivity(Intent(this, RegisterActivity::class.java))
+                RegisterActivity.newInstance(this, it.data)
                 finish()
             }
 
@@ -124,7 +124,7 @@ class WelcomeActivity : BaseActivity(R.layout.activity_welcome),
             }
         }
     }
-    //endregion
+//endregion
 
     //region callbacks
     override fun onFacebookLogin() {
@@ -156,5 +156,5 @@ class WelcomeActivity : BaseActivity(R.layout.activity_welcome),
     private fun onLoginClick() = View.OnClickListener {
         bottomSheet.show(supportFragmentManager, BottomSheetLogin.TAG)
     }
-    //endregion
+//endregion
 }
