@@ -1,5 +1,6 @@
 package com.doubleb.meusemestre.repository
 
+import com.doubleb.meusemestre.extensions.generateRandomString
 import com.doubleb.meusemestre.models.Discipline
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -17,7 +18,7 @@ class DisciplinesRepository(
         knowledgeArea: String,
         onComplete: (disciplineId: String) -> Unit = {}
     ) =
-        database.push().key?.let { disciplineId ->
+        generateRandomString().let { disciplineId ->
             database.child(DATABASE_DISCIPLINES)
                 .child(auth.currentUser?.uid.orEmpty())
                 .child(disciplineId)
