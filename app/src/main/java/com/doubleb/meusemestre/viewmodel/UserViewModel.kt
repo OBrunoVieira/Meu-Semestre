@@ -22,6 +22,8 @@ class UserViewModel(private val userRepository: UserRepository, private val auth
     val liveDataUser = MutableLiveData<DataSource<User>>()
     //endregion
 
+    fun recoverUserId() = auth.currentUser?.uid
+
     fun createGraduationInfo(graduationInfo: GraduationInfo) {
         auth.currentUser?.uid.takeIfValid()?.let { userId ->
             userRepository.createGraduationInfo(userId, graduationInfo)
@@ -67,36 +69,41 @@ class UserViewModel(private val userRepository: UserRepository, private val auth
             )
     }
 
-    fun getUserOrCreate(user: User) {
-        user.id.takeIfValid()?.let { userId ->
-            userRepository.getUser(userId)
-                .addListenerForSingleValueEvent(
-                    object : ValueEventListener {
-                        override fun onDataChange(snapshot: DataSnapshot) {
-                            snapshot.getValue(User::class.java)?.let {
-                                liveDataUser.postValue(DataSource(DataState.SUCCESS, it))
-                            } ?: run {
-                                createUser(user)
-                            }
-                        }
-
-                        override fun onCancelled(error: DatabaseError) {
-                            liveDataUser
-                                .postValue(DataSource(DataState.ERROR,
-                                    throwable = error.toException()))
-                        }
-
-                    }
-                )
-        } ?: run {
-            createUser(user)
+    fun getUserOrCreate(localUser: User?, userId: String? = recoverUserId()) {
+        if (userId.isNullOrBlank()) {
+            liveDataUser.postValue(DataSource(DataState.ERROR))
+            return
         }
+
+        userRepository.getUser(userId).addListenerForSingleValueEvent(
+            object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val serverUser = snapshot.getValue(User::class.java)
+
+                    when {
+                        serverUser?.isValid() == true ->
+                            liveDataUser.postValue(DataSource(DataState.SUCCESS, serverUser))
+
+                        localUser?.isValid() == true ->
+                            createUser(localUser)
+
+                        else ->
+                            liveDataUser.postValue(DataSource(DataState.ERROR))
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    liveDataUser
+                        .postValue(DataSource(DataState.ERROR, throwable = error.toException()))
+                }
+            }
+        )
     }
 
     fun createUser(user: User) {
         userRepository.createUser(user)
             .addOnSuccessListener {
-                liveDataUserCreation.postValue(DataSource(DataState.SUCCESS))
+                liveDataUserCreation.postValue(DataSource(DataState.SUCCESS, user))
             }
             .addOnFailureListener {
                 liveDataUserCreation.postValue(DataSource(DataState.ERROR, throwable = it))
