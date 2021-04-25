@@ -8,29 +8,48 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.doubleb.meusemestre.R
 import com.doubleb.meusemestre.extensions.gone
+import com.doubleb.meusemestre.extensions.loadRoundedImage
 import com.doubleb.meusemestre.extensions.visible
+import com.doubleb.meusemestre.models.User
 import com.doubleb.meusemestre.ui.fragments.DashboardFragment
 import com.doubleb.meusemestre.ui.fragments.DisciplinesFragment
 import com.doubleb.meusemestre.ui.fragments.TipsFragment
 import com.doubleb.meusemestre.ui.views.BottomNavigation
+import com.doubleb.meusemestre.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_home.*
+import org.koin.android.ext.android.inject
 
 class HomeActivity : BaseActivity(R.layout.activity_home) {
 
     companion object {
-        fun newClearedInstance(activity: Activity) = activity.startActivity(
+        private const val USER_INFO_EXTRA = "USER_INFO_EXTRA"
+
+        fun newClearedInstance(activity: Activity, user: User?) = activity.startActivity(
             Intent(activity, HomeActivity::class.java)
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                .putExtra(USER_INFO_EXTRA, user)
         )
     }
+    //region immutable vars
+
+    //region viewModels
+    private val userViewModel: UserViewModel by inject()
+    //endregion
+
+    //endregion
+
+    //region mutable vars
+    private var user: User? = null
+    //endregion
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        user = intent.getParcelableExtra(USER_INFO_EXTRA)
 
         home_coordinator.layoutTransition?.enableTransitionType(CHANGING)
 
         home_content_profile.setOnClickListener {
-            startActivity(Intent(this, ProfileActivity::class.java))
+            ProfileActivity.newInstance(this, user)
         }
 
         home_bottom_navigation.setListener { _, type ->
@@ -58,6 +77,7 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
             }
         }
 
+        home_image_view_profile.loadRoundedImage(user?.picture)
         home_bottom_navigation.selectItem(BottomNavigation.Type.DASHBOARD)
     }
 
