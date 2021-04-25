@@ -18,6 +18,10 @@ fun TextView.showIfValidText(text: String?) =
         this.gone()
     }
 
+fun TextView.setTextIfValid(text:String?) = run {
+    setText(text.takeIfValid() ?: this.text)
+}
+
 fun TextView.disableCopyPaste() {
     val callback = object : ActionMode.Callback {
         override fun onCreateActionMode(mode: ActionMode?, menu: Menu?) = run {

@@ -4,9 +4,17 @@ import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 
 fun ImageView.tintColor(@ColorRes color: Int) = apply {
     setColorFilter(ContextCompat.getColor(context, color))
+}
+
+fun ImageView.loadRoundedImage(src : String?) = src.takeIfValid()?.let {
+    Glide.with(this)
+        .load(it)
+        .circleCrop()
+        .into(this)
 }
 
 fun ImageView.showIfValidDrawable(drawable: Drawable?) =
