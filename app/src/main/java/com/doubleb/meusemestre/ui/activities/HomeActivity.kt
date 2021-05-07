@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Observer
 import com.doubleb.meusemestre.R
 import com.doubleb.meusemestre.extensions.gone
 import com.doubleb.meusemestre.extensions.loadRoundedImage
@@ -15,6 +16,8 @@ import com.doubleb.meusemestre.ui.fragments.DashboardFragment
 import com.doubleb.meusemestre.ui.fragments.DisciplinesFragment
 import com.doubleb.meusemestre.ui.fragments.TipsFragment
 import com.doubleb.meusemestre.ui.views.BottomNavigation
+import com.doubleb.meusemestre.viewmodel.DataSource
+import com.doubleb.meusemestre.viewmodel.DataState
 import com.doubleb.meusemestre.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_home.*
 import org.koin.android.ext.android.inject
@@ -22,12 +25,10 @@ import org.koin.android.ext.android.inject
 class HomeActivity : BaseActivity(R.layout.activity_home) {
 
     companion object {
-        private const val USER_INFO_EXTRA = "USER_INFO_EXTRA"
 
-        fun newClearedInstance(activity: Activity, user: User?) = activity.startActivity(
+        fun newClearedInstance(activity: Activity) = activity.startActivity(
             Intent(activity, HomeActivity::class.java)
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                .putExtra(USER_INFO_EXTRA, user)
         )
     }
     //region immutable vars
@@ -44,10 +45,11 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        user = intent.getParcelableExtra(USER_INFO_EXTRA)
+        userViewModel.liveDataUser.observe(this, observeUser())
 
         home_coordinator.layoutTransition?.enableTransitionType(CHANGING)
 
+        home_content_profile.isEnabled = false
         home_content_profile.setOnClickListener {
             ProfileActivity.newInstance(this, user)
         }
@@ -77,8 +79,8 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
             }
         }
 
-        home_image_view_profile.loadRoundedImage(user?.picture)
         home_bottom_navigation.selectItem(BottomNavigation.Type.DASHBOARD)
+        userViewModel.getUser()
     }
 
     override fun onBackPressed() {
@@ -88,6 +90,30 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
             fragments.popBackStackImmediate()
         } else {
             supportFinishAfterTransition()
+        }
+    }
+
+    private fun observeUser() = Observer<DataSource<User>> {
+        when (it.dataState) {
+            DataState.LOADING -> {
+                home_fragment_progress.show()
+                home_fragment_container.gone()
+                home_text_view_cr.gone()
+            }
+
+            DataState.SUCCESS -> {
+                this.user = it.data
+                home_content_profile.isEnabled = true
+
+                home_fragment_progress.hide()
+                home_fragment_container.visible()
+                home_text_view_cr.visible()
+
+                home_image_view_profile.loadRoundedImage(user?.picture)
+            }
+
+            DataState.ERROR -> {
+            }
         }
     }
 

@@ -58,13 +58,14 @@
                         android:id="@+id/home_image_view_profile"
                         android:layout_width="59dp"
                         android:layout_height="59dp"
-                        android:padding="@dimen/spacing_four"
                         android:importantForAccessibility="no"
+                        android:padding="@dimen/spacing_four"
                         android:src="@drawable/shape_profile" />
 
                     <TextView
                         android:id="@+id/home_text_view_cr"
                         style="@style/Home.TextView.CR"
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center|bottom" />
@@ -74,10 +75,18 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/home_fragment_progress"
+        android:layout_width="wrap_content"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/home_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         android:layout_marginBottom="?attr/actionBarSize"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
@@ -87,10 +96,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:visibility="gone"
         android:layout_marginStart="@dimen/spacing_twenty_four"
         android:layout_marginEnd="@dimen/spacing_twenty_four"
-        android:layout_marginBottom="@dimen/spacing_seventy" />
+        android:layout_marginBottom="@dimen/spacing_seventy"
+        android:visibility="gone" />
 
     <com.doubleb.meusemestre.ui.views.BottomNavigation
         android:id="@+id/home_bottom_navigation"
