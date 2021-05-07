@@ -1,5 +1,6 @@
 package com.doubleb.meusemestre.repository
 
+import com.doubleb.meusemestre.di.observe
 import com.doubleb.meusemestre.extensions.generateRandomString
 import com.doubleb.meusemestre.models.Discipline
 import com.google.firebase.auth.FirebaseAuth
@@ -16,7 +17,7 @@ class DisciplinesRepository(
     fun createDiscipline(
         name: String,
         knowledgeArea: String,
-        onComplete: (disciplineId: String) -> Unit = {}
+        onComplete: (disciplineId: String) -> Unit = {},
     ) =
         generateRandomString().let { disciplineId ->
             database.child(DATABASE_DISCIPLINES)
@@ -25,5 +26,18 @@ class DisciplinesRepository(
                 .setValue(Discipline(disciplineId, name, knowledgeArea)) { error, ref ->
                     onComplete.invoke(disciplineId)
                 }
+        }
+
+    fun getDisciplines() =
+        database.child(DATABASE_DISCIPLINES)
+            .child(auth.currentUser?.uid.orEmpty())
+
+    suspend fun getSuspendedDisciplines() =
+        try {
+            getDisciplines().observe()
+                .children
+                .map { it.getValue(Discipline::class.java) }
+        } catch (exception: Exception) {
+            null
         }
 }
