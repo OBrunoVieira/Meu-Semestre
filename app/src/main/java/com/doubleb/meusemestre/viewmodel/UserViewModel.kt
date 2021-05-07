@@ -34,12 +34,8 @@ class UserViewModel(private val userRepository: UserRepository, private val auth
                     liveDataGraduationInfo.postValue(DataSource(DataState.ERROR, throwable = it))
                 }
                 .addOnCanceledListener {
-                    liveDataGraduationInfo.postValue(
-                        DataSource(
-                            DataState.ERROR,
-                            throwable = CanceledException()
-                        )
-                    )
+                    liveDataGraduationInfo
+                        .postValue(DataSource(DataState.ERROR, throwable = CanceledException()))
                 }
         } ?: run {
             liveDataGraduationInfo.postValue(
@@ -48,25 +44,30 @@ class UserViewModel(private val userRepository: UserRepository, private val auth
         }
     }
 
-    fun getUser(userId: String) {
-        userRepository.getUser(userId)
-            .addListenerForSingleValueEvent(
-                object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        snapshot.getValue(User::class.java)?.let {
-                            liveDataUser.postValue(DataSource(DataState.SUCCESS, it))
-                        } ?: run {
-                            liveDataUser.postValue(DataSource(DataState.ERROR))
+    fun getUser(userId: String? = recoverUserId()) {
+        userId.takeIfValid()?.let {
+            userRepository.getUser(it)
+                .addListenerForSingleValueEvent(
+                    object : ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            snapshot.getValue(User::class.java)?.let { user ->
+                                liveDataUser.postValue(DataSource(DataState.SUCCESS, user))
+                            } ?: run {
+                                liveDataUser.postValue(DataSource(DataState.ERROR))
+                            }
                         }
-                    }
 
-                    override fun onCancelled(error: DatabaseError) {
-                        liveDataUser
-                            .postValue(DataSource(DataState.ERROR, throwable = error.toException()))
-                    }
+                        override fun onCancelled(error: DatabaseError) {
+                            liveDataUser
+                                .postValue(DataSource(DataState.ERROR,
+                                    throwable = error.toException()))
+                        }
 
-                }
-            )
+                    }
+                )
+        } ?: run {
+            liveDataUser.postValue(DataSource(DataState.ERROR))
+        }
     }
 
     fun getUserOrCreate(localUser: User?, userId: String? = recoverUserId()) {
