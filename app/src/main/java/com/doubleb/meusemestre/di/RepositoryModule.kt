@@ -9,7 +9,7 @@ import org.koin.dsl.module
 
 @ExperimentalCoroutinesApi
 val repositoryModule = module {
-    single { UserRepository(get()) }
+    single { UserRepository(get(), get()) }
     single { SemesterRepository(get(), get()) }
     single { DisciplinesRepository(get(), get()) }
     single { TipsRepository(get()) }
