@@ -13,6 +13,7 @@ data class User(
     val email: String? = null,
     val picture: String? = null,
     val graduation_info: GraduationInfo? = null,
+    val current_semester: String? = null,
 ) : Parcelable {
 
     fun isValid() = id.isValid() && name.isValid() && email.isValid()
