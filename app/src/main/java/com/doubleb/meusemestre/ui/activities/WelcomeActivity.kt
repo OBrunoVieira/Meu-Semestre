@@ -98,9 +98,9 @@ class WelcomeActivity : BaseActivity(R.layout.activity_welcome),
 
             DataState.SUCCESS -> {
                 if (it.data?.graduation_info?.isValid() == true) {
-                    HomeActivity.newClearedInstance(this, it.data)
+                    HomeActivity.newClearedInstance(this)
                 } else {
-                    RegisterActivity.newInstance(this, it.data)
+                    RegisterActivity.newInstance(this)
                     finish()
                 }
             }
@@ -116,7 +116,7 @@ class WelcomeActivity : BaseActivity(R.layout.activity_welcome),
             }
 
             DataState.SUCCESS -> {
-                RegisterActivity.newInstance(this, it.data)
+                RegisterActivity.newInstance(this)
                 finish()
             }
 
