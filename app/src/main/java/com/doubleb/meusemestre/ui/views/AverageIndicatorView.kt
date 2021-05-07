@@ -9,11 +9,12 @@ import androidx.core.text.HtmlCompat
 import com.doubleb.meusemestre.R
 import com.doubleb.meusemestre.extensions.gone
 import com.doubleb.meusemestre.extensions.roundWhenBase10
+import com.doubleb.meusemestre.extensions.takeIfValid
 import com.doubleb.meusemestre.extensions.visible
 import kotlinx.android.synthetic.main.view_average_indicator.view.*
 
 class AverageIndicatorView @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0,
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     private val titleTextSize: Int
@@ -70,15 +71,18 @@ class AverageIndicatorView @JvmOverloads constructor(
         }
     }
 
-    fun recoverContentDescription(name: String, average: Float?) =
-        average?.takeIf { it >= 0 }?.let {
-            context.getString(
-                R.string.average_content_description_valid,
-                name,
-                average.roundWhenBase10()
-            )
-        } ?: run {
-            context.getString(R.string.average_content_description_invalid, name)
+    fun recoverContentDescription(name: String?, average: Float?) =
+        run {
+            val discipline = name.takeIfValid() ?: context.getString(R.string.current_discipline)
+            average?.takeIf { it >= 0 }?.let {
+                context.getString(
+                    R.string.average_content_description_valid,
+                    discipline,
+                    average.roundWhenBase10()
+                )
+            } ?: run {
+                context.getString(R.string.average_content_description_invalid, discipline)
+            }
         }
 
     private fun transformGradeToText(grade: Float) =
