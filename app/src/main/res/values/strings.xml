@@ -2,6 +2,7 @@
     <string name="app_name">Meu Semestre</string>
     <!-- Default-->
     <string name="back">Voltar</string>
+    <string name="current_discipline">atual</string>
 
     <!--  Activity/Home  -->
     <string name="home_dashboard">Semestre ativo</string>
