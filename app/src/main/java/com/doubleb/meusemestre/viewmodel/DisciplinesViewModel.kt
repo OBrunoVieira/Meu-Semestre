@@ -19,6 +19,8 @@ class DisciplinesViewModel(
     val liveDataDiscipline = MutableLiveData<DataSource<List<Discipline>>>()
 
     fun createDiscipline(name: String, knowledgeArea: String, semesterId: String?) {
+        liveDataDisciplineCreation.value = DataSource(DataState.LOADING)
+
         disciplinesRepository.createDiscipline(name, knowledgeArea) { disciplineId ->
 
             semesterId.takeIfValid()?.let { semesterId ->
@@ -38,6 +40,10 @@ class DisciplinesViewModel(
             }
 
         }
+    }
+
+    fun removeDiscipline(disciplineId:String) {
+        disciplinesRepository.removeDiscipline(disciplineId)
     }
 
     fun getDisciplines() =

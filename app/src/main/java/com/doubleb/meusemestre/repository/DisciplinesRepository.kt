@@ -32,6 +32,13 @@ class DisciplinesRepository(
         database.child(DATABASE_DISCIPLINES)
             .child(auth.currentUser?.uid.orEmpty())
 
+    fun removeDiscipline(disciplineId: String) =
+        database.child(DATABASE_DISCIPLINES)
+            .child(auth.currentUser?.uid.orEmpty())
+            .child(disciplineId)
+            .removeValue()
+
+
     suspend fun getSuspendedDisciplines() =
         try {
             getDisciplines().observe()
