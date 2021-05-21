@@ -55,7 +55,7 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
         }
 
         home_bottom_navigation.setListener { _, type ->
-            home_app_bar.setExpanded(true)
+            expand()
             supportFragmentManager.popBackStack(
                 BACK_STACK_ROOT_TAG,
                 FragmentManager.POP_BACK_STACK_INCLUSIVE
@@ -129,6 +129,12 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
     fun inflateStackFragment(fragment: Fragment) {
         inflateStackFragment(R.id.home_fragment_container, fragment)
     }
+
+    fun selectDisciplines() {
+        home_bottom_navigation.selectItem(BottomNavigation.Type.DISCIPLINES)
+    }
+
+    fun expand() = home_app_bar.setExpanded(true)
 
     fun fab() = home_fab
 

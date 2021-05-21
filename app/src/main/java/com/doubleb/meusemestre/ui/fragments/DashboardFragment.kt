@@ -18,6 +18,7 @@ import com.doubleb.meusemestre.ui.activities.HomeActivity
 import com.doubleb.meusemestre.ui.adapters.recyclerview.*
 import com.doubleb.meusemestre.ui.dialogs.BottomSheetSemesterRegistration
 import com.doubleb.meusemestre.ui.listeners.DisciplineListener
+import com.doubleb.meusemestre.ui.listeners.RegisterGradesListener
 import com.doubleb.meusemestre.ui.views.EmptyStateView
 import com.doubleb.meusemestre.viewmodel.*
 import kotlinx.android.synthetic.main.fragment_dashboard.*
@@ -25,7 +26,7 @@ import org.koin.android.ext.android.inject
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     DisciplineListener,
-    BottomSheetSemesterRegistration.SemesterRegistrationClickListener {
+    BottomSheetSemesterRegistration.SemesterRegistrationClickListener, RegisterGradesListener {
 
     //region immutable vars
 
@@ -76,10 +77,12 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         super.onViewCreated(view, savedInstanceState)
         semesterViewModel.livedata.observe(viewLifecycleOwner, observeSemesterCreation())
         dashboardViewModel.liveData.observe(viewLifecycleOwner, observeDashboard())
-        disciplinesViewModel.liveDataDiscipline.observe(viewLifecycleOwner, observeDisciplinesRecovery())
+        disciplinesViewModel.liveDataDiscipline.observe(viewLifecycleOwner,
+            observeDisciplinesRecovery())
 
         dashboard_recycler_view.adapter = concatAdapter
         disciplineListAdapter.listener = this
+        registerGradesAdapter.listener = this
 
         dashboardViewModel.getDashboard()
     }
@@ -93,6 +96,12 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
                 disciplineListAdapter.list?.get(position)?.grade
             )
         )
+    }
+
+    override fun onDisciplineDelete(position: Int) {}
+
+    override fun onRegisterGrade() {
+        (activity as? HomeActivity)?.selectDisciplines()
     }
 
     private fun getEmptySemesterListener() = EmptyStateView.ClickListener {
