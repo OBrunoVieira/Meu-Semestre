@@ -15,6 +15,10 @@ class ActiveSemesterViewHolder(itemView: View, private val listener: DisciplineL
         itemView.active_semester_card_view.setOnClickListener {
             listener.onDisciplineClick(bindingAdapterPosition)
         }
+
+        itemView.active_semester_image_delete.setOnClickListener {
+            listener.onDisciplineDelete(bindingAdapterPosition)
+        }
     }
 
     fun bind(item: Discipline) {

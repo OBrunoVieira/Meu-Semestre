@@ -47,8 +47,10 @@ class ActiveSemesterFragment : Fragment(R.layout.fragment_active_semester), Disc
         View.OnClickListener {
             disciplineRegistrationCallback.launch(
                 Intent(context, DisciplineRegistrationActivity::class.java)
-                    .putExtra(DisciplineRegistrationActivity.CURRENT_SEMESTER_EXTRA, user?.current_semester)
-            )        }
+                    .putExtra(DisciplineRegistrationActivity.CURRENT_SEMESTER_EXTRA,
+                        user?.current_semester)
+            )
+        }
     }
     //endregion
 
@@ -61,7 +63,6 @@ class ActiveSemesterFragment : Fragment(R.layout.fragment_active_semester), Disc
 
     //region mutable vars
     private var user: User? = null
-    private var disciplines: List<Discipline>? = null
 
     private lateinit var disciplineRegistrationCallback: ActivityResultLauncher<Intent>
     //endregion
@@ -76,7 +77,8 @@ class ActiveSemesterFragment : Fragment(R.layout.fragment_active_semester), Disc
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activeSemesterViewModel.liveData.observe(viewLifecycleOwner, observeActiveSemester())
-        disciplinesViewModel.liveDataDiscipline.observe(viewLifecycleOwner, observeDisciplinesRecovery())
+        disciplinesViewModel.liveDataDiscipline.observe(viewLifecycleOwner,
+            observeDisciplinesRecovery())
 
         active_semester_recycler_view.adapter = concatAdapter
 
@@ -90,8 +92,7 @@ class ActiveSemesterFragment : Fragment(R.layout.fragment_active_semester), Disc
             it.setText(R.string.active_semester_fab)
 
             if (activeSemesterAdapter.currentList.isNotEmpty()) {
-                it.show()
-                it.extend()
+                showFab()
             } else {
                 it.gone()
             }
@@ -117,10 +118,24 @@ class ActiveSemesterFragment : Fragment(R.layout.fragment_active_semester), Disc
         )
     }
 
+    override fun onDisciplineDelete(position: Int) {
+        (activity as? HomeActivity)?.expand()
+        val targetDiscipline = activeSemesterAdapter.currentList[position]
+        val disciplines = ArrayList(activeSemesterAdapter.currentList).apply { removeAt(position) }
+
+        activeSemesterAdapter.submitList(disciplines)
+        disciplinesViewModel.removeDiscipline(targetDiscipline.id.orEmpty())
+
+        if (disciplines.isEmpty()) {
+            buildEmptySemesterState()
+        }
+    }
+
     override fun onEmptyViewActionClick(view: View) {
         disciplineRegistrationCallback.launch(
             Intent(context, DisciplineRegistrationActivity::class.java)
-                .putExtra(DisciplineRegistrationActivity.CURRENT_SEMESTER_EXTRA, user?.current_semester)
+                .putExtra(DisciplineRegistrationActivity.CURRENT_SEMESTER_EXTRA,
+                    user?.current_semester)
         )
     }
     //endregion
@@ -132,9 +147,8 @@ class ActiveSemesterFragment : Fragment(R.layout.fragment_active_semester), Disc
             }
 
             DataState.SUCCESS -> {
-                this.disciplines = it.data?.disciplines
                 this.user = it.data?.user
-                buildActiveSemester()
+                buildActiveSemester(it.data?.disciplines)
             }
 
             DataState.ERROR -> {
@@ -172,8 +186,9 @@ class ActiveSemesterFragment : Fragment(R.layout.fragment_active_semester), Disc
         concatAdapter.addAdapter(emptyDisciplinesAdapter)
     }
 
-    private fun buildActiveSemester() {
+    private fun buildActiveSemester(disciplines: MutableList<Discipline>?) {
         if (!disciplines.isNullOrEmpty()) {
+            showFab()
             addDisciplines(disciplines)
         } else {
             buildEmptySemesterState()
@@ -186,5 +201,10 @@ class ActiveSemesterFragment : Fragment(R.layout.fragment_active_semester), Disc
 
         activeSemesterAdapter.submitList(list)
         concatAdapter.addAdapter(activeSemesterAdapter)
+    }
+
+    private fun showFab() = fab?.run {
+        show()
+        extend()
     }
 }

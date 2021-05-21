@@ -29,14 +29,14 @@ class ActiveSemesterViewModel(
             val result = awaitAll(userData, disciplinesData)
 
             val user = result[0] as? User?
-            val discipline = result[1] as? ArrayList<Discipline>?
+            val disciplines = result[1] as? ArrayList<Discipline>?
 
-            if (user == null && discipline == null || user == null) {
+            if (user == null && disciplines == null || user == null) {
                 liveData.postValue(DataSource(DataState.ERROR))
                 return@launch
             }
 
-            liveData.postValue(DataSource(DataState.SUCCESS, ActiveSemester(user, discipline)))
+            liveData.postValue(DataSource(DataState.SUCCESS, ActiveSemester(user, disciplines)))
         }
     }
 
