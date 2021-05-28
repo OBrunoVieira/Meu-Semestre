@@ -1,8 +1,8 @@
 package com.doubleb.meusemestre.repository
 
-import com.doubleb.meusemestre.di.observeRemoveValue
-import com.doubleb.meusemestre.di.observeSetValue
 import com.doubleb.meusemestre.extensions.generateRandomString
+import com.doubleb.meusemestre.extensions.observeRemoveValue
+import com.doubleb.meusemestre.extensions.observeSetValue
 import com.doubleb.meusemestre.models.Exam
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot

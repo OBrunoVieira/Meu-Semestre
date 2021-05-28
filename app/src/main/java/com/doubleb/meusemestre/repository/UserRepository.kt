@@ -1,6 +1,6 @@
 package com.doubleb.meusemestre.repository
 
-import com.doubleb.meusemestre.di.observe
+import com.doubleb.meusemestre.extensions.observe
 import com.doubleb.meusemestre.extensions.takeIfValid
 import com.doubleb.meusemestre.models.GraduationInfo
 import com.doubleb.meusemestre.models.User

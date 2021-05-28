@@ -1,4 +1,4 @@
-package com.doubleb.meusemestre.di
+package com.doubleb.meusemestre.extensions
 
 import com.google.firebase.database.*
 import kotlin.coroutines.resume
