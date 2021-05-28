@@ -36,6 +36,10 @@
         <item name="android:fontFamily">@font/mulish_bold</item>
     </style>
 
+    <style name="Base.TextView.Mulish.Regular" parent="Base.TextView">
+        <item name="android:fontFamily">@font/mulish_regular</item>
+    </style>
+
     <!--  Font/Inter  -->
     <style name="Base.TextView.Inter.Light" parent="Base.TextView">
         <item name="android:fontFamily">@font/inter_light</item>
@@ -316,14 +320,25 @@
         <item name="android:hint">@string/discipline_registration_exams_quantity_hint</item>
     </style>
 
-    <style name="DisciplineRegistration.Button" parent="Button.Primary.Default">
+    <!--  Activity/Exam Registration  -->
+    <style name="ExamRegistration.TextView.Cycles" parent="Base.TextView.Mulish.Bold">
+        <item name="android:textSize">@dimen/text_size_eighteen</item>
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:text">@string/exam_registration_cycles</item>
+        <item name="android:layout_marginTop">@dimen/spacing_thirty_four</item>
         <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
         <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
-        <item name="android:layout_marginBottom">@dimen/spacing_sixteen</item>
-        <item name="android:text">@string/discipline_registration_button</item>
     </style>
 
-    <!--  Activity/Exam Registration  -->
+    <style name="ExamRegistration.TextInput.Cycles" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:layout_marginTop">@dimen/spacing_sixteen</item>
+        <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
+        <item name="android:hint">@string/exam_registration_cycles_hint</item>
+    </style>
+
     <style name="ExamRegistration.TextView.Name" parent="Base.TextView.Mulish.Bold">
         <item name="android:textSize">@dimen/text_size_eighteen</item>
         <item name="android:textColor">@color/blue_zodiac</item>
@@ -378,13 +393,6 @@
         <item name="android:hint">@string/exam_registration_grade_hint</item>
     </style>
 
-    <style name="ExamRegistration.Button" parent="Button.Primary.Default">
-        <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
-        <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
-        <item name="android:layout_marginBottom">@dimen/spacing_sixteen</item>
-        <item name="android:text">@string/exam_registration_button</item>
-    </style>
-
     <!--  Fragment/Disciplines  -->
     <style name="Disciplines.Tab" parent="Base.TextView.Mulish.SemiBold">
         <item name="android:textSize">@dimen/text_size_sixteen</item>
@@ -394,6 +402,7 @@
     <!--  Fragment/Discipline Details  -->
     <style name="DisciplineDetails.CollapsingLayout" parent="Base.TextView.Mulish.Bold">
         <item name="android:textSize">@dimen/text_size_eighteen</item>
+        <item name="android:textColor">@color/zircon</item>
     </style>
 
     <!--  Fragment/Register  -->
@@ -406,12 +415,40 @@
         <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
     </style>
 
+    <style name="Register.TextView.Description" parent="Base.TextView.Mulish.Regular">
+        <item name="android:textSize">@dimen/text_size_twelve</item>
+        <item name="android:textColor">@color/zircon</item>
+        <item name="android:paddingBottom">@dimen/spacing_twenty_four</item>
+        <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
+    </style>
+
     <style name="Register.Button.Option" parent="Button.Secondary.Default">
         <item name="android:textColor">@color/zircon</item>
         <item name="strokeColor">@color/zircon</item>
         <item name="android:layout_marginTop">@dimen/spacing_sixteen</item>
         <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
         <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
+    </style>
+
+    <!--  Fragment/Register Exams  -->
+    <style name="RegisterExams.TextView.Title" parent="Base.TextView.Mulish.Bold">
+        <item name="android:textSize">@dimen/spacing_twenty_four</item>
+        <item name="android:textColor">@color/zircon</item>
+        <item name="android:paddingTop">@dimen/spacing_twenty_four</item>
+        <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
+        <item name="android:text">@string/register_exams_title</item>
+    </style>
+
+    <style name="RegisterExams.TextView.Description" parent="Base.TextView.Mulish.Regular">
+        <item name="android:textSize">@dimen/text_size_twelve</item>
+        <item name="android:textColor">@color/zircon</item>
+        <item name="android:layout_marginTop">@dimen/spacing_eight</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_twenty_four</item>
+        <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
+        <item name="android:text">@string/register_exams_description</item>
     </style>
 
     <!--  Fragment/Welcome Info  -->
@@ -574,6 +611,16 @@
         <item name="android:textSize">@dimen/text_size_twenty</item>
     </style>
 
+    <!--  VH/Exams By Cycles  -->
+    <style name="ExamsByCycle.TextView.Title" parent="Base.TextView.Mulish.SemiBold">
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:textSize">@dimen/text_size_eighteen</item>
+        <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_eight</item>
+        <item name="android:layout_marginTop">@dimen/spacing_forty</item>
+    </style>
+
     <!--  View/Average Indicator  -->
     <style name="AverageIndicator.TextView.Title" parent="Base.TextView.Mulish.SemiBold">
         <item name="android:ellipsize">end</item>
@@ -642,6 +689,9 @@
         <item name="android:layout_marginStart">@dimen/spacing_four</item>
     </style>
 
+    <!--  View/Action Button -->
+    <style name="ActionButton.Button" parent="Button.Primary.Default" />
+
     <!--  BottomSheet/Login  -->
     <style name="Login.TextView.Title" parent="Base.TextView.Mulish.Bold">
         <item name="android:textColor">@color/blue_zodiac</item>
@@ -677,11 +727,6 @@
         <item name="android:text">@string/semester_registration_title</item>
         <item name="android:layout_marginTop">@dimen/spacing_twenty_four</item>
         <item name="android:textColor">@color/blue_zodiac</item>
-    </style>
-
-    <style name="SemesterRegistration.Button" parent="Button.Primary.Default">
-        <item name="android:text">@string/semester_registration_action</item>
-        <item name="android:layout_marginTop">@dimen/spacing_forty</item>
     </style>
 
     <style name="SemesterRegistration.TextInput.Value" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">

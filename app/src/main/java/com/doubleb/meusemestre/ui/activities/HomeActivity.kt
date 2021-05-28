@@ -1,15 +1,16 @@
 package com.doubleb.meusemestre.ui.activities
 
 import android.animation.LayoutTransition.CHANGING
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import com.doubleb.meusemestre.R
 import com.doubleb.meusemestre.extensions.gone
 import com.doubleb.meusemestre.extensions.loadRoundedImage
+import com.doubleb.meusemestre.extensions.openActivity
 import com.doubleb.meusemestre.extensions.visible
 import com.doubleb.meusemestre.models.User
 import com.doubleb.meusemestre.ui.fragments.DashboardFragment
@@ -24,13 +25,6 @@ import org.koin.android.ext.android.inject
 
 class HomeActivity : BaseActivity(R.layout.activity_home) {
 
-    companion object {
-
-        fun newClearedInstance(activity: Activity) = activity.startActivity(
-            Intent(activity, HomeActivity::class.java)
-                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        )
-    }
     //region immutable vars
 
     //region viewModels
@@ -40,7 +34,7 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
     //endregion
 
     //region mutable vars
-    private var user: User? = null
+    var user: User? = null
     //endregion
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +45,7 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
 
         home_content_profile.isEnabled = false
         home_content_profile.setOnClickListener {
-            ProfileActivity.newInstance(this, user)
+            openActivity<ProfileActivity>(ProfileActivity.USER_INFO_EXTRA to user)
         }
 
         home_bottom_navigation.setListener { _, type ->
@@ -93,6 +87,55 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
         }
     }
 
+    fun hideNavigation() {
+        home_collapsing_toolbar.gone()
+        home_app_bar.setExpanded(true, false)
+    }
+
+    fun showNavigation() {
+        home_collapsing_toolbar.visible()
+    }
+
+    fun inflateStackFragment(fragment: Fragment) {
+        inflateStackFragment(R.id.home_fragment_container, fragment)
+    }
+
+    fun selectDisciplines() {
+        home_bottom_navigation.selectItem(BottomNavigation.Type.DISCIPLINES)
+    }
+
+    fun expand() = home_app_bar.setExpanded(true)
+
+    fun fab() = home_fab
+
+    fun configureActionButton(
+        @StringRes resId: Int,
+        isButtonVisible: Boolean,
+        listener: View.OnClickListener,
+    ) {
+        home_fab.setOnClickListener(listener)
+        home_fab.setText(resId)
+
+        if (isButtonVisible) {
+            showFab()
+        } else {
+            hideFab()
+        }
+    }
+
+    fun clearActionButton() {
+        home_fab.gone()
+        home_fab.setOnClickListener(null)
+    }
+
+    fun hideFab() = home_fab.gone()
+
+    fun showFab() = home_fab.run {
+        show()
+        extend()
+    }
+
+    //region observers
     private fun observeUser() = Observer<DataSource<User>> {
         when (it.dataState) {
             DataState.LOADING -> {
@@ -116,33 +159,14 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
             }
         }
     }
-
-    fun hideNavigation() {
-        home_collapsing_toolbar.gone()
-        home_app_bar.setExpanded(true, false)
-    }
-
-    fun showNavigation() {
-        home_collapsing_toolbar.visible()
-    }
-
-    fun inflateStackFragment(fragment: Fragment) {
-        inflateStackFragment(R.id.home_fragment_container, fragment)
-    }
-
-    fun selectDisciplines() {
-        home_bottom_navigation.selectItem(BottomNavigation.Type.DISCIPLINES)
-    }
-
-    fun expand() = home_app_bar.setExpanded(true)
-
-    fun fab() = home_fab
+    //endregion
 
     private fun inflateFragment(fragment: Fragment) {
         supportFragmentManager.popBackStack(
             BACK_STACK_ROOT_TAG,
             FragmentManager.POP_BACK_STACK_INCLUSIVE
         )
+
         inflateFragment(R.id.home_fragment_container, fragment)
     }
 }
