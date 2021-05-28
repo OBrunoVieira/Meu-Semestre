@@ -1,17 +1,20 @@
 package com.doubleb.meusemestre.ui.fragments
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ConcatAdapter
 import com.doubleb.meusemestre.R
+import com.doubleb.meusemestre.extensions.createActivityResultLauncher
 import com.doubleb.meusemestre.extensions.isValid
+import com.doubleb.meusemestre.extensions.launchActivity
 import com.doubleb.meusemestre.models.Dashboard
 import com.doubleb.meusemestre.models.Discipline
-import com.doubleb.meusemestre.models.User
 import com.doubleb.meusemestre.ui.activities.DisciplineRegistrationActivity
 import com.doubleb.meusemestre.ui.activities.DisciplineRegistrationActivity.Companion.CURRENT_SEMESTER_EXTRA
 import com.doubleb.meusemestre.ui.activities.HomeActivity
@@ -47,6 +50,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     //endregion
 
     //region components
+    private val homeActivity by lazy { (activity as? HomeActivity) }
     private val bottomSheet by lazy { BottomSheetSemesterRegistration(this) }
     //endregion
 
@@ -59,32 +63,39 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     //endregion
 
     //region mutable vars
-    private var user: User? = null
     private var disciplines: List<Discipline>? = null
 
     private lateinit var disciplineRegistrationCallback: ActivityResultLauncher<Intent>
     //endregion
 
-    //region lifecycle
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        disciplineRegistrationCallback = DisciplineRegistrationActivity.newInstanceForResult(this) {
-            disciplinesViewModel.getDisciplines()
-        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        semesterViewModel.livedata.observe(viewLifecycleOwner, observeSemesterCreation())
-        dashboardViewModel.liveData.observe(viewLifecycleOwner, observeDashboard())
-        disciplinesViewModel.liveDataDiscipline.observe(viewLifecycleOwner,
-            observeDisciplinesRecovery())
+        disciplineRegistrationCallback = createActivityResultLauncher {
+            if (it.resultCode == RESULT_OK) {
+                disciplinesViewModel.getDisciplines()
+            }
+        }
+
+        setFragmentResultListener(DisciplineDetailsFragment.REQUEST_SUCCESS) { _, _ ->
+            disciplinesViewModel.getDisciplines()
+        }
+
+        semesterViewModel.livedata
+            .observe(viewLifecycleOwner, observeSemesterCreation())
+
+        dashboardViewModel.liveData
+            .observe(viewLifecycleOwner, observeDashboard())
+
+        disciplinesViewModel.liveDataDiscipline
+            .observe(viewLifecycleOwner, observeDisciplinesRecovery())
 
         dashboard_recycler_view.adapter = concatAdapter
         disciplineListAdapter.listener = this
         registerGradesAdapter.listener = this
 
-        dashboardViewModel.getDashboard()
+        if (disciplineListAdapter.list.isNullOrEmpty()) {
+            dashboardViewModel.getDashboard()
+        }
     }
     //endregion
 
@@ -92,6 +103,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     override fun onDisciplineClick(position: Int) {
         (activity as? HomeActivity)?.inflateStackFragment(
             DisciplineDetailsFragment.instance(
+                disciplineListAdapter.list?.get(position)?.id,
                 disciplineListAdapter.list?.get(position)?.name,
                 disciplineListAdapter.list?.get(position)?.grade
             )
@@ -109,9 +121,8 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     }
 
     private fun getEmptyDisciplinesListener() = EmptyStateView.ClickListener {
-        disciplineRegistrationCallback.launch(
-            Intent(context, DisciplineRegistrationActivity::class.java)
-                .putExtra(CURRENT_SEMESTER_EXTRA, user?.current_semester)
+        disciplineRegistrationCallback.launchActivity<DisciplineRegistrationActivity>(
+            context, CURRENT_SEMESTER_EXTRA to homeActivity?.user?.current_semester
         )
     }
 
@@ -131,7 +142,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
             }
 
             DataState.SUCCESS -> {
-                user = user?.copy(current_semester = it.data)
+                homeActivity?.user = homeActivity?.user?.copy(current_semester = it.data)
                 bottomSheet.dismiss()
                 buildEmptyDisciplinesState()
             }
@@ -149,7 +160,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
 
             DataState.SUCCESS -> {
                 this.disciplines = it.data?.disciplines
-                this.user = it.data?.user
+                homeActivity?.user = it.data?.user
                 buildDashboard()
             }
 
@@ -172,15 +183,15 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
             }
         }
     }
-
     //endregion
+
     private fun buildDashboard() {
         when {
             !disciplines.isNullOrEmpty() -> {
                 addDisciplines(disciplines)
             }
 
-            user?.current_semester.isValid() -> {
+            homeActivity?.user?.current_semester.isValid() -> {
                 buildEmptyDisciplinesState()
             }
 
@@ -194,6 +205,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         concatAdapter.removeAdapter(emptyDisciplinesAdapter)
         concatAdapter.removeAdapter(emptySemesterAdapter)
         concatAdapter.removeAdapter(registerGradesAdapter)
+        concatAdapter.removeAdapter(disciplineListAdapter)
 
         concatAdapter.addAdapter(loadingAdapter)
     }
@@ -202,6 +214,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         concatAdapter.removeAdapter(loadingAdapter)
         concatAdapter.removeAdapter(emptySemesterAdapter)
         concatAdapter.removeAdapter(registerGradesAdapter)
+        concatAdapter.removeAdapter(disciplineListAdapter)
 
         concatAdapter.addAdapter(emptyDisciplinesAdapter)
     }
@@ -210,6 +223,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         concatAdapter.removeAdapter(loadingAdapter)
         concatAdapter.removeAdapter(emptyDisciplinesAdapter)
         concatAdapter.removeAdapter(registerGradesAdapter)
+        concatAdapter.removeAdapter(disciplineListAdapter)
 
         concatAdapter.addAdapter(emptySemesterAdapter)
     }
