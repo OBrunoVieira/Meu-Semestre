@@ -3,7 +3,6 @@ package com.doubleb.meusemestre.extensions
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
@@ -11,18 +10,18 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 
-inline fun <reified T : Activity> Activity.openActivity(extras: Bundle? = null) =
+inline fun <reified T : Activity> Activity.openActivity(vararg pairs: Pair<String, Any?>) =
     startActivity(
         Intent(this, T::class.java).also { intent ->
-            extras?.let { intent.putExtras(extras) }
+            intent.putExtras(bundleOf(*pairs))
         }
     )
 
-inline fun <reified T : Activity> Activity.openClearedActivity(extras: Bundle? = null) =
+inline fun <reified T : Activity> Activity.openClearedActivity(vararg pairs: Pair<String, Any?>) =
     startActivity(
         Intent(this, T::class.java)
             .also { intent ->
-                extras?.let { intent.putExtras(extras) }
+                intent.putExtras(bundleOf(*pairs))
             }
             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
     )
