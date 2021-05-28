@@ -28,7 +28,7 @@ class DisciplineHistoryViewHolder(itemView: View) : RecyclerView.ViewHolder(item
                 .valueProportion(1.2f)
                 .holeRadius(80f)
                 .enableTitle(false)
-                .grade(discipline.grade)
+                .gradeResult(discipline.grade)
                 .build()
         }
     }

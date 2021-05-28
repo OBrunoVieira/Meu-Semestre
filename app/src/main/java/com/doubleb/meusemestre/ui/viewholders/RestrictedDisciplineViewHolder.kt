@@ -17,7 +17,7 @@ class RestrictedDisciplineViewHolder(itemView: View) : RecyclerView.ViewHolder(i
                 .valueProportion(1.2f)
                 .holeRadius(80f)
                 .enableTitle(false)
-                .grade(item.grade)
+                .gradeResult(item.grade)
                 .build()
         }
     }
