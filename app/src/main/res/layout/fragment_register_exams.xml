@@ -14,10 +14,15 @@
 
         <TextView
             android:id="@+id/register_exams_text_view_title"
-            style="@style/Register.TextView.Title"
+            style="@style/RegisterExams.TextView.Title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/register_exams_title" />
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/register_exams_text_view_description"
+            style="@style/RegisterExams.TextView.Description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/register_exams_button_1"
@@ -39,20 +44,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/register_exams_3" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/register_exams_button_4"
-            style="@style/Register.Button.Option"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/register_exams_4" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/register_exams_button_5"
-            style="@style/Register.Button.Option"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/register_exams_5" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/register_exams_button_other"

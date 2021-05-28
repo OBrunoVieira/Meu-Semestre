@@ -12,8 +12,6 @@ class RegisterExamsFragment(private val listener: Listener) :
         register_exams_button_1,
         register_exams_button_2,
         register_exams_button_3,
-        register_exams_button_4,
-        register_exams_button_5,
         register_exams_button_other
     )
 
