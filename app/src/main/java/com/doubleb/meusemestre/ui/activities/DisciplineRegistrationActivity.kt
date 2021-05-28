@@ -2,12 +2,13 @@ package com.doubleb.meusemestre.ui.activities
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.doubleb.meusemestre.R
-import com.doubleb.meusemestre.extensions.*
+import com.doubleb.meusemestre.extensions.disable
+import com.doubleb.meusemestre.extensions.disableCopyPaste
+import com.doubleb.meusemestre.extensions.enable
+import com.doubleb.meusemestre.extensions.hideKeyboard
+import com.doubleb.meusemestre.ui.views.ActionButtonView
 import com.doubleb.meusemestre.viewmodel.DataSource
 import com.doubleb.meusemestre.viewmodel.DataState
 import com.doubleb.meusemestre.viewmodel.DisciplinesViewModel
@@ -18,11 +19,6 @@ class DisciplineRegistrationActivity : BaseActivity(R.layout.activity_discipline
 
     companion object {
         const val CURRENT_SEMESTER_EXTRA = "CURRENT_SEMESTER_EXTRA"
-
-        fun newInstanceForResult(
-            fragment: Fragment,
-            callback: ActivityResultCallback<ActivityResult>,
-        ) = fragment.registerResultCallback(callback)
     }
 
     //region immutable vars
@@ -62,7 +58,7 @@ class DisciplineRegistrationActivity : BaseActivity(R.layout.activity_discipline
             }
         }
 
-        discipline_registration_button.setOnClickListener {
+        discipline_registration_button.listener {
             disciplinesViewModel.createDiscipline(
                 discipline_registration_edit_text_name.text.toString(),
                 discipline_registration_auto_complete_text_view.editableText.toString(),
@@ -77,20 +73,18 @@ class DisciplineRegistrationActivity : BaseActivity(R.layout.activity_discipline
             DataState.LOADING -> {
                 discipline_registration_text_input_name.disable()
                 discipline_registration_text_input.disable()
-                discipline_registration_button.invisible()
-                discipline_registration_loading.visible()
+                discipline_registration_button.state(ActionButtonView.State.LOADING)
             }
 
             DataState.SUCCESS -> {
                 setResult(RESULT_OK)
-                finish()
+                onBackPressed()
             }
 
             DataState.ERROR -> {
                 discipline_registration_text_input_name.enable()
                 discipline_registration_text_input.enable()
-                discipline_registration_button.visible()
-                discipline_registration_loading.gone()
+                discipline_registration_button.state(ActionButtonView.State.DEFAULT)
             }
         }
     }

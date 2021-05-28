@@ -90,25 +90,16 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.button.MaterialButton
+    <com.doubleb.meusemestre.ui.views.ActionButtonView
         android:id="@+id/discipline_registration_button"
-        style="@style/DisciplineRegistration.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_thirty_two"
+        android:layout_marginEnd="@dimen/spacing_thirty_two"
+        android:layout_marginBottom="@dimen/spacing_sixteen"
+        app:abv_title_button="@string/discipline_registration_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.core.widget.ContentLoadingProgressBar
-        android:id="@+id/discipline_registration_loading"
-        style="@style/Widget.AppCompat.ProgressBar"
-        android:layout_width="wrap_content"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/discipline_registration_button"
-        app:layout_constraintBottom_toBottomOf="@id/discipline_registration_button"
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
