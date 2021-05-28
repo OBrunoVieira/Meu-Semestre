@@ -7,6 +7,8 @@ import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
 import com.doubleb.meusemestre.R
 import com.doubleb.meusemestre.extensions.blendColorAnimation
+import com.doubleb.meusemestre.extensions.openActivity
+import com.doubleb.meusemestre.extensions.openClearedActivity
 import com.doubleb.meusemestre.models.User
 import com.doubleb.meusemestre.ui.adapters.viewpager.WelcomePageAdapter
 import com.doubleb.meusemestre.ui.dialogs.BottomSheetLogin
@@ -61,8 +63,6 @@ class WelcomeActivity : BaseActivity(R.layout.activity_welcome),
 
         welcome_button_explore.setOnClickListener(onExploreClick())
         welcome_button_login.setOnClickListener(onLoginClick())
-
-        loginViewModel.validateCurrentSession()
     }
 
     override fun onDestroy() {
@@ -98,9 +98,9 @@ class WelcomeActivity : BaseActivity(R.layout.activity_welcome),
 
             DataState.SUCCESS -> {
                 if (it.data?.graduation_info?.isValid() == true) {
-                    HomeActivity.newClearedInstance(this)
+                    openClearedActivity<HomeActivity>()
                 } else {
-                    RegisterActivity.newInstance(this)
+                    openActivity<RegisterActivity>()
                     finish()
                 }
             }
@@ -116,7 +116,7 @@ class WelcomeActivity : BaseActivity(R.layout.activity_welcome),
             }
 
             DataState.SUCCESS -> {
-                RegisterActivity.newInstance(this)
+                openActivity<RegisterActivity>()
                 finish()
             }
 
@@ -150,7 +150,7 @@ class WelcomeActivity : BaseActivity(R.layout.activity_welcome),
     }
 
     private fun onExploreClick() = View.OnClickListener {
-        startActivity(Intent(this, RegisterActivity::class.java))
+        openActivity<RegisterActivity>()
     }
 
     private fun onLoginClick() = View.OnClickListener {
