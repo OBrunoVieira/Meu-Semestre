@@ -46,7 +46,7 @@ ext {
     final androidxVersion = '1.2.0'
     final materialVersion = '1.2.1'
     final constraintLayoutVersion = '2.0.4'
-    final fragmentVersion = '1.3.2'
+    final fragmentVersion = '1.3.3'
     final mpchartVersion = 'v3.1.0'
     final pageIndicatorVersion = '1.0.3'
     final viewPagerVersion = '1.0.0'
