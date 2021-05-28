@@ -9,4 +9,5 @@ data class Discipline(
     val name: String? = null,
     val knowledge_area: String? = null,
     val grade: Float? = null,
+    val timestamp : Long?=null
 ) : Parcelable

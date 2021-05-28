@@ -9,11 +9,11 @@ import kotlinx.android.parcel.Parcelize
 data class GraduationInfo(
     var institution_type: String? = null,
     var approval_average: Double? = null,
-    var exams_per_semester: Int? = null
+    var cycles: Int? = null
 ) : Parcelable {
 
     @Exclude
     fun isValid() = institution_type.isValid()
             && approval_average.isValid()
-            && exams_per_semester.isValid()
+            && cycles.isValid()
 }
