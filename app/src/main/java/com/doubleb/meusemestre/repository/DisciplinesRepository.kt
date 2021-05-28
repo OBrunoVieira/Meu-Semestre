@@ -1,18 +1,31 @@
 package com.doubleb.meusemestre.repository
 
-import com.doubleb.meusemestre.di.observe
 import com.doubleb.meusemestre.extensions.generateRandomString
+import com.doubleb.meusemestre.extensions.observe
+import com.doubleb.meusemestre.extensions.observeRemoveValue
+import com.doubleb.meusemestre.extensions.observeSetValue
 import com.doubleb.meusemestre.models.Discipline
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 
 class DisciplinesRepository(
     private val database: DatabaseReference,
-    private val auth: FirebaseAuth
+    private val auth: FirebaseAuth,
 ) {
     companion object {
         private const val DATABASE_DISCIPLINES = "disciplines"
+        private const val CHILD_ORDERING = "timestamp"
     }
+
+    fun getDisciplines() =
+        database.child(DATABASE_DISCIPLINES)
+            .child(auth.currentUser?.uid.orEmpty())
+            .orderByChild(CHILD_ORDERING)
+
+    fun getDiscipline(disciplineId: String) =
+        database.child(DATABASE_DISCIPLINES)
+            .child(auth.currentUser?.uid.orEmpty())
+            .child(disciplineId)
 
     fun createDiscipline(
         name: String,
@@ -20,24 +33,41 @@ class DisciplinesRepository(
         onComplete: (disciplineId: String) -> Unit = {},
     ) =
         generateRandomString().let { disciplineId ->
-            database.child(DATABASE_DISCIPLINES)
-                .child(auth.currentUser?.uid.orEmpty())
-                .child(disciplineId)
-                .setValue(Discipline(disciplineId, name, knowledgeArea)) { error, ref ->
+            getDiscipline(disciplineId)
+                .setValue(
+                    Discipline(disciplineId,
+                        name,
+                        knowledgeArea,
+                        timestamp = System.currentTimeMillis())
+                ) { _, _ ->
                     onComplete.invoke(disciplineId)
                 }
         }
 
-    fun getDisciplines() =
-        database.child(DATABASE_DISCIPLINES)
-            .child(auth.currentUser?.uid.orEmpty())
+    suspend fun removeSuspendedDiscipline(disciplineId: String) =
+        try {
+            getDiscipline(disciplineId).observeRemoveValue()
+        } catch (exception: Exception) {
+            null
+        }
 
-    fun removeDiscipline(disciplineId: String) =
-        database.child(DATABASE_DISCIPLINES)
-            .child(auth.currentUser?.uid.orEmpty())
-            .child(disciplineId)
-            .removeValue()
-
+    suspend fun createSuspendedDiscipline(
+        name: String,
+        knowledgeArea: String,
+    ) = try {
+        generateRandomString().let { disciplineId ->
+            getDiscipline(disciplineId)
+                .observeSetValue(
+                    Discipline(
+                        disciplineId,
+                        name,
+                        knowledgeArea,
+                        timestamp = System.currentTimeMillis())
+                )
+        }
+    } catch (exception: Exception) {
+        null
+    }
 
     suspend fun getSuspendedDisciplines() =
         try {

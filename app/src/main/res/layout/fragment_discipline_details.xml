@@ -22,8 +22,7 @@
             app:contentScrim="@color/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:scrimAnimationDuration="200"
-            app:titleEnabled="false"
-            app:toolbarId="@id/discipline_details_toolbar">
+            app:titleEnabled="false">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/discipline_detail_constraint"
@@ -74,9 +73,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/colorPrimary"
-                app:layout_collapseMode="pin"
-                app:titleTextAppearance="@style/DisciplineDetails.CollapsingLayout"
-                app:titleTextColor="@color/zircon" />
+                app:contentInsetStart="0dp"
+                app:contentInsetLeft="0dp"
+                app:layout_collapseMode="pin">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/discipline_toolbar_image_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/spacing_sixteen"
+                        android:src="?attr/homeAsUpIndicator"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/discipline_toolbar_text_title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/discipline_toolbar_text_title"
+                        style="@style/DisciplineDetails.CollapsingLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/discipline_toolbar_image_delete"
+                        app:layout_constraintStart_toEndOf="@id/discipline_toolbar_image_arrow" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/discipline_toolbar_image_delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/spacing_sixteen"
+                        android:src="@drawable/vector_delete"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/discipline_toolbar_text_title"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
