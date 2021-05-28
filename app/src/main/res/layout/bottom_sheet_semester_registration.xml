@@ -49,25 +49,14 @@
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.button.MaterialButton
+    <com.doubleb.meusemestre.ui.views.ActionButtonView
         android:id="@+id/semester_registration_button"
-        style="@style/SemesterRegistration.Button"
+        app:abv_title_button="@string/semester_registration_action"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_forty"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/semester_registration_text_input" />
-
-    <androidx.core.widget.ContentLoadingProgressBar
-        android:id="@+id/semester_registration_loading"
-        style="@style/Widget.AppCompat.ProgressBar"
-        android:layout_width="wrap_content"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/semester_registration_button"
-        app:layout_constraintBottom_toBottomOf="@id/semester_registration_button"
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
