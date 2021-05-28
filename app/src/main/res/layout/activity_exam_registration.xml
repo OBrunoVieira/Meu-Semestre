@@ -28,6 +28,25 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/exam_registration_text_view_cycles"
+                style="@style/ExamRegistration.TextView.Cycles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/exam_registration_text_input_cycles"
+                style="@style/ExamRegistration.TextInput.Cycles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null">
+
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/exam_registration_auto_complete_cycles"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
                 android:id="@+id/exam_registration_text_view_name"
                 style="@style/ExamRegistration.TextView.Name"
                 android:layout_width="match_parent"
@@ -41,6 +60,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/exam_registration_edit_text_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
@@ -59,6 +79,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/exam_registration_edit_text_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionNext"
@@ -77,6 +98,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/exam_registration_edit_text_grade"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionDone"
@@ -86,11 +108,14 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.button.MaterialButton
+    <com.doubleb.meusemestre.ui.views.ActionButtonView
         android:id="@+id/exam_registration_button"
-        style="@style/ExamRegistration.Button"
+        app:abv_title_button="@string/exam_registration_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_thirty_two"
+        android:layout_marginEnd="@dimen/spacing_thirty_two"
+        android:layout_marginBottom="@dimen/spacing_sixteen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

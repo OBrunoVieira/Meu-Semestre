@@ -17,7 +17,8 @@ class ExamViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 .valueProportion(1.2f)
                 .holeRadius(80f)
                 .enableTitle(false)
-                .grade(exam.grade)
+                .gradeResult(exam.grade_result)
+                .maxGrade(exam.grade_value)
                 .build()
         }
     }
