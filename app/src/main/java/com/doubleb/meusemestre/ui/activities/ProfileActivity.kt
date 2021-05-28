@@ -1,6 +1,5 @@
 package com.doubleb.meusemestre.ui.activities
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -16,12 +15,7 @@ import org.koin.android.ext.android.inject
 class ProfileActivity : BaseActivity(R.layout.activity_profile) {
 
     companion object {
-        private const val USER_INFO_EXTRA = "USER_INFO_EXTRA"
-
-        fun newInstance(activity: Activity, user: User?) = activity.startActivity(
-            Intent(activity, ProfileActivity::class.java)
-                .putExtra(USER_INFO_EXTRA, user)
-        )
+        const val USER_INFO_EXTRA = "USER_INFO_EXTRA"
     }
 
     //region immutable vars
