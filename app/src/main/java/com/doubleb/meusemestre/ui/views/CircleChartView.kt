@@ -32,10 +32,16 @@ class CircleChartView @JvmOverloads constructor(
         )
     }
 
-    private val disableLightColor by lazy { ContextCompat.getColor(context, R.color.light_gray) }
-    private val disableDarkColor by lazy { ContextCompat.getColor(context, R.color.dark_gray_forty) }
+    private val disableLightColor by lazy {
+        ContextCompat.getColor(context, R.color.light_gray)
+    }
 
-    private var grade = 0f
+    private val disableDarkColor by lazy {
+        ContextCompat.getColor(context, R.color.dark_gray_forty)
+    }
+
+    private var gradeResult = 0f
+    private var maxGrade = 10f
     private var valueProportion = 1.8f
     private var thereWasChanging = false
     private var enableTitle = true
@@ -69,7 +75,7 @@ class CircleChartView @JvmOverloads constructor(
     }
 
     fun loading() {
-        grade(0f).build()
+        gradeResult(0f).build()
     }
 
     fun colorIndex(index: Int) = apply {
@@ -104,11 +110,15 @@ class CircleChartView @JvmOverloads constructor(
         holeRadius = radius
     }
 
-    fun grade(@FloatRange(from = 0.0, to = 10.0) value: Float?) = apply {
+    fun gradeResult(@FloatRange(from = 0.0, to = 10.0) value: Float?) = apply {
         value?.let {
-            thereWasChanging = grade != value
-            grade = value
+            thereWasChanging = gradeResult != it
+            gradeResult = it
         }
+    }
+
+    fun maxGrade(@FloatRange(from = 0.0, to = 10.0) value: Float?) = apply {
+        value?.let { maxGrade = it }
     }
 
     fun build() {
@@ -117,11 +127,11 @@ class CircleChartView @JvmOverloads constructor(
             spin(1500, 0f, 270f, Easing.EaseInOutQuad)
         }
 
-        centerText = configureCenteredText(grade)
-        data = PieData(configurePieData(percentage(grade)))
+        centerText = configureCenteredText(gradeResult)
+        data = PieData(configurePieData(percentage(gradeResult)))
     }
 
-    private fun percentage(grade: Float) = (grade / 10) * 100
+    private fun percentage(grade: Float) = (grade / maxGrade) * 100
 
     private fun configureCenteredText(grade: Float) = run {
         val result = grade.roundWhenBase10()
@@ -143,7 +153,7 @@ class CircleChartView @JvmOverloads constructor(
     private fun buildTitleSpan(spannableString: SpannableString, startLength: Int = 0) {
         val interLight = ResourcesCompat.getFont(context, R.font.inter_light)
         spannableString.setSpan(
-            ForegroundColorSpan(if (grade <= 0) disableDarkColor else progressColor),
+            ForegroundColorSpan(if (gradeResult <= 0) disableDarkColor else progressColor),
             0,
             spannableString.length,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -183,8 +193,8 @@ class CircleChartView @JvmOverloads constructor(
             }
 
             val colors = ArrayList<Int>().apply {
-                add(if (grade <= 0) disableLightColor else progressColor)
-                add(if (grade <= 0) disableLightColor else backgroundProgressColor)
+                add(if (gradeResult <= 0) disableLightColor else progressColor)
+                add(if (gradeResult <= 0) disableLightColor else backgroundProgressColor)
             }
 
             PieDataSet(entries, null).apply {
