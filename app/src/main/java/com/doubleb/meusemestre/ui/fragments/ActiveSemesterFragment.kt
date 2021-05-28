@@ -4,114 +4,136 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ConcatAdapter
 import com.doubleb.meusemestre.R
-import com.doubleb.meusemestre.extensions.gone
+import com.doubleb.meusemestre.extensions.createActivityResultLauncher
+import com.doubleb.meusemestre.extensions.isValid
+import com.doubleb.meusemestre.extensions.launchActivity
 import com.doubleb.meusemestre.models.ActiveSemester
 import com.doubleb.meusemestre.models.Discipline
 import com.doubleb.meusemestre.models.User
 import com.doubleb.meusemestre.ui.activities.DisciplineRegistrationActivity
+import com.doubleb.meusemestre.ui.activities.DisciplineRegistrationActivity.Companion.CURRENT_SEMESTER_EXTRA
 import com.doubleb.meusemestre.ui.activities.HomeActivity
 import com.doubleb.meusemestre.ui.adapters.recyclerview.ActiveSemesterAdapter
 import com.doubleb.meusemestre.ui.adapters.recyclerview.EmptyDisciplinesAdapter
+import com.doubleb.meusemestre.ui.adapters.recyclerview.EmptySemesterAdapter
 import com.doubleb.meusemestre.ui.adapters.recyclerview.LoadingAdapter
+import com.doubleb.meusemestre.ui.dialogs.BottomSheetSemesterRegistration
+import com.doubleb.meusemestre.ui.fragments.DisciplineDetailsFragment.Companion.REQUEST_SUCCESS
 import com.doubleb.meusemestre.ui.listeners.DisciplineListener
 import com.doubleb.meusemestre.ui.views.EmptyStateView
-import com.doubleb.meusemestre.viewmodel.ActiveSemesterViewModel
-import com.doubleb.meusemestre.viewmodel.DataSource
-import com.doubleb.meusemestre.viewmodel.DataState
-import com.doubleb.meusemestre.viewmodel.DisciplinesViewModel
+import com.doubleb.meusemestre.viewmodel.*
 import kotlinx.android.synthetic.main.fragment_active_semester.*
 import org.koin.android.ext.android.inject
 
 class ActiveSemesterFragment : Fragment(R.layout.fragment_active_semester), DisciplineListener,
-    EmptyStateView.ClickListener {
+    EmptyStateView.ClickListener,
+    BottomSheetSemesterRegistration.SemesterRegistrationClickListener {
+
+    companion object {
+        private const val INSTANCE_STATE_CLICKED_POSITION = "INSTANCE_STATE_CLICKED_POSITION"
+    }
 
     //region immutable vars
 
     //region adapters
     private val activeSemesterAdapter by lazy { ActiveSemesterAdapter(this) }
     private val emptyDisciplinesAdapter by lazy { EmptyDisciplinesAdapter(this) }
+    private val emptySemesterAdapter by lazy { EmptySemesterAdapter(getEmptySemesterListener()) }
     private val loadingAdapter by lazy { LoadingAdapter() }
     private val concatAdapter by lazy { ConcatAdapter(loadingAdapter) }
     //endregion
 
     //region components
-    private val fab by lazy { (activity as? HomeActivity)?.fab() }
+    private val homeActivity by lazy { (activity as? HomeActivity) }
+    private val bottomSheet by lazy { BottomSheetSemesterRegistration(this) }
     //endregion
 
     //region listeners
-    private val clickListener by lazy {
-        View.OnClickListener {
-            disciplineRegistrationCallback.launch(
-                Intent(context, DisciplineRegistrationActivity::class.java)
-                    .putExtra(DisciplineRegistrationActivity.CURRENT_SEMESTER_EXTRA,
-                        user?.current_semester)
-            )
-        }
-    }
+    private val clickListener by lazy { View.OnClickListener { launchDisciplineRegistrationActivity() } }
     //endregion
 
     //region viewmodels
     private val activeSemesterViewModel: ActiveSemesterViewModel by inject()
     private val disciplinesViewModel: DisciplinesViewModel by inject()
+    private val semesterViewModel: SemesterViewModel by inject()
     //endregion
 
     //endregion
 
     //region mutable vars
     private var user: User? = null
+    private var clickedPosition: Int = 0
 
     private lateinit var disciplineRegistrationCallback: ActivityResultLauncher<Intent>
     //endregion
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        disciplineRegistrationCallback = DisciplineRegistrationActivity.newInstanceForResult(this) {
-            disciplinesViewModel.getDisciplines()
+        savedInstanceState?.let {
+            clickedPosition = it.getInt(INSTANCE_STATE_CLICKED_POSITION)
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activeSemesterViewModel.liveData.observe(viewLifecycleOwner, observeActiveSemester())
-        disciplinesViewModel.liveDataDiscipline.observe(viewLifecycleOwner,
-            observeDisciplinesRecovery())
+
+        disciplineRegistrationCallback = createActivityResultLauncher {
+            if (it.resultCode == AppCompatActivity.RESULT_OK) {
+                disciplinesViewModel.getDisciplines()
+            }
+        }
+
+        setFragmentResultListener(REQUEST_SUCCESS) { _, _ ->
+            activeSemesterViewModel.getActiveSemester()
+        }
+
+        semesterViewModel.livedata
+            .observe(viewLifecycleOwner, observeSemesterCreation())
+        activeSemesterViewModel.liveData
+            .observe(viewLifecycleOwner, observeActiveSemester())
+        disciplinesViewModel.liveDataDiscipline
+            .observe(viewLifecycleOwner, observeDisciplinesRecovery())
 
         active_semester_recycler_view.adapter = concatAdapter
 
-        activeSemesterViewModel.getActiveSemester()
+        if (activeSemesterAdapter.currentList.isNullOrEmpty()) {
+            activeSemesterViewModel.getActiveSemester()
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(INSTANCE_STATE_CLICKED_POSITION, clickedPosition)
     }
 
     override fun onResume() {
         super.onResume()
-        fab?.let {
-            it.setOnClickListener(clickListener)
-            it.setText(R.string.active_semester_fab)
-
-            if (activeSemesterAdapter.currentList.isNotEmpty()) {
-                showFab()
-            } else {
-                it.gone()
-            }
-        }
+        homeActivity?.configureActionButton(
+            R.string.active_semester_fab,
+            activeSemesterAdapter.currentList.isNotEmpty(),
+            clickListener
+        )
     }
 
     override fun onPause() {
         super.onPause()
-        fab?.let {
-            it.gone()
-            it.setOnClickListener(null)
-        }
+        homeActivity?.clearActionButton()
     }
     //endregion
 
     //region listeners
     override fun onDisciplineClick(position: Int) {
-        (activity as? HomeActivity)?.inflateStackFragment(
+        clickedPosition = position
+
+        homeActivity?.inflateStackFragment(
             DisciplineDetailsFragment.instance(
+                activeSemesterAdapter.currentList[position].id,
                 activeSemesterAdapter.currentList[position].name,
                 activeSemesterAdapter.currentList[position].grade
             )
@@ -119,7 +141,7 @@ class ActiveSemesterFragment : Fragment(R.layout.fragment_active_semester), Disc
     }
 
     override fun onDisciplineDelete(position: Int) {
-        (activity as? HomeActivity)?.expand()
+        homeActivity?.expand()
         val targetDiscipline = activeSemesterAdapter.currentList[position]
         val disciplines = ArrayList(activeSemesterAdapter.currentList).apply { removeAt(position) }
 
@@ -127,16 +149,20 @@ class ActiveSemesterFragment : Fragment(R.layout.fragment_active_semester), Disc
         disciplinesViewModel.removeDiscipline(targetDiscipline.id.orEmpty())
 
         if (disciplines.isEmpty()) {
-            buildEmptySemesterState()
+            buildEmptyDisciplinesState()
         }
     }
 
     override fun onEmptyViewActionClick(view: View) {
-        disciplineRegistrationCallback.launch(
-            Intent(context, DisciplineRegistrationActivity::class.java)
-                .putExtra(DisciplineRegistrationActivity.CURRENT_SEMESTER_EXTRA,
-                    user?.current_semester)
-        )
+        launchDisciplineRegistrationActivity()
+    }
+
+    override fun onCreateSemester(name: String) {
+        semesterViewModel.createSemester(name)
+    }
+
+    private fun getEmptySemesterListener() = EmptyStateView.ClickListener {
+        bottomSheet.show(childFragmentManager, BottomSheetSemesterRegistration.TAG)
     }
     //endregion
 
@@ -170,32 +196,61 @@ class ActiveSemesterFragment : Fragment(R.layout.fragment_active_semester), Disc
             }
         }
     }
+
+    private fun observeSemesterCreation() = Observer<DataSource<String>> {
+        when (it.dataState) {
+            DataState.LOADING -> {
+
+            }
+
+            DataState.SUCCESS -> {
+                homeActivity?.user = homeActivity?.user?.copy(current_semester = it.data)
+                bottomSheet.dismiss()
+                buildEmptyDisciplinesState()
+            }
+
+            DataState.ERROR -> {
+                bottomSheet.dismiss()
+            }
+        }
+    }
     //endregion
 
     private fun buildFullLoadingState() {
+        homeActivity?.hideFab()
+
         concatAdapter.removeAdapter(emptyDisciplinesAdapter)
         concatAdapter.removeAdapter(activeSemesterAdapter)
 
         concatAdapter.addAdapter(loadingAdapter)
     }
 
-    private fun buildEmptySemesterState() {
+    private fun buildEmptyDisciplinesState() {
+        homeActivity?.hideFab()
+
         concatAdapter.removeAdapter(loadingAdapter)
         concatAdapter.removeAdapter(activeSemesterAdapter)
 
-        concatAdapter.addAdapter(emptyDisciplinesAdapter)
+        if (homeActivity?.user?.current_semester.isValid()) {
+            concatAdapter.removeAdapter(emptySemesterAdapter)
+            concatAdapter.addAdapter(emptyDisciplinesAdapter)
+        } else {
+            concatAdapter.removeAdapter(emptyDisciplinesAdapter)
+            concatAdapter.addAdapter(emptySemesterAdapter)
+        }
     }
 
     private fun buildActiveSemester(disciplines: MutableList<Discipline>?) {
         if (!disciplines.isNullOrEmpty()) {
-            showFab()
             addDisciplines(disciplines)
         } else {
-            buildEmptySemesterState()
+            buildEmptyDisciplinesState()
         }
     }
 
     private fun addDisciplines(list: List<Discipline>?) {
+        homeActivity?.showFab()
+
         concatAdapter.removeAdapter(loadingAdapter)
         concatAdapter.removeAdapter(emptyDisciplinesAdapter)
 
@@ -203,8 +258,9 @@ class ActiveSemesterFragment : Fragment(R.layout.fragment_active_semester), Disc
         concatAdapter.addAdapter(activeSemesterAdapter)
     }
 
-    private fun showFab() = fab?.run {
-        show()
-        extend()
+    private fun launchDisciplineRegistrationActivity() {
+        disciplineRegistrationCallback.launchActivity<DisciplineRegistrationActivity>(
+            context, CURRENT_SEMESTER_EXTRA to user?.current_semester
+        )
     }
 }
