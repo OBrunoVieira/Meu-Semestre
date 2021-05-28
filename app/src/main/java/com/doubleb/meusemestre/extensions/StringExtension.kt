@@ -12,3 +12,5 @@ fun generateRandomString() = run {
 fun String?.takeIfValid() = this.takeIf { it.isValid() }
 
 fun String?.isValid() = !this.isNullOrEmpty()
+
+fun CharSequence?.isValid() = !this.isNullOrEmpty()
