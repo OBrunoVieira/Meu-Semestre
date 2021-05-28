@@ -47,6 +47,9 @@
     </string-array>
 
     <!--  Activity/Exam Registration  -->
+    <string name="exam_registration_cycles">A qual ciclo de avaliação essa atividade pertence?</string>
+    <string name="exam_registration_cycles_hint">Ciclo</string>
+    <string name="exam_registration_cycles_value">%dº Ciclo</string>
     <string name="exam_registration_name">Dê um nome para a atividade</string>
     <string name="exam_registration_name_hint">Nome da atividade</string>
     <string name="exam_registration_value">Quanto esta atividade vale?</string>
@@ -74,12 +77,11 @@
     <string name="register_institution_private_tag">private</string>
 
     <!--  Fragment/Register Exams  -->
-    <string name="register_exams_title">Quantas avaliações você tem por semestre (em cada disciplina)?</string>
+    <string name="register_exams_title">Seu semestre é dividido em quantos ciclos de avaliação?</string>
+    <string name="register_exams_description">Exemplo: período de AV1, período de AV2...</string>
     <string name="register_exams_1">1</string>
     <string name="register_exams_2">2</string>
     <string name="register_exams_3">3</string>
-    <string name="register_exams_4">4</string>
-    <string name="register_exams_5">5</string>
     <string name="register_exams_other">Variável</string>
 
     <!--  Fragment/Register Average  -->
@@ -145,10 +147,18 @@
     <string name="empty_history_title">Nenhum histórico de semestres</string>
     <string name="empty_history_description">Você ainda não teve semestres anteriores</string>
 
+    <!--  VH/Empty Activities  -->
+    <string name="empty_exams_title">Nenhuma atividade cadastrada</string>
+    <string name="empty_exams_description">Cadastre suas atividades da disciplina e comece a acompanhar seu desempenho.</string>
+    <string name="empty_exams_action">Cadastrar atividades</string>
+
     <!--  VH/Empty Disciplines  -->
     <string name="empty_disciplines_title">Nenhuma disciplina cadastrada</string>
     <string name="empty_disciplines_description">Cadastre suas disciplinas e fique de olho no seu desempenho.</string>
     <string name="empty_disciplines_action">Cadastrar disciplinas</string>
+
+    <!--  VH/Exams By Cycles  -->
+    <string name="exams_by_cycles_title">%dº ciclo de avaliação</string>
 
     <!--  View/Circle Chart  -->
     <string name="circle_chart_title">Média</string>
