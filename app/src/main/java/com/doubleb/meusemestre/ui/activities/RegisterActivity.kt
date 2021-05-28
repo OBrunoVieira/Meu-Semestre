@@ -1,8 +1,6 @@
 package com.doubleb.meusemestre.ui.activities
 
 import android.animation.ValueAnimator
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.animation.OvershootInterpolator
@@ -12,6 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.doubleb.meusemestre.R
 import com.doubleb.meusemestre.extensions.disable
 import com.doubleb.meusemestre.extensions.enable
+import com.doubleb.meusemestre.extensions.openClearedActivity
 import com.doubleb.meusemestre.models.GraduationInfo
 import com.doubleb.meusemestre.models.User
 import com.doubleb.meusemestre.ui.adapters.viewpager.RegisterPageAdapter
@@ -24,13 +23,6 @@ import kotlinx.android.synthetic.main.activity_register.*
 import org.koin.android.ext.android.inject
 
 class RegisterActivity : BaseActivity(R.layout.activity_register), RegisterFragment.Listener {
-
-    companion object {
-        fun newInstance(activity: Activity) = activity.startActivity(
-            Intent(activity, RegisterActivity::class.java)
-                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        )
-    }
 
     //region immutable vars
     private val graduationInfo by lazy { GraduationInfo() }
@@ -84,7 +76,7 @@ class RegisterActivity : BaseActivity(R.layout.activity_register), RegisterFragm
             }
 
             DataState.SUCCESS -> {
-                HomeActivity.newClearedInstance(this)
+                openClearedActivity<HomeActivity>()
             }
 
             DataState.ERROR -> {
@@ -134,7 +126,7 @@ class RegisterActivity : BaseActivity(R.layout.activity_register), RegisterFragm
 
     override fun onExamsNumberSelected(value: Int?) {
         super.onExamsNumberSelected(value)
-        graduationInfo.exams_per_semester = value
+        graduationInfo.cycles = value
     }
 
     override fun onApprovalAverageSelected(value: Double?) {
