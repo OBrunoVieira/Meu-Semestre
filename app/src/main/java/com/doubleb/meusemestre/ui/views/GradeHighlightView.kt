@@ -10,7 +10,7 @@ import com.doubleb.meusemestre.extensions.visible
 import kotlinx.android.synthetic.main.view_grade_highlight.view.*
 
 class GradeHighlightView @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0,
 ) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
     private var highestHighlightGradeName = ""
@@ -24,20 +24,27 @@ class GradeHighlightView @JvmOverloads constructor(
         View.inflate(context, R.layout.view_grade_highlight, this)
     }
 
-    fun highestHighlight(name: String, grade: Float, variation: Float) = apply {
-        this.highestHighlightGradeName = name
-        this.highestHighlightGrade = grade
-        this.highestHighlightVariation = variation
+    fun highestHighlight(name: String?, grade: Float?, variation: Float?) = apply {
+        this.highestHighlightGradeName = name.orEmpty()
+        this.highestHighlightGrade = grade ?: 0f
+        this.highestHighlightVariation = variation ?: 0f
     }
 
-    fun lowestHighlight(name: String, grade: Float, variation: Float) = apply {
-        this.lowestHighlightGradeName = name
-        this.lowestHighlightGrade = grade
-        this.lowestHighlightVariation = variation
+    fun lowestHighlight(name: String?, grade: Float?, variation: Float?) = apply {
+        this.lowestHighlightGradeName = name.orEmpty()
+        this.lowestHighlightGrade = grade ?: 0f
+        this.lowestHighlightVariation = variation ?: 0f
     }
 
     fun build() {
-        if (highestHighlightVariation != 0f && lowestHighlightVariation != 0f) {
+        val hasValidVariations = highestHighlightVariation > 0 && lowestHighlightVariation < 0
+        val hasDifferentHighlights =
+            highestHighlightGradeName != lowestHighlightGradeName &&
+                    highestHighlightGrade != lowestHighlightGrade &&
+                    highestHighlightVariation != lowestHighlightVariation
+
+        if (hasValidVariations && hasDifferentHighlights) {
+
             grade_highlight_grade_vertical_positive.visible()
             grade_highlight_grade_vertical_negative.visible()
             grade_highlight_grade_horizontal.gone()

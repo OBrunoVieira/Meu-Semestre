@@ -9,7 +9,7 @@ import com.doubleb.meusemestre.R
 import kotlinx.android.synthetic.main.view_grade_highlight_vertical.view.*
 
 class GradeHighlightVerticalView @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0,
 ) : CardView(context, attrs, defStyleAttr) {
 
     init {
@@ -29,19 +29,19 @@ class GradeHighlightVerticalView @JvmOverloads constructor(
     fun variation(variation: Float) = apply {
         if (variation < 0) {
             setCardBackgroundColor(ContextCompat.getColor(context, R.color.light_purple))
+            grade_highlight_vertical_image_view.setImageDrawable(
+                ContextCompat.getDrawable(context, R.drawable.vector_lowest_discipline)
+            )
             grade_highlight_vertical_image_view_wave.setBackgroundDrawable(
-                ContextCompat.getDrawable(
-                    context,
-                    R.drawable.vector_wave_left
-                )
+                ContextCompat.getDrawable(context, R.drawable.vector_wave_left)
             )
         } else {
             setCardBackgroundColor(ContextCompat.getColor(context, R.color.light_blue))
+            grade_highlight_vertical_image_view.setImageDrawable(
+                ContextCompat.getDrawable(context, R.drawable.vector_highest_discipline)
+            )
             grade_highlight_vertical_image_view_wave.setBackgroundDrawable(
-                ContextCompat.getDrawable(
-                    context,
-                    R.drawable.vector_wave_right
-                )
+                ContextCompat.getDrawable(context, R.drawable.vector_wave_right)
             )
         }
 
