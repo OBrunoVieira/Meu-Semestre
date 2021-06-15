@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
 import com.doubleb.meusemestre.R
-import com.doubleb.meusemestre.extensions.disable
-import com.doubleb.meusemestre.extensions.disableCopyPaste
-import com.doubleb.meusemestre.extensions.enable
-import com.doubleb.meusemestre.extensions.hideKeyboard
+import com.doubleb.meusemestre.extensions.*
+import com.doubleb.meusemestre.models.KnowledgeArea
 import com.doubleb.meusemestre.ui.views.ActionButtonView
 import com.doubleb.meusemestre.viewmodel.DataSource
 import com.doubleb.meusemestre.viewmodel.DataState
@@ -22,25 +20,19 @@ class DisciplineRegistrationActivity : BaseActivity(R.layout.activity_discipline
     }
 
     //region immutable vars
-    val adapter by lazy {
-        ArrayAdapter(
-            this,
-            R.layout.dropdown_menu_item,
-            resources.getStringArray(R.array.discipline_registration_knowledge_areas)
-        )
-    }
-
     private val disciplinesViewModel: DisciplinesViewModel by inject()
     //endregion
 
     //region mutable vars
     private var currentSemester: String? = null
+    private var knowledgeAreas: List<KnowledgeArea>? = null
     //endregion
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setSupportActionBar(discipline_registration_toolbar)
         disciplinesViewModel.liveDataDisciplineCreation.observe(this, observeDisciplineCreation())
+        disciplinesViewModel.liveDataKnowledgeAreas.observe(this, observeKnowledgeAreas())
 
         currentSemester = intent.extras?.getString(CURRENT_SEMESTER_EXTRA)
 
@@ -50,7 +42,6 @@ class DisciplineRegistrationActivity : BaseActivity(R.layout.activity_discipline
 
         discipline_registration_auto_complete_text_view.showSoftInputOnFocus = false
         discipline_registration_auto_complete_text_view.disableCopyPaste()
-        discipline_registration_auto_complete_text_view.setAdapter(adapter)
         discipline_registration_auto_complete_text_view.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
                 discipline_registration_auto_complete_text_view.showDropDown()
@@ -59,12 +50,22 @@ class DisciplineRegistrationActivity : BaseActivity(R.layout.activity_discipline
         }
 
         discipline_registration_button.listener {
-            disciplinesViewModel.createDiscipline(
-                discipline_registration_edit_text_name.text.toString(),
-                discipline_registration_auto_complete_text_view.editableText.toString(),
-                currentSemester
-            )
+            val knowledgeName =
+                discipline_registration_auto_complete_text_view.editableText.toString()
+
+            knowledgeAreas?.find { it.name == knowledgeName}?.id?.let { knowledgeId ->
+                disciplinesViewModel.createDiscipline(
+                    discipline_registration_edit_text_name.text.toString(),
+                    knowledgeId,
+                    currentSemester
+                )
+            } ?: run{
+                //TODO TRATAR ERRO
+            }
+
         }
+
+        disciplinesViewModel.getKnowledgeAreas()
     }
 
     //region observers
@@ -85,6 +86,37 @@ class DisciplineRegistrationActivity : BaseActivity(R.layout.activity_discipline
                 discipline_registration_text_input_name.enable()
                 discipline_registration_text_input.enable()
                 discipline_registration_button.state(ActionButtonView.State.DEFAULT)
+            }
+        }
+    }
+
+    private fun observeKnowledgeAreas() = Observer<DataSource<List<KnowledgeArea>>> { dataSource ->
+        when (dataSource.dataState) {
+            DataState.LOADING -> {
+                discipline_registration_group.gone()
+                discipline_registration_progress_bar.visible()
+            }
+
+            DataState.SUCCESS -> {
+                discipline_registration_group.visible()
+                discipline_registration_progress_bar.gone()
+
+                dataSource.data
+                    .takeIf { !it.isNullOrEmpty() }
+                    ?.let { knowledgeAreas ->
+                        this.knowledgeAreas = knowledgeAreas
+                        val adapter = ArrayAdapter(
+                            this,
+                            R.layout.dropdown_menu_item,
+                            knowledgeAreas.mapNotNull { knowledgeArea -> knowledgeArea.name }
+                        )
+
+                        discipline_registration_auto_complete_text_view.setAdapter(adapter)
+                    }
+            }
+
+            DataState.ERROR -> {
+                //TODO TRATAR ERRO
             }
         }
     }
