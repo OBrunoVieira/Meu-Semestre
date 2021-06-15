@@ -4,6 +4,8 @@ import android.animation.LayoutTransition.CHANGING
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.StringRes
+import androidx.core.view.doOnPreDraw
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
@@ -50,27 +52,31 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
 
         home_bottom_navigation.setListener { _, type ->
             expand()
-            supportFragmentManager.popBackStack(
-                BACK_STACK_ROOT_TAG,
-                FragmentManager.POP_BACK_STACK_INCLUSIVE
-            )
 
-            when (type) {
-                BottomNavigation.Type.DASHBOARD -> {
-                    home_text_view_title.setText(R.string.home_dashboard)
-                    inflateStackFragment(DashboardFragment())
-                }
+            home_bottom_navigation.doOnPreDraw {
+                supportFragmentManager.popBackStack(
+                    BACK_STACK_ROOT_TAG,
+                    FragmentManager.POP_BACK_STACK_INCLUSIVE
+                )
 
-                BottomNavigation.Type.DISCIPLINES -> {
-                    home_text_view_title.setText(R.string.home_disciplines)
-                    inflateStackFragment(DisciplinesFragment())
-                }
+                when (type) {
+                    BottomNavigation.Type.DASHBOARD -> {
+                        home_text_view_title.setText(R.string.home_dashboard)
+                        inflateStackFragment(DashboardFragment())
+                    }
 
-                else -> {
-                    home_text_view_title.setText(R.string.home_tips)
-                    inflateStackFragment(TipsFragment())
+                    BottomNavigation.Type.DISCIPLINES -> {
+                        home_text_view_title.setText(R.string.home_disciplines)
+                        inflateStackFragment(DisciplinesFragment())
+                    }
+
+                    else -> {
+                        home_text_view_title.setText(R.string.home_tips)
+                        inflateStackFragment(TipsFragment())
+                    }
                 }
             }
+
         }
 
         home_bottom_navigation.selectItem(BottomNavigation.Type.DASHBOARD)
@@ -107,6 +113,15 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
     fun expand() = home_app_bar.setExpanded(true)
 
     fun fab() = home_fab
+
+    fun updateCR(averageList: List<Float>) {
+        home_text_view_cr.text = getString(R.string.dashboard_cr, averageList.average())
+        home_text_view_cr.visible()
+    }
+
+    fun disableCR() {
+        home_text_view_cr.gone()
+    }
 
     fun configureActionButton(
         @StringRes resId: Int,
@@ -150,7 +165,7 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
 
                 home_fragment_progress.hide()
                 home_fragment_container.visible()
-                home_text_view_cr.visible()
+                home_text_view_cr.isVisible = home_text_view_cr.text.isNotEmpty()
 
                 home_image_view_profile.loadRoundedImage(user?.picture)
             }
