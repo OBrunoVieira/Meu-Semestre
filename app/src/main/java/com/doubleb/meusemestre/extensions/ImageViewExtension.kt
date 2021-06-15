@@ -17,6 +17,12 @@ fun ImageView.loadRoundedImage(src : String?) = src.takeIfValid()?.let {
         .into(this)
 }
 
+fun ImageView.loadImage(src:String?) =  src.takeIfValid()?.let {
+    Glide.with(this)
+        .load(it)
+        .into(this)
+}
+
 fun ImageView.showIfValidDrawable(drawable: Drawable?) =
     drawable?.let {
         this.visible()
