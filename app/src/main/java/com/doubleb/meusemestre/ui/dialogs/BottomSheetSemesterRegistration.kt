@@ -52,6 +52,12 @@ class BottomSheetSemesterRegistration(val listener: SemesterRegistrationClickLis
         semester_registration_button.isEnabled(shouldEnableButton)
     }
 
+    override fun dismiss() {
+        if (dialog?.isShowing == true) {
+            super.dismiss()
+        }
+    }
+
     interface SemesterRegistrationClickListener {
         fun onCreateSemester(name: String)
     }
