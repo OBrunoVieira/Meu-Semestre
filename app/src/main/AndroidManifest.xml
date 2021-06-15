@@ -47,7 +47,8 @@
 
         <activity android:name=".ui.activities.RegisterActivity" />
 
-        <activity android:name=".ui.activities.ExamRegistrationActivity" />
+        <activity android:name=".ui.activities.ExamRegistrationActivity"
+            android:windowSoftInputMode="adjustResize"/>
 
         <activity android:name=".ui.activities.DisciplineRegistrationActivity" />
 
