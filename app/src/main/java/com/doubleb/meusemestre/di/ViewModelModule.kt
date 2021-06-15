@@ -11,6 +11,6 @@ val viewModelModule = module {
     viewModel { TipsViewModel(get()) }
     viewModel { UserViewModel(get(), get()) }
     viewModel { DashboardViewModel(get(), get(), get()) }
-    viewModel { ActiveSemesterViewModel(get(), get()) }
+    viewModel { ActiveSemesterViewModel(get(), get(), get()) }
     viewModel { ExamsViewModel(get(), get()) }
 }

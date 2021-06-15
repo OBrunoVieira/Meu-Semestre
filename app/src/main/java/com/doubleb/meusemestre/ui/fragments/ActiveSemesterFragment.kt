@@ -15,6 +15,7 @@ import com.doubleb.meusemestre.extensions.isValid
 import com.doubleb.meusemestre.extensions.launchActivity
 import com.doubleb.meusemestre.models.ActiveSemester
 import com.doubleb.meusemestre.models.Discipline
+import com.doubleb.meusemestre.models.Exam
 import com.doubleb.meusemestre.models.User
 import com.doubleb.meusemestre.ui.activities.DisciplineRegistrationActivity
 import com.doubleb.meusemestre.ui.activities.DisciplineRegistrationActivity.Companion.CURRENT_SEMESTER_EXTRA
@@ -70,6 +71,7 @@ class ActiveSemesterFragment : Fragment(R.layout.fragment_active_semester), Disc
 
     //region mutable vars
     private var user: User? = null
+    private var examsByDisciplines: Map<String, List<Exam>?>? = null
     private var clickedPosition: Int = 0
 
     private lateinit var disciplineRegistrationCallback: ActivityResultLauncher<Intent>
@@ -191,6 +193,7 @@ class ActiveSemesterFragment : Fragment(R.layout.fragment_active_semester), Disc
 
             DataState.SUCCESS -> {
                 this.user = it.data?.user
+                this.examsByDisciplines = it.data?.examsByDisciplines
                 buildActiveSemester(it.data?.disciplines)
             }
 
@@ -271,6 +274,7 @@ class ActiveSemesterFragment : Fragment(R.layout.fragment_active_semester), Disc
         concatAdapter.removeAdapter(loadingAdapter)
         concatAdapter.removeAdapter(emptyDisciplinesAdapter)
 
+        activeSemesterAdapter.examsByDisciplines = examsByDisciplines
         activeSemesterAdapter.submitList(list)
         concatAdapter.addAdapter(activeSemesterAdapter)
     }

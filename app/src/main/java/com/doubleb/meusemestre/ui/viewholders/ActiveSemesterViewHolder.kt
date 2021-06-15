@@ -7,6 +7,8 @@ import com.doubleb.meusemestre.extensions.loadImage
 import com.doubleb.meusemestre.extensions.swipeColorByPosition
 import com.doubleb.meusemestre.extensions.swipeWaveByPosition
 import com.doubleb.meusemestre.models.Discipline
+import com.doubleb.meusemestre.models.Exam
+import com.doubleb.meusemestre.models.extensions.hasPendingGrades
 import com.doubleb.meusemestre.ui.listeners.DisciplineListener
 import kotlinx.android.synthetic.main.vh_active_semester.view.*
 
@@ -23,9 +25,9 @@ class ActiveSemesterViewHolder(itemView: View, private val listener: DisciplineL
         }
     }
 
-    fun bind(item: Discipline) {
+    fun bind(item: Discipline, exams: List<Exam>?) {
         itemView.run {
-            active_semester_image_view_warning.isVisible = item.average == null
+            active_semester_image_view_warning.isVisible = exams?.hasPendingGrades() == true
 
             active_semester_average_indicator.title(item.name)
             active_semester_average_indicator.average(item.average)

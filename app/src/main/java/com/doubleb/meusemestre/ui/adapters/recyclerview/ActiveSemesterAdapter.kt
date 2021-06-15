@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.doubleb.meusemestre.R
 import com.doubleb.meusemestre.models.Discipline
+import com.doubleb.meusemestre.models.Exam
 import com.doubleb.meusemestre.ui.adapters.recyclerview.diff.DisciplineDiffUtils
 import com.doubleb.meusemestre.ui.listeners.DisciplineListener
 import com.doubleb.meusemestre.ui.viewholders.ActiveSemesterViewHolder
 
-class ActiveSemesterAdapter(private val listener: DisciplineListener) :
+class ActiveSemesterAdapter(private val listener: DisciplineListener, var examsByDisciplines: Map<String, List<Exam>?>? = null) :
     ListAdapter<Discipline, ActiveSemesterViewHolder>(DisciplineDiffUtils()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ActiveSemesterViewHolder(
@@ -18,6 +19,7 @@ class ActiveSemesterAdapter(private val listener: DisciplineListener) :
         )
 
     override fun onBindViewHolder(holder: ActiveSemesterViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val item = getItem(position)
+        holder.bind(item, examsByDisciplines?.get(item.id))
     }
 }
