@@ -6,5 +6,5 @@ import com.google.firebase.database.IgnoreExtraProperties
 data class Tip(
     val title: String? = null,
     val description: String? = null,
-    val storage: String? = null,
+    val storage: String? = null
 )
