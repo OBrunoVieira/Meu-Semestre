@@ -8,7 +8,8 @@ import org.koin.dsl.module
 val repositoryModule = module {
     single { UserRepository(get(), get()) }
     single { SemesterRepository(get(), get()) }
-    single { DisciplinesRepository(get(), get()) }
+    single { DisciplinesRepository(get(), get(), get()) }
     single { ExamRepository(get(), get()) }
     single { TipsRepository(get()) }
+    single { KnowledgeAreasRepository(get()) }
 }
