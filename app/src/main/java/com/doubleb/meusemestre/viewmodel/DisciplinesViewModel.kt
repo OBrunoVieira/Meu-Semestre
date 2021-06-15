@@ -5,12 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.doubleb.meusemestre.extensions.takeIfValid
 import com.doubleb.meusemestre.models.Discipline
+import com.doubleb.meusemestre.models.KnowledgeArea
 import com.doubleb.meusemestre.repository.DisciplinesRepository
 import com.doubleb.meusemestre.repository.ExamRepository
+import com.doubleb.meusemestre.repository.KnowledgeAreasRepository
 import com.doubleb.meusemestre.repository.SemesterRepository
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
@@ -19,16 +18,18 @@ class DisciplinesViewModel(
     private val disciplinesRepository: DisciplinesRepository,
     private val examRepository: ExamRepository,
     private val semesterRepository: SemesterRepository,
+    private val knowledgeAreasRepository: KnowledgeAreasRepository,
 ) : ViewModel() {
 
+    val liveDataKnowledgeAreas = MutableLiveData<DataSource<List<KnowledgeArea>>>()
     val liveDataDisciplineRemoval = MutableLiveData<DataSource<List<Discipline>>>()
     val liveDataDisciplineCreation = MutableLiveData<DataSource<Unit>>()
     val liveDataDiscipline = MutableLiveData<DataSource<List<Discipline>>>()
 
-    fun createDiscipline(name: String, knowledgeArea: String, semesterId: String?) {
+    fun createDiscipline(name: String, knowledgeId: String, semesterId: String?) {
         liveDataDisciplineCreation.value = DataSource(DataState.LOADING)
 
-        disciplinesRepository.createDiscipline(name, knowledgeArea) { disciplineId ->
+        disciplinesRepository.createDiscipline(name, knowledgeId) { disciplineId ->
 
             semesterId.takeIfValid()?.let { semesterId ->
                 semesterRepository.updateCurrentSemester(disciplineId = disciplineId, semesterId)
@@ -46,6 +47,21 @@ class DisciplinesViewModel(
                 liveDataDisciplineCreation.value = DataSource(DataState.ERROR)
             }
 
+        }
+    }
+
+    fun getKnowledgeAreas() {
+        liveDataKnowledgeAreas.postValue(DataSource(DataState.LOADING))
+
+        viewModelScope.launch {
+            val knowledgeAreas = async { knowledgeAreasRepository.getKnowledgeAreas() }.await()
+
+            if (knowledgeAreas != null) {
+                liveDataKnowledgeAreas.postValue(DataSource(DataState.SUCCESS, knowledgeAreas))
+                return@launch
+            }
+
+            liveDataKnowledgeAreas.postValue(DataSource(DataState.ERROR))
         }
     }
 
@@ -67,23 +83,16 @@ class DisciplinesViewModel(
         }
     }
 
-    fun getDisciplines() =
-        disciplinesRepository.getDisciplines()
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val disciplineList =
-                        snapshot.children.mapNotNull { it.getValue(Discipline::class.java) }
+    fun getDisciplines() {
+        viewModelScope.launch {
+            val disciplines = disciplinesRepository.getChainedDisciplines(this)
 
-                    if (disciplineList.isNotEmpty()) {
-                        liveDataDiscipline.value = DataSource(DataState.SUCCESS, disciplineList)
-                    } else {
-                        liveDataDiscipline.value = DataSource(DataState.ERROR)
-                    }
-                }
+            if (disciplines != null) {
+                liveDataDiscipline.postValue(DataSource(DataState.SUCCESS, disciplines))
+                return@launch
+            }
 
-                override fun onCancelled(error: DatabaseError) {
-                    liveDataDiscipline.value = DataSource(DataState.ERROR)
-                }
-
-            })
+            liveDataDiscipline.postValue(DataSource(DataState.ERROR))
+        }
+    }
 }

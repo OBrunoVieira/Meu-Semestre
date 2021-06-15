@@ -37,6 +37,8 @@ class LoginViewModel(private val auth: FirebaseAuth) :
     fun validateCurrentSession() {
         if (isAlreadyLogged()) {
             liveData.postValue(DataSource(DataState.SUCCESS))
+        } else {
+            liveData.postValue(DataSource(DataState.ERROR))
         }
     }
 
