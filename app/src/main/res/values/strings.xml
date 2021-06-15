@@ -34,17 +34,6 @@
     <string name="discipline_registration_exams_quantity">Quantas avaliações você vai ter nesta disciplina?</string>
     <string name="discipline_registration_exams_quantity_hint">Quantidade de avaliações</string>
     <string name="discipline_registration_button">Concluir</string>
-    <string-array name="discipline_registration_knowledge_areas">
-        <item>Ciências Exatas e da Terra</item>
-        <item>Ciências Biológicas</item>
-        <item>Engenharias</item>
-        <item>Ciências da Saúde</item>
-        <item>Ciências Agrárias</item>
-        <item>Ciências Sociais</item>
-        <item>Ciências Humanas</item>
-        <item>Linguística, Letras</item>
-        <item>Artes</item>
-    </string-array>
 
     <!--  Activity/Exam Registration  -->
     <string name="exam_registration_cycles">A qual ciclo de avaliação essa atividade pertence?</string>
@@ -93,7 +82,7 @@
     <string name="register_average_9">9</string>
 
     <!--  Fragment/Dashboard  -->
-    <string name="dashboard_cr">CR %s</string>
+    <string name="dashboard_cr">CR %.1f</string>
 
     <!--  Fragment/Welcome Info  -->
     <string name="welcome_info_first_title">Olá!</string>
@@ -124,6 +113,7 @@
 
     <!--  VH/Restricted Discipline  -->
     <string name="restricted_discipline_title">Disciplinas que precisam de atenção</string>
+    <string name="restricted_discipline_grades_registered">%d notas registradas</string>
 
     <!--  VH/Register Grades  -->
     <string name="register_grades_title">Cadastre suas notas!</string>
@@ -157,6 +147,13 @@
     <string name="empty_disciplines_description">Cadastre suas disciplinas e fique de olho no seu desempenho.</string>
     <string name="empty_disciplines_action">Cadastrar disciplinas</string>
 
+    <!--  VH/Grade Comparison Chart  -->
+    <string name="grade_comparison_chart_title">Comparativo das avaliações</string>
+    <string name="grade_comparison_chart_first_cycle">Avaliação 1</string>
+    <string name="grade_comparison_chart_second_cycle">Avaliação 2</string>
+    <string name="grade_comparison_chart_third_cycle">Avaliação 3</string>
+
+
     <!--  VH/Exams By Cycles  -->
     <string name="exams_by_cycles_title">%dº ciclo de avaliação</string>
 
@@ -184,4 +181,14 @@
     <string name="semester_registration_title">Dê um nome para o semestre</string>
     <string name="semester_registration_hint">Nome do semestre</string>
     <string name="semester_registration_action">Criar</string>
+
+    <!--  Dialog/Confirm Removal  -->
+    <string name="confirm_removal_action">Excluir</string>
+    <string name="confirm_removal_action_cancel">Cancelar</string>
+
+    <!--  Dialog/Confirm Removal Discipline -->
+    <string name="confirm_removal_discipline_text">Deseja excluir esta disciplina?</string>
+
+    <!--  Dialog/Confirm Removal Exam -->
+    <string name="confirm_removal_exam_text">Deseja excluir esta atividade?</string>
 </resources>

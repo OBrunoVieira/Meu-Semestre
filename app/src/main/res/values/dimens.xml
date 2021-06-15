@@ -6,6 +6,7 @@
     <dimen name="spacing_four">4dp</dimen>
     <dimen name="spacing_eight">8dp</dimen>
     <dimen name="spacing_twelve">12dp</dimen>
+    <dimen name="spacing_fourteen">14dp</dimen>
     <dimen name="spacing_sixteen">16dp</dimen>
     <dimen name="spacing_eighteen">18dp</dimen>
     <dimen name="spacing_twenty">20dp</dimen>
@@ -43,6 +44,14 @@
     <!--  Custom Dimension/Discipline  -->
     <dimen name="max_discipline_width">152dp</dimen>
     <dimen name="min_discipline_title_height">44dp</dimen>
+    <dimen name="min_discipline_knowledge_area_size">96dp</dimen>
+
+    <!--  Custom Dimension/Discipline Details  -->
+    <dimen name="min_discipline_details_knowledge_area_height">118dp</dimen>
+
+    <!--  Custom Dimension/Active Semester  -->
+    <dimen name="min_active_semester_knowledge_area_width">136dp</dimen>
+    <dimen name="min_active_semester_knowledge_area_height">96dp</dimen>
 
     <!--  Custom Dimension/Best Discipline  -->
     <dimen name="best_discipline_chart_size">96dp</dimen>
@@ -52,6 +61,9 @@
 
     <!-- Custom Dimension/Grade Variation-->
     <dimen name="min_grade_variation_title_height">44dp</dimen>
+
+    <!-- Custom Dimension/Grade Highlight-->
+    <dimen name="min_grade_highlight_size">113dp</dimen>
 
     <!--  Custom Dimension/Login  -->
     <dimen name="min_login_button_width">144dp</dimen>
@@ -63,5 +75,9 @@
     <!--  Custom Dimension/Bottom Sheet  -->
     <dimen name="min_bottom_sheet_indicator_width">56dp</dimen>
     <dimen name="min_bottom_sheet_indicator_height">4dp</dimen>
+
+    <!--  Custom Dimensions/Grade Comparison Chart  -->
+    <dimen name="min_grade_comparison_chart_size">128dp</dimen>
+    <dimen name="min_grade_comparison_chart_text_width">55dp</dimen>
 
 </resources>

@@ -3,6 +3,8 @@
     <color name="colorPrimary">@color/light_purple</color>
     <color name="colorPrimaryDark">@color/dark_purple</color>
     <color name="colorAccent">@color/dark_pink</color>
+
+    <color name="dialog_background">#59191919</color>
     
     <color name="zircon">#FCFDFF</color>
     <color name="zircon_forty">#66FCFDFF</color>

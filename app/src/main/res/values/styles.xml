@@ -8,6 +8,7 @@
         <item name="android:windowBackground">@color/zircon</item>
         <item name="android:textColorSecondary">@color/zircon</item>
         <item name="bottomSheetDialogTheme">@style/BottomSheet.Theme</item>
+        <item name="dialogTheme">@style/BottomSheet.Theme</item>
     </style>
 
     <style name="LightPurpleTheme" parent="AppTheme">
@@ -153,7 +154,6 @@
         <item name="android:includeFontPadding">false</item>
         <item name="android:gravity">center</item>
         <item name="android:padding">@dimen/spacing_four</item>
-        <item name="android:text">@string/dashboard_cr</item>
     </style>
 
     <style name="Home.Fab" parent="Base.TextView.Inter.SemiBold">
@@ -388,6 +388,7 @@
         <item name="android:fontFamily">@font/inter_regular</item>
         <item name="android:textColor">@color/blue_zodiac</item>
         <item name="android:layout_marginTop">@dimen/spacing_sixteen</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_sixteen</item>
         <item name="android:layout_marginStart">@dimen/spacing_thirty_two</item>
         <item name="android:layout_marginEnd">@dimen/spacing_thirty_two</item>
         <item name="android:hint">@string/exam_registration_grade_hint</item>
@@ -461,6 +462,28 @@
     <style name="WelcomeInfo.TextView.Description" parent="Base.TextView.Inter.Light">
         <item name="android:gravity">center</item>
         <item name="android:layout_marginTop">@dimen/spacing_eight</item>
+    </style>
+
+    <!--  VH/Card Grade Comparison Chart  -->
+    <style name="CardGradeComparisonChart.TextView.Title" parent="Base.TextView.Mulish.SemiBold">
+        <item name="android:textColor">@color/blue_zodiac</item>
+        <item name="android:textSize">@dimen/text_size_eighteen</item>
+        <item name="android:text">@string/grade_comparison_chart_title</item>
+        <item name="android:layout_marginStart">@dimen/spacing_eight</item>
+    </style>
+
+    <!--  VH/ Grade Comparison Chart  -->
+    <style name="GradeComparisonChart.TextView.Title" parent="Base.TextView.Inter.Light">
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:textSize">@dimen/text_size_eight</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="GradeComparisonChart.TextView.Legend" parent="Base.TextView.Inter.Light">
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:textSize">@dimen/spacing_twelve</item>
+        <item name="drawableStartCompat">@drawable/shape_legend</item>
+        <item name="android:drawablePadding">@dimen/spacing_four</item>
     </style>
 
     <!--  VH/Discipline  -->
@@ -649,7 +672,7 @@
     <style name="GradeVariation.TextView.Grade" parent="Base.TextView.Inter.SemiBold">
         <item name="android:textColor">@color/zircon</item>
         <item name="android:textSize">@dimen/text_size_forty</item>
-        <item name="android:layout_marginTop">@dimen/spacing_twenty_four</item>
+        <item name="android:layout_marginTop">@dimen/spacing_four</item>
     </style>
 
     <style name="GradeVariation.TextView.Variation" parent="Base.TextView.Inter.SemiBold">
@@ -734,6 +757,26 @@
         <item name="android:textColor">@color/blue_zodiac</item>
         <item name="android:layout_marginTop">@dimen/spacing_twenty_four</item>
         <item name="android:hint">@string/semester_registration_hint</item>
+    </style>
+
+    <!--  Dialog/Confirm Removal  -->
+    <style name="ConfirmRemoval.TextView.Title" parent="Base.TextView.Inter.SemiBold">
+        <item name="android:textSize">@dimen/text_size_eighteen</item>
+        <item name="android:textColor">@color/blue_zodiac</item>
+    </style>
+
+    <style name="ConfirmRemoval.TextView.Description" parent="Base.TextView.Inter.Regular">
+        <item name="android:textSize">@dimen/text_size_fourteen</item>
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:layout_marginTop">@dimen/spacing_eight</item>
+    </style>
+
+    <style name="ConfirmRemoval.Button.Confirm" parent="Button.Primary.Default">
+        <item name="android:text">@string/confirm_removal_action</item>
+    </style>
+
+    <style name="ConfirmRemoval.Button.Cancel" parent="Button.Secondary.Default">
+        <item name="android:text">@string/confirm_removal_action_cancel</item>
     </style>
 
 </resources>
