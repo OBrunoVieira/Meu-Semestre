@@ -4,17 +4,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.doubleb.meusemestre.models.Dashboard
-import com.doubleb.meusemestre.models.Discipline
-import com.doubleb.meusemestre.models.User
+import com.doubleb.meusemestre.models.extensions.groupByCycle
+import com.doubleb.meusemestre.models.extensions.transformToVariationList
 import com.doubleb.meusemestre.repository.DisciplinesRepository
+import com.doubleb.meusemestre.repository.ExamRepository
 import com.doubleb.meusemestre.repository.UserRepository
 import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 
 class DashboardViewModel(
     private val userRepository: UserRepository,
-    private val disciplinesRepository: DisciplinesRepository
+    private val examRepository: ExamRepository,
+    private val disciplinesRepository: DisciplinesRepository,
 ) : ViewModel() {
 
     val liveData = MutableLiveData<DataSource<Dashboard>>()
@@ -23,21 +24,32 @@ class DashboardViewModel(
         liveData.postValue(DataSource(DataState.LOADING))
 
         viewModelScope.launch {
-            val userData = async { userRepository.getSuspendedUser() }
-            val disciplinesData = async { disciplinesRepository.getSuspendedDisciplines() }
+            val disciplines = disciplinesRepository.getChainedDisciplines(this)
+            val user = async { userRepository.getSuspendedUser() }.await()
 
-            val result = awaitAll(userData, disciplinesData)
+            val examsByDisciplines =
+                disciplines
+                    ?.mapNotNull { discipline ->
+                        discipline.id?.let { disciplineId ->
+                            val exams = async { examRepository.getSuspendedExamsById(disciplineId) }
+                            discipline.id to exams.await()
+                        }
+                    }?.toMap()
 
-            val user = result[0] as? User?
-            val discipline = result[1] as? ArrayList<Discipline>?
+            val gradeVariationByDisciplines = disciplines?.mapNotNull { discipline ->
+                discipline.id?.let { disciplineId ->
+                    val exams = examsByDisciplines?.getValue(disciplineId)
+                    disciplineId to exams.groupByCycle()?.transformToVariationList()
+                }
+            }?.toMap()
 
-            if (user == null && discipline == null || user == null) {
+            if (user == null && disciplines == null || user == null) {
                 liveData.postValue(DataSource(DataState.ERROR))
                 return@launch
             }
 
-            liveData.postValue(DataSource(DataState.SUCCESS, Dashboard(user, discipline)))
+            liveData.postValue(DataSource(DataState.SUCCESS,
+                Dashboard(user, disciplines, examsByDisciplines, gradeVariationByDisciplines)))
         }
     }
-
 }

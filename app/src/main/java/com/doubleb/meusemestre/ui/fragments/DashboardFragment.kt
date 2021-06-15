@@ -15,6 +15,10 @@ import com.doubleb.meusemestre.extensions.isValid
 import com.doubleb.meusemestre.extensions.launchActivity
 import com.doubleb.meusemestre.models.Dashboard
 import com.doubleb.meusemestre.models.Discipline
+import com.doubleb.meusemestre.models.Exam
+import com.doubleb.meusemestre.models.extensions.groupByCycle
+import com.doubleb.meusemestre.models.extensions.hasPendingGrades
+import com.doubleb.meusemestre.models.extensions.transformToGradeList
 import com.doubleb.meusemestre.ui.activities.DisciplineRegistrationActivity
 import com.doubleb.meusemestre.ui.activities.DisciplineRegistrationActivity.Companion.CURRENT_SEMESTER_EXTRA
 import com.doubleb.meusemestre.ui.activities.HomeActivity
@@ -35,6 +39,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
 
     //region adapters
     private val disciplineListAdapter by lazy { DisciplineListAdapter() }
+    private val gradeComparisonChartAdapter by lazy { CardGradeComparisonChartAdapter() }
     private val bestDisciplineAdapter by lazy { BestDisciplineAdapter() }
     private val restrictedDisciplineListAdapter by lazy { RestrictedDisciplineListAdapter() }
     private val registerGradesAdapter by lazy { RegisterGradesAdapter() }
@@ -44,6 +49,19 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     private val emptySemesterAdapter by lazy { EmptySemesterAdapter(getEmptySemesterListener()) }
     private val emptyDisciplinesAdapter by lazy {
         EmptyDisciplinesAdapter(getEmptyDisciplinesListener())
+    }
+
+    private val adapters by lazy {
+        arrayOf(disciplineListAdapter,
+            gradeComparisonChartAdapter,
+            bestDisciplineAdapter,
+            restrictedDisciplineListAdapter,
+            registerGradesAdapter,
+            finishSemesterAdapter,
+            gradeHighlightAdapter,
+            loadingAdapter,
+            emptySemesterAdapter,
+            emptyDisciplinesAdapter)
     }
 
     private val concatAdapter by lazy { ConcatAdapter(loadingAdapter) }
@@ -64,6 +82,8 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
 
     //region mutable vars
     private var disciplines: List<Discipline>? = null
+    private var gradeVariationByDisciplines: Map<String, Float?>? = null
+    private var examsByDisciplines: Map<String, List<Exam>?>? = null
 
     private lateinit var disciplineRegistrationCallback: ActivityResultLauncher<Intent>
     //endregion
@@ -77,7 +97,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         }
 
         setFragmentResultListener(DisciplineDetailsFragment.REQUEST_SUCCESS) { _, _ ->
-            disciplinesViewModel.getDisciplines()
+            dashboardViewModel.getDashboard()
         }
 
         semesterViewModel.livedata
@@ -103,9 +123,8 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     override fun onDisciplineClick(position: Int) {
         (activity as? HomeActivity)?.inflateStackFragment(
             DisciplineDetailsFragment.instance(
-                disciplineListAdapter.list?.get(position)?.id,
-                disciplineListAdapter.list?.get(position)?.name,
-                disciplineListAdapter.list?.get(position)?.grade
+                disciplineListAdapter.list?.get(position),
+                position
             )
         )
     }
@@ -160,8 +179,10 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
 
             DataState.SUCCESS -> {
                 this.disciplines = it.data?.disciplines
+                this.gradeVariationByDisciplines = it.data?.gradeVariationByDisciplines
+                this.examsByDisciplines = it.data?.examsByDisciplines
                 homeActivity?.user = it.data?.user
-                buildDashboard()
+                buildDashboard(disciplines)
             }
 
             DataState.ERROR -> {
@@ -176,7 +197,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
             }
 
             DataState.SUCCESS -> {
-                addDisciplines(it.data)
+                buildDashboard(it.data)
             }
 
             DataState.ERROR -> {
@@ -185,10 +206,17 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     }
     //endregion
 
-    private fun buildDashboard() {
+    private fun buildDashboard(disciplines: List<Discipline>?) {
         when {
             !disciplines.isNullOrEmpty() -> {
+                removeAdapters()
+
                 addDisciplines(disciplines)
+                addChart()
+                addBestDiscipline(disciplines)
+                addRestrictedDisciplines(disciplines)
+                addGradeHighlights(disciplines)
+                addRegisterGrades()
             }
 
             homeActivity?.user?.current_semester.isValid() -> {
@@ -201,40 +229,145 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
         }
     }
 
-    private fun buildFullLoadingState() {
-        concatAdapter.removeAdapter(emptyDisciplinesAdapter)
-        concatAdapter.removeAdapter(emptySemesterAdapter)
-        concatAdapter.removeAdapter(registerGradesAdapter)
-        concatAdapter.removeAdapter(disciplineListAdapter)
+    private fun addChart() {
+        val examsByDisciplineName = disciplines
+            ?.mapNotNull {
+                val disciplineId = it.id
+                val disciplineName = it.name
+                val exams = examsByDisciplines
+                    ?.get(disciplineId)
+                    ?.filter { exam -> exam.grade_result != null }
 
+                if (disciplineId != null && !disciplineName.isNullOrEmpty() && !exams.isNullOrEmpty()) {
+                    disciplineName to exams
+                } else {
+                    null
+                }
+            }
+            ?.toMap()
+            ?.takeIf {
+                val hasMoreThanOneGradePerCycle =
+                    it.filter { entries ->
+                        val gradeList = entries.value.groupByCycle()?.transformToGradeList()
+                        gradeList != null && gradeList.size > 1
+                    }.isNotEmpty()
+
+                val hasMoreThanOneExamByDiscipline = it.size > 1
+
+                hasMoreThanOneExamByDiscipline || hasMoreThanOneGradePerCycle
+            }
+
+        examsByDisciplineName?.let {
+            gradeComparisonChartAdapter.examsByDisciplines = it
+            concatAdapter.addAdapter(gradeComparisonChartAdapter)
+        } ?: run {
+            concatAdapter.removeAdapter(gradeComparisonChartAdapter)
+        }
+    }
+
+    private fun addBestDiscipline(list: List<Discipline>) {
+        val discipline = list
+            .takeIf { it.size > 1 }
+            ?.filter { it.average != null }
+            ?.maxByOrNull { it.average ?: 0f }
+
+        if (discipline != null) {
+            bestDisciplineAdapter.discipline = discipline
+            bestDisciplineAdapter.notifyDataSetChanged()
+            concatAdapter.addAdapter(bestDisciplineAdapter)
+            return
+        }
+
+        concatAdapter.removeAdapter(bestDisciplineAdapter)
+    }
+
+    private fun addRestrictedDisciplines(list: List<Discipline>) {
+        val restrictedDisciplines = run {
+            homeActivity?.user?.graduation_info?.approval_average?.let { approvalAverage ->
+                list
+                    .takeIf { it.size > 1 }
+                    ?.filter {
+                        val disciplineAverage = it.average
+                        disciplineAverage != null && disciplineAverage < approvalAverage
+                    }
+                    ?.take(3)
+            }
+        }
+
+        if (restrictedDisciplines?.isNotEmpty() == true) {
+            restrictedDisciplineListAdapter.list = restrictedDisciplines
+            restrictedDisciplineListAdapter.examsByDisciplines = examsByDisciplines
+            restrictedDisciplineListAdapter.notifyDataSetChanged()
+            concatAdapter.addAdapter(restrictedDisciplineListAdapter)
+            return
+        }
+
+        concatAdapter.removeAdapter(restrictedDisciplineListAdapter)
+    }
+
+    private fun addGradeHighlights(list: List<Discipline>) {
+        val bestDisciplineByVariation = list
+            .filter {
+                val gradeVariation = gradeVariationByDisciplines?.get(it.id)
+                gradeVariation != null && gradeVariation > 0
+            }
+            .maxByOrNull { gradeVariationByDisciplines?.get(it.id) ?: 0f }
+
+        val worstDisciplineByVariation = list
+            .filter {
+                val gradeVariation = gradeVariationByDisciplines?.get(it.id)
+                gradeVariation != null && gradeVariation < 0
+            }
+            .minByOrNull { gradeVariationByDisciplines?.get(it.id) ?: 0f }
+
+        if (bestDisciplineByVariation != null || worstDisciplineByVariation != null) {
+            gradeHighlightAdapter.bestDiscipline = bestDisciplineByVariation
+            gradeHighlightAdapter.worstDiscipline = worstDisciplineByVariation
+            gradeHighlightAdapter.gradeVariationByDisciplines = gradeVariationByDisciplines
+            gradeHighlightAdapter.notifyDataSetChanged()
+            concatAdapter.addAdapter(gradeHighlightAdapter)
+            return
+        }
+
+        concatAdapter.removeAdapter(gradeHighlightAdapter)
+    }
+
+    private fun addRegisterGrades() {
+        val hasAnyUnregisteredGrade = examsByDisciplines?.hasPendingGrades() ?: true
+
+        if (hasAnyUnregisteredGrade) {
+            concatAdapter.addAdapter(registerGradesAdapter)
+            return
+        }
+
+        concatAdapter.removeAdapter(registerGradesAdapter)
+    }
+
+    private fun buildFullLoadingState() {
+        removeAdapters()
         concatAdapter.addAdapter(loadingAdapter)
     }
 
     private fun buildEmptyDisciplinesState() {
-        concatAdapter.removeAdapter(loadingAdapter)
-        concatAdapter.removeAdapter(emptySemesterAdapter)
-        concatAdapter.removeAdapter(registerGradesAdapter)
-        concatAdapter.removeAdapter(disciplineListAdapter)
-
+        removeAdapters()
+        homeActivity?.disableCR()
         concatAdapter.addAdapter(emptyDisciplinesAdapter)
     }
 
     private fun buildEmptySemesterState() {
-        concatAdapter.removeAdapter(loadingAdapter)
-        concatAdapter.removeAdapter(emptyDisciplinesAdapter)
-        concatAdapter.removeAdapter(registerGradesAdapter)
-        concatAdapter.removeAdapter(disciplineListAdapter)
-
+        removeAdapters()
+        homeActivity?.disableCR()
         concatAdapter.addAdapter(emptySemesterAdapter)
     }
 
-    private fun addDisciplines(list: List<Discipline>?) {
-        concatAdapter.removeAdapter(loadingAdapter)
-        concatAdapter.removeAdapter(emptyDisciplinesAdapter)
-        concatAdapter.removeAdapter(emptySemesterAdapter)
-
+    private fun addDisciplines(list: List<Discipline>) {
         disciplineListAdapter.list = list
+        disciplineListAdapter.examsByDisciplines = examsByDisciplines
+        disciplineListAdapter.notifyDataSetChanged()
         concatAdapter.addAdapter(disciplineListAdapter)
-        concatAdapter.addAdapter(registerGradesAdapter)
+
+        homeActivity?.updateCR(list.map { it.average ?: 0f })
     }
+
+    private fun removeAdapters() = adapters.forEach { concatAdapter.removeAdapter(it) }
 }
