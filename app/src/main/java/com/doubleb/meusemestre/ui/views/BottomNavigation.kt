@@ -4,7 +4,6 @@ import android.animation.LayoutTransition
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import android.view.View.OnClickListener
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
 import androidx.core.view.updatePadding
@@ -12,7 +11,7 @@ import com.doubleb.meusemestre.R
 import kotlinx.android.synthetic.main.view_bottom_navigation.view.*
 
 class BottomNavigation @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0,
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     private var listener: Listener? = null
@@ -29,19 +28,25 @@ class BottomNavigation @JvmOverloads constructor(
             .icon(R.drawable.vector_dashboard, R.color.dark_purple)
             .backgroundColorRes(R.color.light_purple)
             .title(R.string.bottom_navigation_dashboard)
-            .setOnClickListener(buttonClickListener(Type.DASHBOARD))
+            .setOnClickListener {
+                selectItem(Type.DASHBOARD)
+            }
 
         bottom_navigation_button_disciplines
             .icon(R.drawable.vector_disciplines, R.color.dark_blue)
             .backgroundColorRes(R.color.light_blue)
             .title(R.string.bottom_navigation_disciplines)
-            .setOnClickListener(buttonClickListener(Type.DISCIPLINES))
+            .setOnClickListener {
+                selectItem(Type.DISCIPLINES)
+            }
 
         bottom_navigation_button_tips
             .icon(R.drawable.vector_tips, R.color.dark_yellow)
             .backgroundColorRes(R.color.light_yellow)
             .title(R.string.bottom_navigation_tips)
-            .setOnClickListener(buttonClickListener(Type.TIPS))
+            .setOnClickListener {
+                selectItem(Type.TIPS)
+            }
     }
 
     fun selectItem(type: Type) = apply {
@@ -57,12 +62,6 @@ class BottomNavigation @JvmOverloads constructor(
 
     fun setListener(listener: Listener) {
         this.listener = listener
-    }
-
-    private fun buttonClickListener(type: Type) = OnClickListener {
-        val button = it as ButtonSelectionView
-        openButton(button)
-        listener?.onNavigationItemSelected(button, type)
     }
 
     private fun openButton(button: ButtonSelectionView) {
