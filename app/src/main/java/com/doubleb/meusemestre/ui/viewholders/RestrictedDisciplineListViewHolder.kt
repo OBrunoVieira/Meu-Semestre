@@ -3,6 +3,7 @@ package com.doubleb.meusemestre.ui.viewholders
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.doubleb.meusemestre.models.Discipline
+import com.doubleb.meusemestre.models.Exam
 import com.doubleb.meusemestre.ui.adapters.recyclerview.RestrictedDisciplineAdapter
 import kotlinx.android.synthetic.main.vh_restricted_discipline_list.view.*
 
@@ -14,7 +15,8 @@ class RestrictedDisciplineListViewHolder(itemView: View) : RecyclerView.ViewHold
         itemView.restricted_discipline_list_recycler_view.adapter = restrictedDisciplineAdapter
     }
 
-    fun bind(list: List<Discipline>) {
+    fun bind(list: List<Discipline>, examsByDisciplines: Map<String, List<Exam>?>?) {
+        restrictedDisciplineAdapter.examsByDisciplines = examsByDisciplines
         restrictedDisciplineAdapter.submitList(list)
     }
 

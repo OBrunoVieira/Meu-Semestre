@@ -11,9 +11,8 @@ class BestDisciplineViewHolder(itemView: View) : RecyclerView.ViewHolder(itemVie
         itemView.run {
             best_discipline_text_view_name.text = discipline.name
             best_discipline_circle_chart
-                .gradeResult(discipline.grade)
+                .gradeResult(discipline.average)
                 .build()
         }
     }
-
 }
