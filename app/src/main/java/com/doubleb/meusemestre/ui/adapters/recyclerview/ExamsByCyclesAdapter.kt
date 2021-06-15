@@ -5,16 +5,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.doubleb.meusemestre.R
 import com.doubleb.meusemestre.models.Exam
+import com.doubleb.meusemestre.ui.listeners.ExamListener
 import com.doubleb.meusemestre.ui.viewholders.ExamsByCyclesViewHolder
 
-class ExamsByCyclesAdapter(var list: List<Pair<Int?, List<Exam>>>? = null) :
-    RecyclerView.Adapter<ExamsByCyclesViewHolder>() {
+class ExamsByCyclesAdapter(
+    var list: List<Pair<Int?, List<Exam>>>? = null,
+    val listener: ExamListener? = null,
+) : RecyclerView.Adapter<ExamsByCyclesViewHolder>() {
 
     private val pool = RecyclerView.RecycledViewPool()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ExamsByCyclesViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.vh_exams_by_cycles, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.vh_exams_by_cycles, parent, false),
+            listener
         )
 
     override fun onBindViewHolder(holder: ExamsByCyclesViewHolder, position: Int) {

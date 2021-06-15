@@ -5,10 +5,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.doubleb.meusemestre.R
 import com.doubleb.meusemestre.models.Discipline
+import com.doubleb.meusemestre.models.Exam
 import com.doubleb.meusemestre.ui.listeners.DisciplineListener
 import com.doubleb.meusemestre.ui.viewholders.DisciplineListViewHolder
 
-class DisciplineListAdapter(var list: List<Discipline>? = null, var listener: DisciplineListener? = null) :
+class DisciplineListAdapter(
+    var list: List<Discipline>? = null,
+    var examsByDisciplines: Map<String, List<Exam>?>? = null,
+    var listener: DisciplineListener? = null
+) :
     RecyclerView.Adapter<DisciplineListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -20,6 +25,6 @@ class DisciplineListAdapter(var list: List<Discipline>? = null, var listener: Di
     override fun getItemCount() = 1
 
     override fun onBindViewHolder(holder: DisciplineListViewHolder, position: Int) {
-       list?.let { holder.bind(it, listener) }
+        list?.let { holder.bind(it, examsByDisciplines, listener) }
     }
 }
