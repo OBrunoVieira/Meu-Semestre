@@ -1,7 +1,9 @@
 package com.doubleb.meusemestre.ui.viewholders
 
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.doubleb.meusemestre.extensions.loadImage
 import com.doubleb.meusemestre.extensions.swipeColorByPosition
 import com.doubleb.meusemestre.extensions.swipeWaveByPosition
 import com.doubleb.meusemestre.models.Discipline
@@ -23,8 +25,11 @@ class ActiveSemesterViewHolder(itemView: View, private val listener: DisciplineL
 
     fun bind(item: Discipline) {
         itemView.run {
+            active_semester_image_view_warning.isVisible = item.average == null
+
             active_semester_average_indicator.title(item.name)
-            active_semester_average_indicator.average(item.grade)
+            active_semester_average_indicator.average(item.average)
+            active_semester_image_knowledge_area.loadImage(item.image)
 
             active_semester_image_view_wave.background =
                 context.swipeWaveByPosition(bindingAdapterPosition)

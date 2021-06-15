@@ -24,6 +24,7 @@ import com.doubleb.meusemestre.ui.adapters.recyclerview.EmptyDisciplinesAdapter
 import com.doubleb.meusemestre.ui.adapters.recyclerview.EmptySemesterAdapter
 import com.doubleb.meusemestre.ui.adapters.recyclerview.LoadingAdapter
 import com.doubleb.meusemestre.ui.dialogs.BottomSheetSemesterRegistration
+import com.doubleb.meusemestre.ui.dialogs.DialogConfirmRemoval
 import com.doubleb.meusemestre.ui.fragments.DisciplineDetailsFragment.Companion.REQUEST_SUCCESS
 import com.doubleb.meusemestre.ui.listeners.DisciplineListener
 import com.doubleb.meusemestre.ui.views.EmptyStateView
@@ -52,6 +53,7 @@ class ActiveSemesterFragment : Fragment(R.layout.fragment_active_semester), Disc
     //region components
     private val homeActivity by lazy { (activity as? HomeActivity) }
     private val bottomSheet by lazy { BottomSheetSemesterRegistration(this) }
+    private val dialogConfirmRemoval by lazy { DialogConfirmRemoval().type(DialogConfirmRemoval.Type.DISCIPLINE) }
     //endregion
 
     //region listeners
@@ -89,7 +91,7 @@ class ActiveSemesterFragment : Fragment(R.layout.fragment_active_semester), Disc
             }
         }
 
-        setFragmentResultListener(REQUEST_SUCCESS) { _, _ ->
+        parentFragment?.setFragmentResultListener(REQUEST_SUCCESS) { _, _ ->
             activeSemesterViewModel.getActiveSemester()
         }
 
@@ -125,6 +127,12 @@ class ActiveSemesterFragment : Fragment(R.layout.fragment_active_semester), Disc
         super.onPause()
         homeActivity?.clearActionButton()
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        dialogConfirmRemoval.dismiss()
+        bottomSheet.dismiss()
+    }
     //endregion
 
     //region listeners
@@ -133,24 +141,33 @@ class ActiveSemesterFragment : Fragment(R.layout.fragment_active_semester), Disc
 
         homeActivity?.inflateStackFragment(
             DisciplineDetailsFragment.instance(
-                activeSemesterAdapter.currentList[position].id,
-                activeSemesterAdapter.currentList[position].name,
-                activeSemesterAdapter.currentList[position].grade
+                activeSemesterAdapter.currentList[position],
+                position
             )
         )
     }
 
     override fun onDisciplineDelete(position: Int) {
         homeActivity?.expand()
-        val targetDiscipline = activeSemesterAdapter.currentList[position]
-        val disciplines = ArrayList(activeSemesterAdapter.currentList).apply { removeAt(position) }
 
-        activeSemesterAdapter.submitList(disciplines)
-        disciplinesViewModel.removeDiscipline(targetDiscipline.id.orEmpty())
+        activeSemesterAdapter.currentList[position].name?.let { disciplineName ->
+            dialogConfirmRemoval
+                .title(disciplineName)
+                .listener {
+                    val targetDiscipline = activeSemesterAdapter.currentList[position]
+                    val disciplines =
+                        ArrayList(activeSemesterAdapter.currentList).apply { removeAt(position) }
 
-        if (disciplines.isEmpty()) {
-            buildEmptyDisciplinesState()
+                    activeSemesterAdapter.submitList(disciplines)
+                    disciplinesViewModel.removeDiscipline(targetDiscipline.id.orEmpty())
+
+                    if (disciplines.isEmpty()) {
+                        buildEmptyDisciplinesState()
+                    }
+                }
+                .show(childFragmentManager)
         }
+
     }
 
     override fun onEmptyViewActionClick(view: View) {
@@ -240,7 +257,7 @@ class ActiveSemesterFragment : Fragment(R.layout.fragment_active_semester), Disc
         }
     }
 
-    private fun buildActiveSemester(disciplines: MutableList<Discipline>?) {
+    private fun buildActiveSemester(disciplines: List<Discipline>?) {
         if (!disciplines.isNullOrEmpty()) {
             addDisciplines(disciplines)
         } else {
