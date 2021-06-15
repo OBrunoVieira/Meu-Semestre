@@ -7,13 +7,18 @@ import com.doubleb.meusemestre.extensions.observeSetValue
 import com.doubleb.meusemestre.models.Discipline
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.async
 
 class DisciplinesRepository(
+    private val knowledgeAreasRepository: KnowledgeAreasRepository,
     private val database: DatabaseReference,
     private val auth: FirebaseAuth,
 ) {
     companion object {
+        const val DATABASE_CHILD_AVERAGE = "average"
         private const val DATABASE_DISCIPLINES = "disciplines"
+
         private const val CHILD_ORDERING = "timestamp"
     }
 
@@ -29,7 +34,7 @@ class DisciplinesRepository(
 
     fun createDiscipline(
         name: String,
-        knowledgeArea: String,
+        knowledgeId: String,
         onComplete: (disciplineId: String) -> Unit = {},
     ) =
         generateRandomString().let { disciplineId ->
@@ -37,7 +42,7 @@ class DisciplinesRepository(
                 .setValue(
                     Discipline(disciplineId,
                         name,
-                        knowledgeArea,
+                        knowledgeId,
                         timestamp = System.currentTimeMillis())
                 ) { _, _ ->
                     onComplete.invoke(disciplineId)
@@ -53,7 +58,7 @@ class DisciplinesRepository(
 
     suspend fun createSuspendedDiscipline(
         name: String,
-        knowledgeArea: String,
+        knowledgeId: String,
     ) = try {
         generateRandomString().let { disciplineId ->
             getDiscipline(disciplineId)
@@ -61,7 +66,7 @@ class DisciplinesRepository(
                     Discipline(
                         disciplineId,
                         name,
-                        knowledgeArea,
+                        knowledgeId,
                         timestamp = System.currentTimeMillis())
                 )
         }
@@ -69,11 +74,30 @@ class DisciplinesRepository(
         null
     }
 
+    suspend fun updateSuspendedDiscipline(disciplineId: String, childName: String, value: Any?) =
+        try {
+            getDiscipline(disciplineId)
+                .child(childName)
+                .observeSetValue(value)
+        } catch (exception: Exception) {
+            null
+        }
+
+    suspend fun getChainedDisciplines(scope: CoroutineScope) = scope.run {
+        val knowledgeAreas = async { knowledgeAreasRepository.getKnowledgeAreas() }.await()
+        val disciplines = async { getSuspendedDisciplines() }.await()
+
+        disciplines?.map { discipline ->
+            val knowledgeArea = knowledgeAreas?.find { it.id == discipline.knowledge_id }
+            discipline.copy(image = knowledgeArea?.storage)
+        }
+    }
+
     suspend fun getSuspendedDisciplines() =
         try {
             getDisciplines().observe()
                 .children
-                .map { it.getValue(Discipline::class.java) }
+                .mapNotNull { it.getValue(Discipline::class.java) }
         } catch (exception: Exception) {
             null
         }

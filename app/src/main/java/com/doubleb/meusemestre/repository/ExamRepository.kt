@@ -1,14 +1,13 @@
 package com.doubleb.meusemestre.repository
 
 import com.doubleb.meusemestre.extensions.generateRandomString
+import com.doubleb.meusemestre.extensions.observe
 import com.doubleb.meusemestre.extensions.observeRemoveValue
 import com.doubleb.meusemestre.extensions.observeSetValue
 import com.doubleb.meusemestre.models.Exam
+import com.doubleb.meusemestre.models.extensions.groupByCycle
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
 
 class ExamRepository(
     @PublishedApi
@@ -46,44 +45,70 @@ class ExamRepository(
         null
     }
 
+    suspend fun updateSuspendedExam(
+        disciplineId: String,
+        examId: String,
+        name: String?,
+        cycle: Int?,
+        gradeValue: Float?,
+        gradeResult: Float? = null,
+    ) =
+        try {
+            getExam(disciplineId, examId)
+                .observeSetValue(
+                    Exam(examId,
+                        disciplineId,
+                        name,
+                        cycle,
+                        gradeValue,
+                        gradeResult,
+                        System.currentTimeMillis())
+                )
+        } catch (exception: Exception) {
+            null
+        }
+
     suspend fun removeSuspendedExams(disciplineId: String) = try {
-        getExams(disciplineId).observeRemoveValue()
+        getExamsById(disciplineId).observeRemoveValue()
     } catch (exception: Exception) {
         null
     }
 
-    inline fun getExams(
-        disciplineId: String,
-        crossinline success: (List<Pair<Int?, List<Exam>>>) -> Unit,
-        crossinline error: () -> Unit,
-    ) =
-        getOrderedExams(disciplineId)
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val examList =
-                        snapshot.children
-                            .mapNotNull { it.getValue(Exam::class.java) }
-                            .sortedBy { it.cycle }
-                            .groupBy { it.cycle }
-                            .toList()
+    suspend fun removeSuspendedExam(disciplineId: String, examId: String) = try {
+        getExamsById(disciplineId)
+            .child(examId).observeRemoveValue()
+    } catch (exception: Exception) {
+        null
+    }
 
-                    success(examList)
-                }
+    suspend fun getSuspendedExamsById(disciplineId: String) = try {
+        getOrderedExams(disciplineId).observe()
+            .children
+            .mapNotNull { it.getValue(Exam::class.java) }
+    } catch (exception: Exception) {
+        null
+    }
 
-                override fun onCancelled(error: DatabaseError) {
-                    error()
-                }
-            })
+    suspend fun getSuspendedGroupedExams(disciplineId: String) = try {
+        getOrderedExams(disciplineId).observe()
+            .children
+            .mapNotNull { it.getValue(Exam::class.java) }
+            .groupByCycle()
+    } catch (exception: Exception) {
+        null
+    }
 
-    fun getExam(disciplineId: String, examId: String) =
-        getExams(disciplineId).child(examId)
+    private fun getExam(disciplineId: String, examId: String) =
+        getExamsById(disciplineId).child(examId)
 
-    fun getOrderedExams(disciplineId: String) =
-        getExams(disciplineId)
+    private fun getOrderedExams(disciplineId: String) =
+        getExamsById(disciplineId)
             .orderByChild(CHILD_ORDERING)
 
-    private fun getExams(disciplineId: String) =
+    private fun getExamsById(disciplineId: String) =
+        getExams().child(disciplineId)
+
+    private fun getExams() =
         database.child(DATABASE_EXAMS)
             .child(auth.currentUser?.uid.orEmpty())
-            .child(disciplineId)
 }
