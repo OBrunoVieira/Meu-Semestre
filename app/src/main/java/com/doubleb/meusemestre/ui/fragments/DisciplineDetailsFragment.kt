@@ -13,17 +13,21 @@ import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ConcatAdapter
 import com.doubleb.meusemestre.R
-import com.doubleb.meusemestre.extensions.createActivityResultLauncher
-import com.doubleb.meusemestre.extensions.launchActivity
+import com.doubleb.meusemestre.extensions.*
 import com.doubleb.meusemestre.models.Discipline
 import com.doubleb.meusemestre.models.Exam
+import com.doubleb.meusemestre.models.extensions.transformToAverageList
 import com.doubleb.meusemestre.ui.activities.ExamRegistrationActivity
 import com.doubleb.meusemestre.ui.activities.ExamRegistrationActivity.Companion.EXTRA_CYCLES
 import com.doubleb.meusemestre.ui.activities.ExamRegistrationActivity.Companion.EXTRA_DISCIPLINE_ID
+import com.doubleb.meusemestre.ui.activities.ExamRegistrationActivity.Companion.EXTRA_EXAM
+import com.doubleb.meusemestre.ui.activities.ExamRegistrationActivity.Companion.EXTRA_IS_ON_EDIT_MODE
 import com.doubleb.meusemestre.ui.activities.HomeActivity
 import com.doubleb.meusemestre.ui.adapters.recyclerview.EmptyExamsAdapter
 import com.doubleb.meusemestre.ui.adapters.recyclerview.ExamsByCyclesAdapter
 import com.doubleb.meusemestre.ui.adapters.recyclerview.LoadingAdapter
+import com.doubleb.meusemestre.ui.dialogs.DialogConfirmRemoval
+import com.doubleb.meusemestre.ui.listeners.ExamListener
 import com.doubleb.meusemestre.ui.views.EmptyStateView
 import com.doubleb.meusemestre.viewmodel.DataSource
 import com.doubleb.meusemestre.viewmodel.DataState
@@ -35,21 +39,19 @@ import org.koin.android.ext.android.inject
 import kotlin.math.abs
 
 class DisciplineDetailsFragment : Fragment(R.layout.fragment_discipline_details),
-    EmptyStateView.ClickListener {
+    EmptyStateView.ClickListener, ExamListener {
 
     companion object {
-        private const val DISCIPLINE_DETAILS_ID = "DISCIPLINE_DETAILS_ID"
-        private const val DISCIPLINE_DETAILS_NAME = "DISCIPLINE_DETAILS_TITLE"
-        private const val DISCIPLINE_DETAILS_GRADE = "DISCIPLINE_DETAILS_GRADE"
+        private const val DISCIPLINE_ITEM_POSITION = "DISCIPLINE_ITEM_POSITION"
+        private const val DISCIPLINE_ITEM = "DISCIPLINE_ITEM"
 
         const val REQUEST_SUCCESS = "REQUEST_SUCCESS"
 
-        fun instance(id: String?, title: String?, grade: Float?) =
+        fun instance(discipline: Discipline?, itemPosition: Int) =
             DisciplineDetailsFragment().apply {
                 arguments = Bundle().apply {
-                    putString(DISCIPLINE_DETAILS_ID, id)
-                    putString(DISCIPLINE_DETAILS_NAME, title)
-                    putFloat(DISCIPLINE_DETAILS_GRADE, grade ?: -1f)
+                    putParcelable(DISCIPLINE_ITEM, discipline)
+                    putInt(DISCIPLINE_ITEM_POSITION, itemPosition)
                 }
             }
     }
@@ -57,7 +59,7 @@ class DisciplineDetailsFragment : Fragment(R.layout.fragment_discipline_details)
     //region immutable vars
 
     //region adapters
-    private val examsAdapter by lazy { ExamsByCyclesAdapter() }
+    private val examsAdapter by lazy { ExamsByCyclesAdapter(listener = this) }
     private val emptyExamsAdapter by lazy { EmptyExamsAdapter(this) }
     private val loadingAdapter by lazy { LoadingAdapter() }
     private val concatAdapter by lazy { ConcatAdapter(loadingAdapter) }
@@ -74,14 +76,15 @@ class DisciplineDetailsFragment : Fragment(R.layout.fragment_discipline_details)
 
     //region components
     private val homeActivity by lazy { (activity as? HomeActivity) }
+    private val dialogConfirmRemoval by lazy { DialogConfirmRemoval().type(DialogConfirmRemoval.Type.DISCIPLINE) }
     //endregion
 
     //endregion
 
     //region mutable vars
-    private var grade: Float? = null
-    private var name: String? = null
-    private var id: String? = null
+    private var itemPosition: Int = 0
+    private var discipline: Discipline? = null
+    private var hasChanged = false
 
     private lateinit var examRegistrationCallback: ActivityResultLauncher<Intent>
     //endregion
@@ -97,13 +100,13 @@ class DisciplineDetailsFragment : Fragment(R.layout.fragment_discipline_details)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        id = arguments?.getString(DISCIPLINE_DETAILS_ID)
-        name = arguments?.getString(DISCIPLINE_DETAILS_NAME)
-        grade = arguments?.getFloat(DISCIPLINE_DETAILS_GRADE)
+        discipline = arguments?.getParcelable(DISCIPLINE_ITEM)
+        itemPosition = arguments?.getInt(DISCIPLINE_ITEM_POSITION) ?: 0
 
         examRegistrationCallback = createActivityResultLauncher {
             if (it.resultCode == AppCompatActivity.RESULT_OK) {
-                examsViewModel.getExams(id)
+                hasChanged = true
+                examsViewModel.getExams(discipline?.id)
             }
         }
 
@@ -112,12 +115,13 @@ class DisciplineDetailsFragment : Fragment(R.layout.fragment_discipline_details)
             observeDisciplineRemoval())
 
         configureViews()
-        examsViewModel.getExams(id)
+        examsViewModel.getExams(discipline?.id)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         homeActivity?.showNavigation()
+        dialogConfirmRemoval.dismiss()
     }
 
     override fun onResume() {
@@ -134,35 +138,58 @@ class DisciplineDetailsFragment : Fragment(R.layout.fragment_discipline_details)
         homeActivity?.clearActionButton()
     }
 
+    //region listeners
     override fun onEmptyViewActionClick(view: View) {
         launchExamRegistrationActivity()
     }
 
+    override fun onExamClick(parentPosition: Int, position: Int) {
+        val examList = examsAdapter.list?.getOrNull(parentPosition)?.second
+        val exam = examList?.getOrNull(position)
+        launchExamRegistrationActivity(exam)
+    }
+    //endregion
+
     private fun configureViews() {
+        context?.let {
+            discipline_details_image_view_wave.background = it.swipeWaveByPosition(itemPosition)
+
+            discipline_details_toolbar.setBackgroundColor(it.swipeColorByPosition(itemPosition))
+            discipline_detail_constraint.setBackgroundColor(it.swipeColorByPosition(itemPosition))
+
+            discipline_details_image_view_knowledge_area.loadImage(discipline?.image)
+        }
+
         discipline_toolbar_image_arrow.setOnClickListener {
-            homeActivity?.onBackPressed()
+            onBackPressed()
         }
 
         discipline_toolbar_image_delete.setOnClickListener {
-            disciplinesViewModel.removeDiscipline(id.orEmpty())
+            dialogConfirmRemoval
+                .title(discipline?.name)
+                .listener {
+                    disciplinesViewModel.removeDiscipline(discipline?.id.orEmpty())
+                }
+                .show(childFragmentManager)
         }
 
         discipline_details_appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             val isCollapsed = abs(verticalOffset) == appBarLayout.totalScrollRange
-            discipline_toolbar_text_title.text = name.takeIf { isCollapsed }.orEmpty()
+            discipline_toolbar_text_title.text = discipline?.name.takeIf { isCollapsed }.orEmpty()
         })
 
         homeActivity?.hideNavigation()
         discipline_details_recyclerview.adapter = concatAdapter
-        discipline_details_average_indicator.title(name).average(grade)
+        discipline_details_average_indicator.title(discipline?.name).average(discipline?.average)
     }
 
     //region observers
     private fun observeDisciplineRemoval() = Observer<DataSource<List<Discipline>>> {
         if (it.dataState == DataState.SUCCESS) {
-            activity?.onBackPressed()
-            setFragmentResult(REQUEST_SUCCESS, bundleOf())
+            hasChanged = true
         }
+
+        onBackPressed()
     }
 
     private fun observeExams() = Observer<DataSource<List<Pair<Int?, List<Exam>>>>> {
@@ -211,34 +238,37 @@ class DisciplineDetailsFragment : Fragment(R.layout.fragment_discipline_details)
     }
 
     private fun buildDisciplineDetails(list: List<Pair<Int?, List<Exam>>>?) {
+        buildAverageIndicator(list)
+
         if (list.isNullOrEmpty()) {
             buildEmptyState()
         } else {
             addExams(list)
-            buildAverageIndicator(list)
         }
     }
 
-    private fun buildAverageIndicator(list: List<Pair<Int?, List<Exam>>>) {
-        val gradeResultList = list
-            .map {
-                it.second.mapNotNull { exam -> exam.grade_result }.sum()
-            }
-            .sortedDescending()
-            .take(2)
+    private fun buildAverageIndicator(list: List<Pair<Int?, List<Exam>>>?) {
+        val gradeResultList = list?.transformToAverageList()
 
-        val average = if (gradeResultList.isEmpty()) null else gradeResultList.average().toFloat()
-
-
+        val average =
+            if (gradeResultList.isNullOrEmpty()) null else gradeResultList.average().toFloat()
         discipline_details_average_indicator.average(average)
     }
 
-    private fun launchExamRegistrationActivity() = id?.let {
+    private fun launchExamRegistrationActivity(exam: Exam? = null) = discipline?.id?.let {
         examRegistrationCallback.launchActivity<ExamRegistrationActivity>(
             context,
             EXTRA_DISCIPLINE_ID to it,
-            EXTRA_CYCLES to homeActivity?.user?.graduation_info?.cycles
+            EXTRA_CYCLES to homeActivity?.user?.graduation_info?.cycles,
+            EXTRA_IS_ON_EDIT_MODE to (exam != null),
+            EXTRA_EXAM to exam
         )
     }
 
+    private fun onBackPressed() {
+        homeActivity?.onBackPressed()
+        if (hasChanged) {
+            setFragmentResult(REQUEST_SUCCESS, bundleOf())
+        }
+    }
 }
