@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/spacing_sixteen"
+        android:background="@drawable/shadow_card"
+        android:paddingStart="@dimen/spacing_twenty_four"
+        android:paddingTop="@dimen/spacing_thirty_two"
+        android:paddingEnd="@dimen/spacing_twenty_four"
+        android:paddingBottom="@dimen/spacing_thirty_two">
+
+        <TextView
+            android:id="@+id/confirm_removal_text_title"
+            style="@style/ConfirmRemoval.TextView.Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Título" />
+
+        <TextView
+            android:id="@+id/confirm_removal_text_description"
+            style="@style/ConfirmRemoval.TextView.Description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/confirm_removal_text_title"
+            tools:text="Descrição" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/confirm_removal_button_exclude"
+            style="@style/ConfirmRemoval.Button.Confirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_forty"
+            android:layout_marginEnd="@dimen/spacing_four"
+            app:layout_constraintEnd_toStartOf="@id/confirm_removal_button_cancel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/confirm_removal_text_description" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/confirm_removal_button_cancel"
+            style="@style/ConfirmRemoval.Button.Cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_four"
+            android:layout_marginTop="@dimen/spacing_forty"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/confirm_removal_button_exclude"
+            app:layout_constraintTop_toBottomOf="@id/confirm_removal_text_description" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

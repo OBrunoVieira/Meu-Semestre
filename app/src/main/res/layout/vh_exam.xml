@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/exam_image_view_warning"
         style="@style/Image.Warning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -53,10 +54,7 @@
             android:id="@+id/exam_image_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="?selectableItemBackgroundBorderless"
-            android:clickable="true"
             android:contentDescription="@string/exam_edit"
-            android:focusable="true"
             android:src="@drawable/vector_edit"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

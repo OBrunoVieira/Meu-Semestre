@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/spacing_thirty_two"
+    android:layout_marginStart="@dimen/spacing_eight"
+    android:layout_marginEnd="@dimen/spacing_eight"
+    android:layout_marginBottom="@dimen/spacing_eight"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/card_grade_comparison_chart_title"
+        style="@style/CardGradeComparisonChart.TextView.Title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_eight"
+        android:background="@drawable/shadow_card"
+        android:paddingStart="@dimen/spacing_twenty_four"
+        android:paddingTop="@dimen/spacing_thirty_two"
+        android:paddingEnd="@dimen/spacing_twenty_four"
+        android:paddingBottom="@dimen/spacing_thirty_two"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_grade_comparison_chart_title">
+
+        <TextView
+            android:id="@+id/card_grade_comparison_chart_view_legend_first"
+            style="@style/GradeComparisonChart.TextView.Legend"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/grade_comparison_chart_first_cycle"
+            app:drawableTint="@color/light_purple"
+            app:layout_constraintEnd_toStartOf="@id/card_grade_comparison_chart_view_legend_second"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/card_grade_comparison_chart_view_legend_second"
+            style="@style/GradeComparisonChart.TextView.Legend"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/grade_comparison_chart_second_cycle"
+            app:drawableTint="@color/light_pink"
+            app:layout_constraintEnd_toStartOf="@id/card_grade_comparison_chart_view_legend_third"
+            app:layout_constraintStart_toEndOf="@id/card_grade_comparison_chart_view_legend_first"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/card_grade_comparison_chart_view_legend_third"
+            style="@style/GradeComparisonChart.TextView.Legend"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/grade_comparison_chart_third_cycle"
+            app:drawableTint="@color/light_yellow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/card_grade_comparison_chart_view_legend_second"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/card_grade_comparison_chart_view_legend_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="card_grade_comparison_chart_view_legend_first,
+            card_grade_comparison_chart_view_legend_second,
+            card_grade_comparison_chart_view_legend_third" />
+
+        <com.doubleb.meusemestre.ui.views.GradeComparisonChartView
+            android:id="@+id/card_grade_comparison_chart_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_thirty_two"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_grade_comparison_chart_view_legend_barrier" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

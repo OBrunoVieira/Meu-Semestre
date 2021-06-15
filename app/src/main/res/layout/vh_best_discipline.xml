@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/spacing_thirty_two"
+    android:layout_marginTop="@dimen/spacing_twenty_eight"
     android:layout_marginStart="@dimen/spacing_sixteen"
     android:layout_marginEnd="@dimen/spacing_sixteen"
     app:cardCornerRadius="@dimen/spacing_eight"
-    app:cardUseCompatPadding="true"
     app:cardBackgroundColor="@color/light_blue">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,7 +44,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@id/best_discipline_text_view_name"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/best_discipline_image_view"
             app:layout_constraintStart_toEndOf="@id/best_discipline_circle_chart"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
@@ -56,10 +55,24 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/best_discipline_image_view"
             app:layout_constraintStart_toEndOf="@id/best_discipline_circle_chart"
             app:layout_constraintTop_toBottomOf="@id/best_discipline_text_view_title"
             tools:text="Álgebra Linear" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/best_discipline_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_eight"
+            android:layout_marginEnd="@dimen/spacing_eight"
+            android:adjustViewBounds="true"
+            android:src="@drawable/vector_best_discipline"
+            android:layout_marginTop="@dimen/spacing_sixteen"
+            android:layout_marginBottom="@dimen/spacing_sixteen"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

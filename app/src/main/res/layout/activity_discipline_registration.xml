@@ -13,7 +13,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/discipline_registration_progress_bar"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/discipline_registration_toolbar" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/discipline_registration_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="discipline_registration_button,
+        discipline_registration_scroll_view" />
+
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/discipline_registration_scroll_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
@@ -41,11 +60,11 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
-                   android:id="@+id/discipline_registration_edit_text_name"
+                    android:id="@+id/discipline_registration_edit_text_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionNext"
-                    android:inputType="text" />
+                    android:inputType="textCapSentences" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView

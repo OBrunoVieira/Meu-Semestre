@@ -21,18 +21,31 @@
             android:minHeight="118dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <com.doubleb.meusemestre.ui.views.GradeVariationView
             android:id="@+id/grade_highlight_horizontal_grade_variation"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_twenty_four"
+            android:layout_marginBottom="@dimen/spacing_twenty_four"
             android:layout_marginStart="@dimen/spacing_sixteen"
             android:layout_marginEnd="@dimen/spacing_sixteen"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/grade_highlight_horizontal_image_view"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/grade_highlight_horizontal_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/spacing_fourteen"
+            android:layout_marginBottom="@dimen/spacing_fourteen"
+            android:maxHeight="@dimen/min_grade_highlight_size"
+            android:minHeight="@dimen/min_grade_highlight_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/spacing_eight">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/grade_comparison_chart_content_view"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/min_grade_comparison_chart_size"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/grade_comparison_chart_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/grade_comparison_chart_image_first"
+            android:layout_width="@dimen/spacing_eight"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:background="@drawable/shape_grade_indicator"
+            android:backgroundTint="@color/light_purple"
+            android:importantForAccessibility="no" />
+
+        <ImageView
+            android:id="@+id/grade_comparison_chart_image_second"
+            android:layout_width="@dimen/spacing_eight"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="@dimen/spacing_eight"
+            android:visibility="gone"
+            android:background="@drawable/shape_grade_indicator"
+            android:backgroundTint="@color/light_pink"
+            android:importantForAccessibility="no" />
+
+        <ImageView
+            android:id="@+id/grade_comparison_chart_image_third"
+            android:layout_width="@dimen/spacing_eight"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="@dimen/spacing_eight"
+            android:background="@drawable/shape_grade_indicator"
+            android:backgroundTint="@color/light_yellow"
+            android:importantForAccessibility="no" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <TextView
+        android:id="@+id/grade_comparison_chart_text"
+        style="@style/GradeComparisonChart.TextView.Title"
+        android:layout_width="@dimen/min_grade_comparison_chart_text_width"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
