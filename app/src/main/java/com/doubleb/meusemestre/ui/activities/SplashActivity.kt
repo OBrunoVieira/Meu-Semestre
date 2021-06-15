@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.doubleb.meusemestre.R
-import com.doubleb.meusemestre.extensions.openActivity
 import com.doubleb.meusemestre.extensions.openClearedActivity
 import com.doubleb.meusemestre.models.User
 import com.doubleb.meusemestre.viewmodel.DataSource
@@ -39,7 +38,7 @@ class SplashActivity : BaseActivity(R.layout.activity_splash_screen) {
         if (it.dataState == DataState.SUCCESS) {
             userViewModel.getUser()
         } else if (it.dataState == DataState.ERROR) {
-            openActivity<WelcomeActivity>()
+            openClearedActivity<WelcomeActivity>()
         }
     }
 
@@ -51,7 +50,7 @@ class SplashActivity : BaseActivity(R.layout.activity_splash_screen) {
                 openClearedActivity<RegisterActivity>()
             }
         } else if (it.dataState == DataState.ERROR) {
-            openActivity<WelcomeActivity>()
+            openClearedActivity<WelcomeActivity>()
         }
     }
     //endregion
